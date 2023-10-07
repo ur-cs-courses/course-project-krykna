@@ -52,5 +52,5 @@ The **customer** will be able to:
 - Robot status interacts with customer and every robot type.
 - Room cleanliness status interacts with rooms and customer.
 - Maintenance management interacts with customer and each robot type.
-- Mopping, vacuuming, and scrubbing use cases interact with customer and their respective robots.
+- Mopping, vacuuming, and scrubbing use cases interact with customer, room, and their respective robots.
 
