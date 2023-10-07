@@ -37,6 +37,10 @@ package "Fleet Management" {
     UC4 --> Mop_Bot : Assign Task
     UC5 --> Vac_Bot : Assign Task
     UC6 --> Scrub_Bot : Assign Task
+
+    UC4 ..> Room : Location
+    UC5 ..> Room : Location
+    UC6 ..> Room : Location
 }
 
 note right of UC1

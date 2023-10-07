@@ -1,5 +1,18 @@
-# Fleet Management Use Case
+# Primary - Fleet Management Use Case
 
+### Contributions:
+* **Liz**
+    - use_case.puml and .png
+    - .md: Actors/Entities, Use Cases, Relationships
+* **Waleed** 
+    - .md: description, customer goal, customer actions 
+* **Wonyoung**
+    - reviewed and merged all pull requests 
+* **Kate**
+    - brainstorming
+
+
+#
 ![Diagram Description](../images/use_case.png)
 The customers will be able to manage their fleet of robots through a command line interface application. This UML diagram visualizes the interactions between a manager (`Customer`), rooms, and various types of cleaning robots.
 
@@ -52,5 +65,5 @@ The **customer** will be able to:
 - Robot status interacts with customer and every robot type.
 - Room cleanliness status interacts with rooms and customer.
 - Maintenance management interacts with customer and each robot type.
-- Mopping, vacuuming, and scrubbing use cases interact with customer and their respective robots.
+- Mopping, vacuuming, and scrubbing use cases interact with customer, room, and their respective robots.
 
