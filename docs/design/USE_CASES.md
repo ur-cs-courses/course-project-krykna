@@ -1,6 +1,6 @@
-# Use Case Design
+# Fleet Management Use Case
 
-
+![Diagram Description](../images/use_case.png)
 The customers will be able to manage their fleet of robots through a command line interface application. This UML diagram visualizes the interactions between a manager (`Customer`), rooms, and various types of cleaning robots.
 
 
