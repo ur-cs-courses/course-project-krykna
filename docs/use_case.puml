@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+skinparam packageStyle rect
+actor Customer
+
+entity "Room" as Room
+entity "Mop Bot" as Mop_Bot
+entity "Vacuum Bot" as Vac_Bot
+entity "Scrub Bot" as Scrub_Bot
+
+package "Fleet Management" {
+    
+    usecase "Check Robot Status" as UC1
+    usecase "Check Room Status" as UC2
+    usecase "Manage Robot Maintenance" as UC3
+    usecase "Order Mopping" as UC4
+    usecase "Order Vacuuming" as UC5
+    usecase "Order Scrubbing" as UC6
+
+    Customer --> UC1
+    Customer --> UC2
+    Customer --> UC3
+    Customer --> UC4
+    Customer --> UC5
+    Customer --> UC6
+    
+    UC1 --> Mop_Bot : Check Status
+    UC1 --> Vac_Bot : Check Status
+    UC1 --> Scrub_Bot : Check Status
+    
+    UC2 --> Room : Check Status
+    
+    UC3 --> Mop_Bot : Manage Maintenance
+    UC3 --> Vac_Bot : Manage Maintenance
+    UC3 --> Scrub_Bot : Manage Maintenance
+    
+    UC4 --> Mop_Bot : Assign Task
+    UC5 --> Vac_Bot : Assign Task
+    UC6 --> Scrub_Bot : Assign Task
+}
+
+note right of UC1
+    Status:
+    - Ready
+    - Offline
+    - Busy (time till free)
+end note
+
+note right of UC2
+    Status:
+    - Clean
+    - In-Progress
+    - Dirty
+end note
+@enduml
