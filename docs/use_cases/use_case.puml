@@ -1,7 +1,7 @@
 @startuml
 left to right direction
 skinparam packageStyle rect
-actor Customer
+actor "Cleaning Manager" as Customer
 
 entity "Room" as Room
 entity "Mop Bot" as Mop_Bot
