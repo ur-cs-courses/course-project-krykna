@@ -1,0 +1,24 @@
+@startuml
+class Robot {
+  - room_assigned: set
+  - task_assigned: set
+  - robot_status: set
+  - room_status: set
+  - timer: set
+  
+  + clean_room(): void
+  + go_home(): void
+  + get_robot_status(): int
+  + update_robot_status(): int
+  + get_room_status(): int
+  + update_room_status(): int
+  
+}
+
+interface CommandLine {}
+
+Management "1" *--> "0...n" Rooms
+Management "1" *--> "0...n" Robot
+Robot "1" *--> "0...n" Rooms
+Management ..|> CommandLine
+@enduml
