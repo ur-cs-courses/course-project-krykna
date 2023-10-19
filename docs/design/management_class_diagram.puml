@@ -23,6 +23,6 @@ class Rooms{}
 
 Management "1" *--> "0...n" Rooms
 Management "1" *--> "0...n" Robots
-Management --|> CommandLine
+Management ..|> CommandLine
 @enduml
 

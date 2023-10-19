@@ -5,7 +5,7 @@ In our design document, we will be going over how we plan on developing our robo
 ## Project Overview
 **Our software will help building managers, the customers, manage their fleet of cleaning robots in their building.**
 
-_* Our actual design implementation isn't fully completed yet. We are still in the beginning phases of our Scrum development process._
+
 
 Potential Design Ideas:
 
@@ -14,9 +14,11 @@ Potential Design Ideas:
 
 # Class Diagram Documentation
 
-## Overview
+## Management Class Diagram Overview
 
-This document describes the class diagram for a simple management system that involves room cleaning by robots. The system consists of three main classes (Management, Robots, Rooms) and one interface (CommandLine).
+![Diagram Description](images/management_class_diagram.png)
+
+This document describes the class diagram for a simple management system that involves room cleaning by robots. The system focuses on the attributes of the main class, Management, and mentions its relationships with other classes and interfaces (CommandLine, Robots, Rooms). 
 
 ## Classes
 ### Management
@@ -26,22 +28,18 @@ Attributes
 * room_clean: set: A set containing the rooms that are clean.
 * rooms_dirty: set: A set containing the rooms that are dirty.
 * bots_ready: set: A set containing the robots that are ready for cleaning.
-* bots_out: set: A set containing the robots that are currently out cleaning.
+* bots_out: set: A set containing the robots that are currently out cleaning or out of commission.
 
 Methods
 
 * assign_bots(): void: Assigns robots to rooms for cleaning.
-* update_rooms(): void: Updates the status of rooms.
-* update_bots(): void: Updates the status of robots.
-* availability_string(): string: Returns a string representing the availability of robots.
-* room_stats_string(): string: Returns a string representing the status of rooms.
-* bot_stats_string(): string: Returns a string representing the status of robots.
+* update_rooms(): void: Updates the status of rooms (clean/dirty).
+* update_bots(): void: Updates the status of robots (clean/dirty).
+* availability_string(): string: Returns a string representing the availability of robots (available/not).
+* room_status_string(): string: Returns a string representing the status of rooms (clean/dirty).
+* bot_data_string(): string: Returns a string representing the status of robots (size, type).
 * add_new_bot(): void: Adds a new robot to the system.
 * add_new_room(): void: Adds a new room to the system.
-Robots
-This class represents the robots in the system. It is associated with the Management class.
-
-
 
 Relationships
 
