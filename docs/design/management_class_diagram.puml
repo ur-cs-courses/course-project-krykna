@@ -1,0 +1,28 @@
+@startuml
+class Management {
+  - room_clean: set
+  - rooms_dirty: set
+  - bots_ready: set
+  - bots_out: set
+  
+  + assign_bots(): void
+  + update_rooms(): void
+  + update_bots(): void
+  + availability_string(): string
+  + room_stats_string(): string
+  + bot_stats_string(): string
+  + add_new_bot(): void
+  + add_new_room(): void
+}
+
+interface CommandLine {}
+
+class Robots{}
+
+class Rooms{}
+
+Management "1" *--> "0...n" Rooms
+Management "1" *--> "0...n" Robots
+Management --|> CommandLine
+@enduml
+
