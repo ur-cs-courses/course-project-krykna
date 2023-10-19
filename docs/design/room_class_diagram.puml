@@ -1,8 +1,8 @@
 @startuml
 class Room {
     + String room_name
-    - enum status: set
-    - enum size: set
+    - enum status
+    - enum size
     + update_room_status(): void
     + get_room_status(): enum status
     + get_size(): enum size
