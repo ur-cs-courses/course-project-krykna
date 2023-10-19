@@ -50,6 +50,11 @@ Relationships
 * The Management class has a 1 to 0...n composition relationship with the Robots class.
 * The Management class implements the CommandLine interface.
 
+## Robot Class Diagram Overview
+
+![Diagram Description](images/robot_class_diagram.png)
+
+This document describes the class diagram for a system of robots that involves receiving input commands and cleaning rooms. The system focuses on the attributes of the Robot class and mentions its relationships with other classes and interfaces (Management, Rooms).
 
 ### Robot
 
