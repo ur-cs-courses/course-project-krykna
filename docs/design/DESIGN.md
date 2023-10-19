@@ -56,6 +56,7 @@ Relationships
 
 This document describes the class diagram for a system of robots that involves receiving input commands and cleaning rooms. The system focuses on the attributes of the Robot class and mentions its relationships with other classes and interfaces (Management, Rooms).
 
+## Classes
 ### Robot
 
 Attributes
