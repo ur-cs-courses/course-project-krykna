@@ -79,3 +79,29 @@ Methods
 Relationships
 
 * The Robot class has a 0...n to 0...n composition relationship with Rooms class.
+
+## Room Class Diagram Overview
+
+![Diagram Description](images/room_class_diagram.png)
+
+This document describes the class diagram for a system of rooms that involves receiving input commands and cleaning rooms. The system focuses on the attributes of the Room class and mentions its relationships with other classes and interfaces (Management, Rooms).
+
+## Classes
+### Room
+
+Attributes
+
+* room_name: string: The name of a room
+* status: set: The status of the room currently assigned.
+* size: set: The size of the room
+
+Methods
+
+* update_room_status(): void: Updates whether the current room is cleaned.
+* get_room_status(): Returns an int representing how much is left of the assigned room.
+* get_size(): Returns an int representing the size of a room
+
+Relationships
+
+* The Room class has a 1-to-1 composition with enum class Status
+* The Room class has a 1-to-1 composition with enum class Size

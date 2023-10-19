@@ -1,0 +1,31 @@
+@startuml
+class Room {
+    + String room_name
+    - enum status: set
+    - enum size: set
+    + update_room_status(): void
+    + get_room_status(): enum status
+    + get_size(): enum size
+}
+
+enum Status {
+    Dirty
+    In-progress
+    Clean
+}
+
+enum Size {
+    Small
+    Medium
+    Large
+}
+
+interface CommandLine {}
+
+Management "1" *--> "0...n" Room
+Management "1" *--> "0...n" Robot
+Robot "1" *--> "0...n" Room
+Room "1" *--> "1" Status
+Room "1" *--> "1" Size
+Management ..|> CommandLine
+@enduml
