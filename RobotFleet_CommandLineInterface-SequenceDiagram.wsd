@@ -1,0 +1,20 @@
+@startuml RobotFleet
+
+participant "Command Line Interface" as CMI
+participant "BuildingManager"
+
+CMI -> BuildingManager: Welcome to your Robot Fleet Management Software!
+CMI -> BuildingManager: Provide status overview of robots and rooms
+
+alt Room is Clean
+
+    BuildingManager -> CMI: [No action needed]
+
+else Room is NOT clean
+    loop until clean
+        CMI -> BuildingManager: Provides the necessary tasks and robots required to clean room
+        BuildingManager -> CMI: Performs one of the following tasks:
+        note right: assign_bots(): void \n update_rooms(): void \n update_bots(): void \n availability_string(): string \n room_stats_string(): string \n bot_stats_string(): string \n add_new_bot(): void \n add_new_room(): void
+    end
+end
+@enduml
