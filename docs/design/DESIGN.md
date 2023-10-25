@@ -110,7 +110,6 @@ Relationships
 
 ## Cleaning Sequence Diagram
 ![Diagram Description](images/cleaning_sequence_diagram.png)
-# Sequence Diagram Documentation
 
 ## Overview
 
