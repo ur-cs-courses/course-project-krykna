@@ -108,9 +108,6 @@ Relationships
 
 # Sequence Diagram Documentation
 
-## Cleaning Sequence Diagram
-![Diagram Description](images/cleaning_sequence_diagram.png)
-
 ## Overview
 
 This documentation explains a sequence diagram that outlines the interactions between four components involved in a robot cleaning a room from start to finish:
@@ -120,14 +117,10 @@ This documentation explains a sequence diagram that outlines the interactions be
 3. `Robots (Bot)`: Represents the robots available for cleaning.
 4. `Rooms (R)`: Represents the rooms available for cleaning.
 
+## Cleaning Sequence Diagram
+![Diagram Description](images/cleaning_sequence_diagram.png)
+
 ## Components
-
-#### Requesting Room Status
-
-1. `CommandLine requests room status`: CLI sends a message to Management to request the status of rooms.
-   - `Management` 
-      -  converts status data to string format.
-     -   sends back the status of the room as a string to `CLI`.
 
 #### Assign Bot for Cleaning
 
@@ -167,4 +160,24 @@ This documentation explains a sequence diagram that outlines the interactions be
     - updates its status to `FREE`.
     - notifies `Management` that it's now free.
 - `Management` Notifies `CLI` that the cleaning was successful.
+
+
+
+## Requesting Room and Bot Status Sequence Diagram
+![Diagram Description](images/requesting_status_sequence_diagram.png)
+
+- `CommandLine requests room or bot status from management`
+- `Management` 
+     -  converts status data to string format.
+     -   sends back the status of the room/bot as a string to `CLI`.
+
+
+
+## Adding New Rooms and Bots Sequence Diagram
+![Diagram Description](images/adding_sequence_diagram.png)
+
+- `CommandLine requests add new bot/room from management`
+- `Management` 
+    -  initialize new bot/room object
+    -   add  bot/room to free set
 

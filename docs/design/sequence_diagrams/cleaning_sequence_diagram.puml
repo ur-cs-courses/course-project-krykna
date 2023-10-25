@@ -17,18 +17,6 @@ box #LightYellow
   participant Rooms as R
 end box
 
-CLI -> M : Request room status
-activate M
-M->M: data to string
-M -> CLI : room_status_string()
-deactivate M
-
-CLI -> M : Request bot status
-activate M
-M->M: data to string
-M -> CLI : bot_data_string()
-deactivate M
-
 CLI -> M : Assign bot to clean room
 activate M
 M -> Bot : assign_bot(room)

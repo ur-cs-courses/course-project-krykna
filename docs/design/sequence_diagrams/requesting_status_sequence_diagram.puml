@@ -1,0 +1,23 @@
+@startuml
+!define RECTANGLE class
+
+box #LightGreen
+  participant CommandLine as CLI
+end box
+
+box #LightBlue
+  participant Management as M
+end box
+
+CLI -> M : Request bot status
+activate M
+M->M: data to string
+M -> CLI : bot_data_string()
+deactivate M
+
+CLI -> M : Request room status
+activate M
+M->M: data to string
+M -> CLI : room_status_string()
+deactivate M
+@enduml
