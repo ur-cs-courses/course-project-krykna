@@ -105,3 +105,8 @@ Relationships
 
 * The Room class has a 1-to-1 composition with enum class Status
 * The Room class has a 1-to-1 composition with enum class Size
+
+# Sequence Diagram Documentation
+
+## Cleaning Sequence Diagram
+![Diagram Description](images/cleaning_sequence_diagram.png)
