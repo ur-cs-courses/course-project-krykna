@@ -181,3 +181,22 @@ This documentation explains a sequence diagram that outlines the interactions be
     -  initialize new bot/room object
     -   add  bot/room to free set
 
+# Activity Diagram Documentation
+
+## Overview
+
+This documentation explains an activity diagram that outlines the overall activity of the program between the user, robot, and the rooms. The activity diagram captures the very big picture on a simple level without the exact details. 
+
+1. The User is online in the software.
+2. The user checks the system whether there are any robots available.
+    - If Robot IS available, Assign robot the given task
+    - If Robot is NOT available, wait, and prompt user again.
+3. Tasked robot goes to clean the assigned room.
+    - If room IS clean, end.
+    - Else check.. 
+        - Room is not clean
+            - In case room is not clean, robot continues to clean room.
+        - Robot fail
+            - In case robot fails, robot returns home and user is prompted. 
+
+![Diagram Description](images/activity_diagram.png)
