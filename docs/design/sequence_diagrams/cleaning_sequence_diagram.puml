@@ -31,9 +31,11 @@ opt Robot breaks
   R -> R: pause timer
   R --> Bot: broken bot
   Bot --> M : broken bot
+  deactivate Bot
   M -> M: check bot availabilities
   alt if another bot is available
     M -> Bot : assign_bot(room)
+    activate Bot
     Bot -> R : resume cleaning
     R -> R: resume timer
   else if no other bot is available
