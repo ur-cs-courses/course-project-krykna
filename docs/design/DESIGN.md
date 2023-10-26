@@ -46,7 +46,7 @@ Methods
 
 Relationships
 
-* The Management class has a 1 to 0...n  composition relationship with the Rooms class.
+* The Management class has a 1 to 0...n  aggregation relationship with the Rooms class.
 * The Management class has a 1 to 0...n composition relationship with the Robots class.
 * The Management class implements the CommandLine interface.
 
