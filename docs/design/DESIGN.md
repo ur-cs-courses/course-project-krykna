@@ -61,11 +61,10 @@ This document describes the class diagram for a system of robots that involves r
 
 Attributes
 
-* room_assigned: set: A set room assigned for robot to clean.
-* task_assigned: set: A set task of either mop, scrub, or vacuum.
-* robot_status: set: Status of robot ready or not.
-* room_status: set: The status of the room currently assigned.
-* timer: set: A set time needed to clean the assigned room.
+* room_assigned: string: A string to represent room assigned for robot to clean.
+* task_assigned: string: A string to represent task of either mop, scrub, or vacuum.
+* robot_status: string: A string to represent the status of robot ready or not.
+* timer: int: An integer to represent time needed to clean the assigned room.
 
 Methods
 
