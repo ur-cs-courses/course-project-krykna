@@ -187,13 +187,21 @@ This documentation explains an activity diagram that outlines the overall activi
 1. The User is online in the software.
 2. The user checks the system whether there are any robots available.
     - If Robot IS available, Assign robot the given task
-    - If Robot is NOT available, wait, and prompt user again.
+    - If Robot is NOT available, wait and end.
 3. Tasked robot goes to clean the assigned room.
     - If room IS clean, end.
     - Else check.. 
         - Room is not clean
             - In case room is not clean, robot continues to clean room.
         - Robot fail
-            - In case robot fails, robot returns home and user is prompted. 
+            - In case robot fails, robot returns home and user is prompted.
+4. If User wants to utilize other functions:
+    - If user wants to add or check:
+        - If add:
+            - Add Robot
+            - Add Room
+        - If check:
+            - Check Robot Status
+            - Check Room Status
 
 ![Diagram Description](images/activity_diagram.png)
