@@ -71,14 +71,12 @@ Methods
 
 * clean_room(): void: Robot set to clean assigned room.
 * go_home(): void: Robot sent back home.
-* get_robot_status(): Returns an int representing whether robot has failed or not.
-* update_robot_status(): Returns an int representing whether robot is ready for new task or not.
-* get_room_status(): Returns an int representing how much is left of the assigned room.
-* update_room_stats(): Updates whether the current room is cleaned.
+* get_robot_status(): Returns a string representing whether robot has failed or not.
+* update_robot_status(): Sets robot status to a string representing whether robot is ready for new task or not.
 
 Relationships
 
-* The Robot class has a 0...n to 0...n composition relationship with Rooms class.
+* The Robot class has a 1 to 1 aggregation relationship with the Rooms class. 
 
 ## Room Class Diagram Overview
 
