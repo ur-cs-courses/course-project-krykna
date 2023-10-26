@@ -198,3 +198,5 @@ This documentation explains an activity diagram that outlines the overall activi
             - In case room is not clean, robot continues to clean room.
         - Robot fail
             - In case robot fails, robot returns home and user is prompted. 
+
+![Diagram Description](images/activity_diagram.png)
