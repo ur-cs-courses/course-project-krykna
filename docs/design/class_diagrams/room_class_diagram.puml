@@ -22,9 +22,9 @@ enum Size {
 
 interface CommandLine {}
 
-Management "1" *--> "0...n" Room
+Management "1" o--> "0...n" Room
 Management "1" *--> "0...n" Robot
-Robot "1" *--> "0...n" Room
+Robot "1" o--> "1" Room
 Room "1" *--> "1" Status
 Room "1" *--> "1" Size
 Management ..|> CommandLine
