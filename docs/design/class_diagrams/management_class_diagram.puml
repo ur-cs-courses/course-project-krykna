@@ -9,8 +9,8 @@ class Management {
   + update_rooms(): void
   + update_bots(): void
   + availability_string(): string
-  + room_stats_string(): string
-  + bot_stats_string(): string
+  + room_status_string(): string
+  + bot_data_string(): string
   + add_new_bot(): void
   + add_new_room(): void
 }

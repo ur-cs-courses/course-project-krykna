@@ -105,3 +105,79 @@ Relationships
 
 * The Room class has a 1-to-1 composition with enum class Status
 * The Room class has a 1-to-1 composition with enum class Size
+
+# Sequence Diagram Documentation
+
+## Overview
+
+This documentation explains a sequence diagram that outlines the interactions between four components involved in a robot cleaning a room from start to finish:
+
+1. `CommandLine (CLI)`: The command line interface for users.
+2. `Management (M)`: The management system that handles room and robot statuses.
+3. `Robots (Bot)`: Represents the robots available for cleaning.
+4. `Rooms (R)`: Represents the rooms available for cleaning.
+
+## Cleaning Sequence Diagram
+![Diagram Description](images/cleaning_sequence_diagram.png)
+
+## Components
+
+#### Assign Bot for Cleaning
+
+1. CLI sends a message to `Management` to assign a bot to clean a room.
+   - `Management` assigns  `Bot` to a room.
+   - `Bot`
+     -  updates its status to `BUSY`.
+     -  starts the cleaning process.
+   - `Room`
+     - starts a timer for cleaning.
+   
+##### Optional Flow: Robot Breaks
+
+- `opt Robot breaks`: An optional block where the robot can break.
+  - `Room`
+    - pauses the timer.
+    -  notifies `Bot` that bot is broken.
+  - `Bot`
+    - notifies `Management`.
+  - `Management`
+    - checks for available bots.
+    - `alt if another bot is available`:
+      - Assigns another bot to the room.
+      - `Bot`
+        - New bot starts cleaning.
+      - `Room`
+        -  Room resumes timer.
+
+    - `else if no other bot is available`:
+      -  Notifies CLI that cleaning assignment was unsuccessful.
+
+- `Room`
+    - cleaning timer ends.
+    - updates its status to `CLEAN`.
+    - notifies `Management` that the room is clean.
+- `Bot`
+    - updates its status to `FREE`.
+    - notifies `Management` that it's now free.
+- `Management` Notifies `CLI` that the cleaning was successful.
+
+
+
+## Requesting Room and Bot Status Sequence Diagram
+![Diagram Description](images/requesting_status_sequence_diagram.png)
+
+- `CommandLine requests room or bot status from management`
+- `Management` 
+     -  converts status data to string format.
+     -   sends back the status of the room/bot as a string to `CLI`.
+
+
+
+## Adding New Rooms and Bots Sequence Diagram
+![Diagram Description](images/adding_sequence_diagram.png)
+
+- `CommandLine requests add new bot/room from management`
+- `Management` 
+    -  initialize new bot/room object
+    -   add  bot/room to free set
+
