@@ -1,0 +1,56 @@
+@startuml
+!define RECTANGLE class
+
+box #LightGreen
+  participant CommandLine as CLI
+end box
+
+box #LightBlue
+  participant Management as M
+end box
+
+box #Pink
+  participant Robots as Bot
+end box
+
+box #LightYellow
+  participant Rooms as R
+end box
+
+CLI -> M : Assign bot to clean room
+activate M
+M -> Bot : assign_bot(room)
+activate Bot
+Bot -> M : update_bots(BUSY)
+Bot -> R : start cleaning
+activate R
+R -> R: start timer
+activate R
+
+opt Robot breaks
+  R -> R: pause timer
+  R --> Bot: broken bot
+  Bot --> M : broken bot
+  deactivate Bot
+  M -> M: check bot availabilities
+  alt if another bot is available
+    M -> Bot : assign_bot(room)
+    activate Bot
+    Bot -> R : resume cleaning
+    R -> R: resume timer
+  else if no other bot is available
+    M --> CLI : Cleaning assignment unsuccessful
+  end
+end
+R --> R: timer ends
+deactivate R
+R -> R: CLEAN status
+R -> M: update_rooms(CLEAN)
+deactivate R
+Bot -> Bot: FREE status
+Bot -> M: update_bots(FREE)
+deactivate Bot
+M --> CLI : Cleaning assignment successful
+deactivate M
+@enduml
+

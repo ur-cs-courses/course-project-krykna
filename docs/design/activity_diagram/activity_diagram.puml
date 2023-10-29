@@ -1,0 +1,37 @@
+@startuml
+
+(*) --> "User on"
+If "Start Clean" then
+    If "Robots Available" then
+        --> [Yes] "Assign Robot a given task"
+        --> "Clean Room"
+        If "Is Room Clean" then
+            -->[Room_is_clean] (*)
+        else
+            If "" then
+                --> [Room_not_clean] "Clean Room"
+            else
+                --> [Robot_Fail] (*)
+            Endif
+        Endif
+    else
+    --> [No] "wait"
+    --> (*)
+    Endif
+else
+    If "other functions" then
+        If "Add" then
+            -->[robot] "Add Robot"
+        else
+            -->[room] "Add Room"
+        Endif
+    else
+        If "Check" then
+            -->[robot] "Get Robot Status"
+        else
+            -->[room] "Get Room Status"
+        Endif
+    Endif
+
+
+@enduml
