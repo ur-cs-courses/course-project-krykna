@@ -1,0 +1,22 @@
+@startuml Robot and Manger Data Interaction
+
+participant "Management" as Management
+participant "Command Line Interface" as CLI
+participant "Backend" as Backend
+database "CSV File" as CSV
+
+Management -> CLI: Enter command (e.g., get robot status)
+CLI -> Backend: Request to get robot status
+Backend -> CSV: Read robot data
+CSV -> Backend: Return robot data
+Backend -> CLI: Provide robot status
+CLI -> Management: Display robot status
+
+Management -> CLI: Enter command (e.g., assign cleaning task)
+CLI -> Backend: Request to assign cleaning task
+Backend -> CSV: Update robot data
+CSV -> Backend: Confirm update
+Backend -> CLI: Provide confirmation
+CLI -> Management: Display confirmation message
+
+@enduml
