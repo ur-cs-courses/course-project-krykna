@@ -4,12 +4,6 @@
 #include <vector>
 #include <string>
 
-// Forward declarations for Robots, Rooms, and Cleaner. 
-// You would typically include the appropriate header files.
-class Robots;
-class Rooms;
-enum class Cleaner;
-
 class Management {
 private:
     std::vector<Robots> robot_list;
@@ -33,4 +27,4 @@ public:
     std::string to_string_robot_list();
 };
 
-#endif // MANAGEMENT_H
+#endif

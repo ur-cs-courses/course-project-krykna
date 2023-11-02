@@ -81,18 +81,16 @@ void Management::add_new_room(int size) {
 
 std::string Management::to_string_room_list() {
     std::string output;
-    // create a string representation of room_list
-    // for (const auto& room : room_list) {
-    //     output += room.to_string() + "\n";
-    // }
+    for (const auto& room : room_list) {
+        output += room.to_string() + "\n";
+    }
     return output;
 }
 
 std::string Management::to_string_robot_list() {
     std::string output;
-    // create a string representation of robot_list
-    // for (const auto& robot : robot_list) {
-    //     output += robot.to_string() + "\n";
-    // }
+    for (const auto& robot : robot_list) {
+         output += robot.to_string() + "\n";
+    }
     return output;
 }
