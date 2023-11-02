@@ -48,6 +48,7 @@ class Room {
         * PURPOSE: Update the status of a room object
         * PARAMS:  enum Status updated_status - the desired status change
         * RETURN:  None
+        * NOTE:    Expected to be used by either robot or management class
         */
         void update_room_status(Status updated_status);
 
@@ -55,6 +56,7 @@ class Room {
         * PURPOSE: Modifier methods for convenience
         * PARAMS:  String - passed values to be converted
         * RETURN:  None
+        * NOTE:    Assumes values will be passed as strings to be converted to proper types.
         */
         void set_room_name(std::string name);
         void set_room_size(std::string set_to_size);
@@ -83,7 +85,7 @@ class Room {
         * PARAMS:  None
         * RETURN:  String conversion of the int estimated_time
         *          "Estimated Time to Clean: [estimated_time] minutes"
-        * NOTE:    Assumes that unit of time is minutes
+        * NOTE:    Assumes unit of time is minutes
         */
         std::string time_to_string();
 
