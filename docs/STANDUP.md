@@ -9,6 +9,7 @@
 * **Kate**
     - brainstorming
 
+
 ### STANDUP 2 Contributions:
 * **Wonyoung**
     - Robot.hpp and Robot.cpp
