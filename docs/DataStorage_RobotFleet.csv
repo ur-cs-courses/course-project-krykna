@@ -1,0 +1,18 @@
+Structure of the CSV File:
+
+The CSV file could have columns for various attributes of the robots, such as:
+
+RobotID: A unique identifier for each robot.
+Type: The type of robot (mopping, vacuum, scrubber).
+Size: The size of the robot (large, small).
+Status: The current status of the robot (e.g., cleaning, charging, offline, maintenance).
+BatteryLevel: The current battery level of the robot.
+Location: The current location or room the robot is in.
+LastMaintenanceDate: The date when the robot last went through maintenance.
+CurrentTask: The current task the robot is performing (if any).
+
+It should incorporate it in this way:
+
+I think we should have a CSV file that that we insert into the command line that gets repeatedly read on to and queried from that 
+changes throughout the simulation. When the program turns off, the CSV file can be left off with the information that 
+maintained after the previous simulation. it should set up the initialization of the system in my opinion
