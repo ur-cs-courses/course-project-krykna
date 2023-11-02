@@ -11,4 +11,9 @@ int main() {
         CHECK(myroom->get_room_status() == Status::dirty);
         CHECK(myroom->get_room_data() == expected_string);
     }
+
+    Room* empty = new Room();
+    TEST_CASE("Testing empty room") {
+        CHECK(empty->get_room_data() == "Room Name: TBD\nRoom Status: TBD\nRoom Size: TBD\nEstimated Time to Clean: 0 minutes");
+    }
 }
