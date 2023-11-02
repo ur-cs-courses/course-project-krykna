@@ -1,4 +1,4 @@
-#include "management/Management.hpp"  // Include the corresponding header file
+#include "manage/Management.hpp"  // Include the corresponding header file
 #include <iostream>
 #include <fstream>
 
@@ -43,11 +43,9 @@ void Management::initialize_robot_list_from_csv_file() {
 
 
 void Management::initialize_room_list_from_csv_file() {
-    // Implement CSV reading logic to populate room_list
-    // For example:
+    // populate room_list
     // std::ifstream csvFile(csv_path);
     // ... read data and populate room_list
-    continue
 }
 
 
@@ -79,16 +77,13 @@ void Management::add_new_robot(int size, const std::string& clean_type, bool onl
 
 
 void Management::add_new_room(int size) {
-    // Implement logic to add a new room
-    // For example:
+    // add a new room
     // room_list.push_back(Rooms(size));
-    continue
 }
 
 std::string Management::to_string_room_list() {
     std::string output;
-    // Implement logic to create a string representation of room_list
-    // For example:
+    // create a string representation of room_list
     // for (const auto& room : room_list) {
     //     output += room.to_string() + "\n";
     // }
@@ -97,8 +92,7 @@ std::string Management::to_string_room_list() {
 
 std::string Management::to_string_robot_list() {
     std::string output;
-    // Implement logic to create a string representation of robot_list
-    // For example:
+    // create a string representation of robot_list
     // for (const auto& robot : robot_list) {
     //     output += robot.to_string() + "\n";
     // }
