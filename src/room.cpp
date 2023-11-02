@@ -61,11 +61,11 @@ void Room::set_room_time(std::string time) {
 std::string Room::status_to_string() {
     switch (this->room_status) {
         case (Status::dirty):
-            return "Room Status: Dirty";
+            return "Room Status:\tDirty";
         case (Status::in_progress):
-            return "Room Status: In-progress";
+            return "Room Status:\tIn-progress";
         case (Status::clean):
-            return "Room Status: Clean";
+            return "Room Status:\tClean";
     }
 
     return "Room Status: TBD";
@@ -74,11 +74,11 @@ std::string Room::status_to_string() {
 std::string Room::size_to_string() {
     switch (this->room_size) {
         case (Size::small):
-            return "Room Size: Small";
+            return "Room Size:\tSmall";
         case (Size::medium):
-            return "Room Size: Medium";
+            return "Room Size:\tMedium";
         case (Size::large):
-            return "Room Size: Large";
+            return "Room Size:\tLarge";
     }
 
     return "Room Size: TBD";
@@ -90,6 +90,6 @@ std::string Room::time_to_string() {
 }
 
 std::string Room::get_room_data() {
-    std::string data = "Room Name: " + room_name + "\n" + status_to_string() + "\n" + size_to_string() + "\n" + time_to_string();
+    std::string data = "Room Name:\t" + room_name + "\n" + status_to_string() + "\n" + size_to_string() + "\n" + time_to_string();
     return data;
 }
