@@ -10,5 +10,5 @@
     - brainstorming
 
 ### STANDUP 2 Contributions:
-**Wonyoung**
+* **Wonyoung**
     - Robot.hpp and Robot.cpp
