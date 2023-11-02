@@ -13,3 +13,5 @@
 ### STANDUP 2 Contributions:
 * **Wonyoung**
     - Robot.hpp and Robot.cpp
+* **Kate**
+    - Room.hpp, room.cpp, and testRoom.cpp
