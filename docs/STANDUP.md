@@ -11,8 +11,10 @@
 
 
 ### STANDUP 2 Contributions:
+* **Liz**
+    - Management.hpp, Management.cpp (constructors, initialization from csvs, to_strings, add_news)
 * **Wonyoung**
-    - Robot.hpp and Robot.cpp
+    - Robot.hpp, Robot.cpp (Constructors, setRoom, getRoom, getType, getStatus, setStatus, setTimer, getTimer, setLocation, getLocation)
 * **Kate**
     - Room.hpp, room.cpp, and testRoom.cpp
 * **Waleed**
