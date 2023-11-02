@@ -15,3 +15,5 @@
     - Robot.hpp and Robot.cpp
 * **Kate**
     - Room.hpp, room.cpp, and testRoom.cpp
+* **Waleed**
+      - DataStorage_RobotFleet.csv, Data Storage Ideas
