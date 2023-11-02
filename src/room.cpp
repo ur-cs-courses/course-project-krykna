@@ -1,7 +1,7 @@
 #include "libroom/room.hpp"
 
 Room::Room() {
-    room_name = "";
+    room_name = "TBD";
     this->room_status = Status::tbd;
     this->room_size = Size::tbd;
     this->estimated_time = 0;
@@ -68,7 +68,7 @@ std::string Room::status_to_string() {
             return "Room Status: Clean";
     }
 
-    return 0;
+    return "Room Status: TBD";
 }
 
 std::string Room::size_to_string() {
@@ -81,7 +81,7 @@ std::string Room::size_to_string() {
             return "Room Size: Large";
     }
 
-    return 0;
+    return "Room Size: TBD";
 }
 
 std::string Room::time_to_string() {
