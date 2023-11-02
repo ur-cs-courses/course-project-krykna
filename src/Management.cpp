@@ -1,15 +1,14 @@
-#include "manage/Management.hpp"  // Include the corresponding header file
+#include "manage/Management.hpp"
 #include <iostream>
 #include <fstream>
 
-// Default constructor implementation
+// Default constructor
 Management::Management() : csv_path("") {
-    // Initialize robot_list and room_list to empty
     robot_list.clear();
     room_list.clear();
 }
 
-// Parameterized constructor implementation
+// Parameterized constructor
 Management::Management(const std::string& csv_path) : csv_path(csv_path) {
     initialize_robot_list_from_csv_file();
     initialize_room_list_from_csv_file();
@@ -34,7 +33,6 @@ void Management::initialize_robot_list_from_csv_file() {
         
         iss >> size >> clean_type >> online_status;
         
-        // Add a new robot with the parsed attributes
         add_new_robot(size, clean_type, online_status, false);
     }
     
