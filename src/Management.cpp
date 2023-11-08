@@ -27,13 +27,14 @@ void Management::initialize_robot_list_from_csv_file() {
     while (std::getline(csvFile, line)) {
         std::istringstream iss(line);
         
-        int size;
+        std::string ID;
+        std::string size;
         std::string clean_type;
-        bool online_status;
+        std::string online_status;
         
-        iss >> size >> clean_type >> online_status;
+        iss >> ID >> online_status >> size >> clean_type;
         
-        add_new_robot(size, clean_type, online_status, false);
+        add_new_robot(ID, size, clean_type, online_status);
     }
     
     csvFile.close();
@@ -46,37 +47,20 @@ void Management::initialize_room_list_from_csv_file() {
     // ... read data and populate room_list
 }
 
-
 // Public methods
-
-void Management::add_new_robot(int size, const std::string& clean_type, bool online_status, bool update_csv) {
+void Management::add_new_robot(const std::string& ID, const std::string& size, const std::string& clean_type, const std::string& online_status) {
     // Create a new Robot object with the given parameters
-    Robots new_robot(size, clean_type, online_status);
+    //Robot new_bot = new Robot(ID, online_status, size, clean_type);
+    std::string new_bot = ID + online_status + size + clean_type;
+    robot_list.push_back(new_bot);
 
-    // Add the new Robot object to the robot_list
-    robot_list.push_back(new_robot);
-
-    if (update_csv) {
-        // Open the CSV file in append mode
-        std::ofstream csvFile(csv_path, std::ios_base::app);
-
-        if (!csvFile.is_open()) {
-            std::cerr << "Could not open the file: " << csv_path << std::endl;
-            return;
-        }
-
-        // Write the new robot information to the CSV file
-        csvFile << size << " " << clean_type << " " << online_status << std::endl;
-        
-        csvFile.close();
-    }
 }
 
-
-
-void Management::add_new_room(int size) {
+void Management::add_new_room(const std::string& ID, const std::string& size, const std::string& clean_status, const std::string& time_till_clean) {
     // add a new room
-    // room_list.push_back(Rooms(size));
+    Room new_room = Room(ID, clean_status, size, time_till_clean);
+    //std::string new_room = ID + size + clean_status + time_till_clean;
+    room_list.push_back(new_room);
 }
 
 std::string Management::to_string_room_list() {
