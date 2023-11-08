@@ -47,7 +47,7 @@ std::string Room::status_to_string() {
             return "Room Status:\tClean";
     }
 
-    return "Room Status: TBD";
+    return "Room Status:\tTBD";
 }
 
 std::string Room::size_to_string() {
@@ -60,7 +60,7 @@ std::string Room::size_to_string() {
             return "Room Size:\tLarge";
     }
 
-    return "Room Size: TBD";
+    return "Room Size:\tTBD";
 }
 
 std::string Room::time_to_string() {
