@@ -1,5 +1,3 @@
-#test csv of rooms
-"ID","Status","Size","Min time till clean in seconds"
 0,Clean,Small,0
 1,Dirty,Small,10
 2,IP,Medium,20

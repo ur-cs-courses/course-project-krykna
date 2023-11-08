@@ -3,8 +3,8 @@
 
 #include <string>
 
-enum class Status   {tbd, dirty, in_progress, clean};
-enum class Size     {tbd, small, medium, large};
+enum Status   {emp, dirty, in_progress, clean};
+enum Size     {emp2, small, medium, large};
 
 class Room {
     public:
@@ -43,28 +43,6 @@ class Room {
         * RETURN:  None
         */
         ~Room();
-
-        /**
-        * PURPOSE: Update the status of a room object
-        * PARAMS:  enum Status updated_status - the desired status change
-        * RETURN:  None
-        * NOTE:    Expected to be used by either robot or management class
-        */
-        void update_room_status(Status updated_status);
-
-        /**
-        * PURPOSE: Modifier methods for convenience
-        * PARAMS:  String - passed values to be converted
-        * RETURN:  None
-        * NOTE:    Assumes values will be passed as strings to be converted to proper types.
-        */
-        void set_room_name(std::string name);
-        void set_room_size(std::string set_to_size);
-        void set_room_time(std::string time);
-
-        inline Status get_room_status() const {return this->room_status;}
-        inline Size get_room_size() const {return this->room_size;}
-        inline int get_estimated_clean_time() const {return this->estimated_time;}
 
         /**
         * PURPOSE: Helper - Converts enum class Status value to string

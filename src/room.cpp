@@ -1,30 +1,38 @@
-#include "libroom/room.hpp"
-
+#include "../include/libroom/room.hpp"
+#include <iostream>
 Room::Room() {
     room_name = "TBD";
-    this->room_status = Status::tbd;
-    this->room_size = Size::tbd;
+    this->room_status = Status::emp;
+    this->room_size = Size::emp2;
     this->estimated_time = 0;
 }
 
 Room::Room(std::string name, std::string status, std::string size, std::string time)
     : room_name(name)
 {
+        std::cout << "suuposed to be name:" << name << std::endl;
+        std::cout << "suuposed to be status:" << status << std::endl;
+        std::cout << "suuposed to be size:" << size << std::endl;
+        std::cout << "suuposed to be time:" << time << std::endl;
     if (status == "dirty") {
         this->room_status = Status::dirty;
     } else if (status == "clean") {
         this->room_status = Status::clean;
     }
-
-    if (size == "small" || size == "s") {
+    if (size == "small" || size == "s" || size == "Small") {
         this->room_size = Size::small;
-    } else if (size == "medium" || size == "med" || size == "m") {
+    } else if (size == "medium" || size == "med" || size == "m" || size == "Medium") {
         this->room_size = Size::medium;
-    } else if (size == "large" || size == "lg" || size == "l") {
+    } else if (size == "large" || size == "lg" || size == "l" || size == "Large") {
         this->room_size = Size::large;
     }
 
     this->estimated_time = std::stoi(time);
+
+        std::cout << "suuposed to be name:" << name << std::endl;
+        std::cout << "suuposed to be status:" << status << std::endl;
+        std::cout << "suuposed to be size:" << size << std::endl;
+        std::cout << "suuposed to be time:" << time << std::endl;
 }
 
 Room::Room(const Room &other)
@@ -35,28 +43,6 @@ Room::Room(const Room &other)
 {}
 
 Room::~Room() {}
-
-void Room::update_room_status(Status updated_status) {
-    this->room_status = updated_status;
-}
-
-void Room::set_room_name(std::string name) {
-    this->room_name = name;
-}
-
-void Room::set_room_size(std::string set_to_size) {
-    if (set_to_size == "small" || set_to_size == "s") {
-        this->room_size = Size::small;
-    } else if (set_to_size == "medium" || set_to_size == "med" || set_to_size == "m") {
-        this->room_size = Size::medium;
-    } else if (set_to_size == "large" || set_to_size == "lg" || set_to_size == "l") {
-        this->room_size = Size::large; 
-    }
-}
-
-void Room::set_room_time(std::string time) {
-    this->estimated_time = std::stoi(time);
-}
 
 std::string Room::status_to_string() {
     switch (this->room_status) {
