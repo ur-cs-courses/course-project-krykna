@@ -28,7 +28,7 @@ public:
     std::string to_string_room_list();
     // std::string to_string_robot_list();
 
-    std::string status_to_lower();
+    // std::string status_to_lower();
 };
 
 #endif
