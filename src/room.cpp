@@ -16,11 +16,11 @@ Room::Room(std::string name, std::string status, std::string size, std::string t
     } else if (status == "clean") {
         this->room_status = Status::clean;
     }
-    if (size == "small" || size == "s" || size == "Small") {
+    if (size == "small" || size == "s") {
         this->room_size = Size::small;
-    } else if (size == "medium" || size == "med" || size == "m" || size == "Medium") {
+    } else if (size == "medium" || size == "med" || size == "m") {
         this->room_size = Size::medium;
-    } else if (size == "large" || size == "lg" || size == "l" || size == "Large") {
+    } else if (size == "large" || size == "lg" || size == "l") {
         this->room_size = Size::large;
     }
 
