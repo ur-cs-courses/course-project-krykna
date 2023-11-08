@@ -10,10 +10,7 @@ Room::Room() {
 Room::Room(std::string name, std::string status, std::string size, std::string time)
     : room_name(name)
 {
-        std::cout << "suuposed to be name:" << name << std::endl;
-        std::cout << "suuposed to be status:" << status << std::endl;
-        std::cout << "suuposed to be size:" << size << std::endl;
-        std::cout << "suuposed to be time:" << time << std::endl;
+
     if (status == "dirty") {
         this->room_status = Status::dirty;
     } else if (status == "clean") {

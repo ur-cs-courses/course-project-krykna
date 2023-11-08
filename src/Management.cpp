@@ -78,7 +78,7 @@ void Management::initialize_room_list_from_csv_file() {
 
 // }
 
-void Management::add_new_room(const std::string& ID, const std::string& size, const std::string& clean_status, const std::string& time_till_clean) {
+void Management::add_new_room(const std::string& ID,  const std::string& clean_status, const std::string& size, const std::string& time_till_clean) {
     // add a new room
     Room new_room = Room(ID, clean_status, size, time_till_clean);
     //std::string new_room = ID + size + clean_status + time_till_clean;
@@ -88,7 +88,7 @@ void Management::add_new_room(const std::string& ID, const std::string& size, co
 std::string Management::to_string_room_list() {
     std::string output;
     for (auto& room : room_list) {
-        output += room.get_room_data() + "\n";
+        output += room.get_room_data() + "\n" + "\n";
     }
     return output;
 }
