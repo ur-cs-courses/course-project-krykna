@@ -29,10 +29,6 @@ Room::Room(std::string name, std::string status, std::string size, std::string t
 
     this->estimated_time = std::stoi(time);
 
-        std::cout << "suuposed to be name:" << name << std::endl;
-        std::cout << "suuposed to be status:" << status << std::endl;
-        std::cout << "suuposed to be size:" << size << std::endl;
-        std::cout << "suuposed to be time:" << time << std::endl;
 }
 
 Room::Room(const Room &other)
