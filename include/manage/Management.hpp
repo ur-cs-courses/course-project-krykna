@@ -24,7 +24,7 @@ public:
 
     // Public methods
     //void add_new_robot(const std::string& ID, const std::string& size, const std::string& clean_type, const std::string& online_status);
-    void add_new_room(const std::string& ID, const std::string& size, const std::string& clean_status, const std::string& time_till_clean);
+    void add_new_room(const std::string& ID, const std::string& clean_status, const std::string& size, const std::string& time_till_clean);
     std::string to_string_room_list();
     // std::string to_string_robot_list();
 
