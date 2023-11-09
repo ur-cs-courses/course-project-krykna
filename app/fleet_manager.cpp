@@ -9,9 +9,6 @@ int main() {
     //Introduction Message
     cout << "Welcome to your Robot Fleet Management System! "; 
     
-    // Variables for file handling
-    ifstream robotCSV, roomCSV;
-    string robotCSV, roomCSV;
 
     
 
