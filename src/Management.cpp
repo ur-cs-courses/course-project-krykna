@@ -62,13 +62,8 @@ void Management::initialize_room_list_from_csv_file() {
         std::getline(iss, size, ',');
         std::getline(iss, time, ',');
         
-        std::string lowercase_size;
-        for (char c : size) {
-            lowercase_size.push_back(std::tolower(c));
-        }
-        
-        std::cout << name << status << lowercase_size << time << std::endl;
-        add_new_room(name, status, lowercase_size, time);
+        std::cout << name << status << size << time << std::endl;
+        add_new_room(name, status, size, time);
     }
 
     
@@ -105,12 +100,4 @@ std::string Management::to_string_room_list() {
 //          output += robot.to_string() + "\n";
 //     }
 //     return output;
-// }
-
-// std::string Management::size_to_lower(std::string& size) {
-//     std::string lowercase_size;
-//     for (char c : size) {
-//         lowercase_size.push_back(std::tolower(c));
-//     }
-//     return lowercase_size;
 // }
