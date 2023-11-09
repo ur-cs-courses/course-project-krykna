@@ -62,7 +62,6 @@ void Management::initialize_room_list_from_csv_file() {
         std::getline(iss, size, ',');
         std::getline(iss, time, ',');
         
-        std::cout << name << status << size << time << std::endl;
         add_new_room(name, status, size, time);
     }
 
