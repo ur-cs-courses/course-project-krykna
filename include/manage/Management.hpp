@@ -27,8 +27,6 @@ public:
     void add_new_room(const std::string& ID, const std::string& clean_status, const std::string& size, const std::string& time_till_clean);
     std::string to_string_room_list();
     // std::string to_string_robot_list();
-
-    // std::string size_to_lower(std::string& size);
 };
 
 #endif
