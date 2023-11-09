@@ -10,20 +10,22 @@ Room::Room() {
 Room::Room(std::string name, std::string status, std::string size, std::string time)
     : room_name(name)
 {
+    std::string stat_conv = to_lower(status);
+    std::string size_conv = to_lower(size);
 
-    if (status == "dirty") {
+    if (stat_conv == "dirty") {
         this->room_status = Status::dirty;
-    } else if (status == "in-progress" || status == "IP") {
+    } else if (stat_conv == "in-progress" || stat_conv == "in progress" || stat_conv == "ip") {
         this->room_status = Status::in_progress;
-    } else if (status == "clean") {
+    } else if (stat_conv == "clean") {
         this->room_status = Status::clean;
     }
 
-    if (size == "small" || size == "s") {
+    if (size_conv == "small" || size_conv == "s") {
         this->room_size = Size::small;
-    } else if (size == "medium" || size == "med" || size == "m") {
+    } else if (size_conv == "medium" || size_conv == "med" || size_conv == "m") {
         this->room_size = Size::medium;
-    } else if (size == "large" || size == "lg" || size == "l") {
+    } else if (size_conv == "large" || size_conv == "lg" || size_conv == "l") {
         this->room_size = Size::large;
     }
 
@@ -39,6 +41,14 @@ Room::Room(const Room &other)
 {}
 
 Room::~Room() {}
+
+std::string Room::to_lower(std::string& string_to_convert) {
+    std::string lowercase;
+    for (char c : string_to_convert) {
+        lowercase.push_back(std::tolower(c));
+    }
+    return lowercase;
+}
 
 std::string Room::status_to_string() {
     switch (this->room_status) {
