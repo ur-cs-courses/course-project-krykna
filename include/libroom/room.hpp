@@ -45,6 +45,13 @@ class Room {
         ~Room();
 
         /**
+        * PURPOSE: Helper - converts string to lowercase
+        * PARAMS:  None
+        * RETURN:  lowercase string
+        */
+        std::string to_lower(std::string& string_to_convert);
+
+        /**
         * PURPOSE: Helper - Converts enum class Status value to string
         * PARAMS:  None
         * RETURN:  String conversion of the enum status
