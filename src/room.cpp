@@ -13,9 +13,12 @@ Room::Room(std::string name, std::string status, std::string size, std::string t
 
     if (status == "dirty") {
         this->room_status = Status::dirty;
+    } else if (status == "in-progress" || status == "IP") {
+        this->room_status = Status::in_progress;
     } else if (status == "clean") {
         this->room_status = Status::clean;
     }
+
     if (size == "small" || size == "s") {
         this->room_size = Size::small;
     } else if (size == "medium" || size == "med" || size == "m") {
