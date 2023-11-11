@@ -1,10 +1,6 @@
-add_executable(say_hello
-  say_hello.cpp
-)
+# Add an executable for the main application
+add_executable(MainApp main.cpp ../src/Management.cpp ../src/Robot.cpp ../src/Room.cpp)
 
-target_link_libraries(say_hello
-  PRIVATE
-    libhello
+target_link_libraries(MainApp
+  fmt::fmt
 )
-
-target_compile_features(say_hello PRIVATE cxx_std_20)
