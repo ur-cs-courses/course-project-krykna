@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-// TODO
+// TODO 
 // Timer not needed
 // Combine set room into cleanRoom param
 enum class Status {Free, Busy};

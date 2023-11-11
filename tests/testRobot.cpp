@@ -1,6 +1,8 @@
 #include "../include/libRobot/Robot.hpp"
 #include <iostream>
 
+
+// Comment
 void test_initialize_Robot() {
     Robot testRobot(0, "Free", "Small", "Mop");
     std::cout << testRobot.typeToString() << std::endl;
