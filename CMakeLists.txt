@@ -1,19 +1,12 @@
+# Root CMakeLists.txt file for Configuration
 cmake_minimum_required(VERSION 3.16)
-project(libhello)
+project(RobotFleetManager)
 
+# Include dependencies
 include(dependencies.cmake)
 
-add_library(libhello
-  src/hello.cpp
-)
+# Include directories for header files
+include_directories(include/manage include/libRobot include/libroom)
 
-target_include_directories(libhello
-  PUBLIC
-    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-)
-
-target_link_libraries(libhello
-  fmt::fmt
-)
-
+# Add subdirectory for the main application
 add_subdirectory(app)
