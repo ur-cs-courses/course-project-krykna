@@ -3,6 +3,15 @@
 #include <string>
 using namespace std;
 
+// Keep track of Timer
+// Multiples of different factor depending on size
+// Get Timer from Management 
+    // Math in Robot
+    // Large = Standard
+    // Medium  = Standard * 2
+    // Small = Standard * 3
+// Make new branch off of Integration Test and copy and paste the 3 files changed
+
 Robot::Robot(int ID, string status, string size, string type) {
     this->id = ID;
     if (status == "Free") {
