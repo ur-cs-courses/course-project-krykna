@@ -80,7 +80,7 @@ class Room {
         * RETURN:  String providing the information of the room
         * HELPERS: status_to_string(), size_to_string(), time_to_string()
         */
-        std::string get_room_data();
+        std::string to_string();
 };
 
 #endif

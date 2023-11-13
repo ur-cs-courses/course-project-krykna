@@ -81,7 +81,7 @@ std::string Room::time_to_string() {
     return est_time;
 }
 
-std::string Room::get_room_data() {
+std::string Room::to_string() {
     std::string data = "Room Name:\t" + room_name + "\n" + status_to_string() + "\n" + size_to_string() + "\n" + time_to_string();
     return data;
 }
