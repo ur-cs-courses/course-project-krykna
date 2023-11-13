@@ -5,18 +5,18 @@
 
 // Default constructor
 Management::Management() {
-    this->csv_path_room = "";
-    this->csv_path_robot = "";
-    robot_list.clear();
-    room_list.clear();
+    this->csv_path_room_ = "";
+    this->csv_path_robot_ = "";
+    robot_list_.clear();
+    room_list_.clear();
 }
 
 //Parameterized constructor
-Management::Management(const std::string& csv_path_room, const std::string& csv_path_robot){
-    this->csv_path_room = csv_path_room;
-    this->csv_path_robot = csv_path_robot;
-    initialize_robot_list_from_csv_file(csv_path_robot);
-    initialize_room_list_from_csv_file(csv_path_room);
+Management::Management(const std::string& csv_path_room_, const std::string& csv_path_robot_){
+    this->csv_path_room_ = csv_path_room_;
+    this->csv_path_robot_ = csv_path_robot_;
+    initialize_robot_list_from_csv_file(csv_path_robot_);
+    initialize_room_list_from_csv_file(csv_path_room_);
 }
 
 // Private methods
@@ -78,18 +78,18 @@ void Management::initialize_room_list_from_csv_file(const std::string& csv_path)
 void Management::add_new_robot(const std::string& ID, const std::string& online_status, const std::string& size, const std::string& clean_type) {
     // Create a new Robot object with the given parameters
     Robot new_bot = Robot(ID, online_status, size, clean_type);
-    robot_list.push_back(new_bot);
+    robot_list_.push_back(new_bot);
 }
 
 void Management::add_new_room(const std::string& ID,  const std::string& clean_status, const std::string& size, const std::string& time_till_clean) {
     // add a new room
     Room new_room = Room(ID, clean_status, size, time_till_clean);
-    room_list.push_back(new_room);
+    room_list_.push_back(new_room);
 }
 
 std::string Management::to_string_room_list() {
     std::string output = "********** ROOMS ************ \n \n";
-    for (auto& room : room_list) {
+    for (auto& room : room_list_) {
         output += room.to_string() + "\n" + "\n";
     }
     return output;
@@ -97,7 +97,7 @@ std::string Management::to_string_room_list() {
 
 std::string Management::to_string_robot_list() {
     std::string output = "********** ROBOTS ************ \n \n";
-    for (auto& robot : robot_list) {
+    for (auto& robot : robot_list_) {
          output += robot.to_string() + "\n" + "\n";
     }
     return output;

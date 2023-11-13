@@ -9,11 +9,11 @@ enum Type {Mop, Vac, Scrub};
 
 class Robot {
     private:
-        string id;
-        Robot_Size size;
-        string room;
-        Robot_Status status;
-        Type type;
+        string id_;
+        Robot_Size size_;
+        string room_;
+        Robot_Status status_;
+        Type type_;
     
     public:
         // Constructors
