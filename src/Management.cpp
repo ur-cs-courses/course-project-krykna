@@ -88,7 +88,7 @@ void Management::add_new_room(const std::string& ID,  const std::string& clean_s
 }
 
 std::string Management::to_string_room_list() {
-    std::string output;
+    std::string output = "********** ROOMS ************ \n \n";
     for (auto& room : room_list) {
         output += room.to_string() + "\n" + "\n";
     }
@@ -96,9 +96,9 @@ std::string Management::to_string_room_list() {
 }
 
 std::string Management::to_string_robot_list() {
-    std::string output;
+    std::string output = "********** ROBOTS ************ \n \n";
     for (auto& robot : robot_list) {
-         output += robot.to_string() + "\n";
+         output += robot.to_string() + "\n" + "\n";
     }
     return output;
 }

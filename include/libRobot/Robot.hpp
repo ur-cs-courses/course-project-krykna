@@ -35,9 +35,9 @@ class Robot {
         // Robot activities
         void go_home();
 
-        string to_string_type() const;
-        string to_string_status() const;
-        string to_string_size() const;
+        string to_string_type();
+        string to_string_status();
+        string to_string_size();
         string to_string();
 };
 
