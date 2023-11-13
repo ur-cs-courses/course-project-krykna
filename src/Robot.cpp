@@ -3,44 +3,44 @@
 #include <string>
 using namespace std;
 
-Robot::Robot(string ID, string status, string size, string type) {
-    this->id = ID;
-    if (status == "Free") {
-        this->status = Robot_Status::Free;
-    } else if (status == "Busy") {
-        this->status = Robot_Status::Busy;
+Robot::Robot(string ID, string status_, string size_, string type_) {
+    this->id_ = ID;
+    if (status_ == "Free") {
+        this->status_ = Robot_Status::Free;
+    } else if (status_ == "Busy") {
+        this->status_ = Robot_Status::Busy;
     }
 
-    if (type == "Mop") {
-        this->type = Type::Mop;
-    } else if (type == "Vac") {
-        this->type = Type::Vac;
-    } else if (type== "Scrub") {
-        this->type = Type::Scrub;
+    if (type_ == "Mop") {
+        this->type_ = Type::Mop;
+    } else if (type_ == "Vac") {
+        this->type_ = Type::Vac;
+    } else if (type_== "Scrub") {
+        this->type_ = Type::Scrub;
     }
 
-    if (size == "Small") {
-        this->size = Robot_Size::Small;
-    } else if (size == "Medium") {
-        this->size = Robot_Size::Medium;
-    } else if (size== "Large") {
-        this->size = Robot_Size::Large;
+    if (size_ == "Small") {
+        this->size_ = Robot_Size::Small;
+    } else if (size_ == "Medium") {
+        this->size_ = Robot_Size::Medium;
+    } else if (size_== "Large") {
+        this->size_ = Robot_Size::Large;
     }
 }
 
 Robot::~Robot() {}
 
 void Robot::set_room(string givenRoom) {
-    this->room = givenRoom;
-    this->status = Robot_Status::Busy;
+    this->room_ = givenRoom;
+    this->status_ = Robot_Status::Busy;
 }
 
 string Robot::get_room() const {
-    return this->room;
+    return this->room_;
 }
 
 string Robot::to_string_size() {
-    switch (this->size) {
+    switch (this->size_) {
         case (Robot_Size::Small):
             return "Size: Small";
         case (Robot_Size::Medium):
@@ -51,7 +51,7 @@ string Robot::to_string_size() {
 }
 
 string Robot::to_string_type() {
-    switch (this->type) {
+    switch (this->type_) {
         case (Type::Mop):
             return "Type: Mop";
         case (Type::Vac):
@@ -62,7 +62,7 @@ string Robot::to_string_type() {
 }
 
 string Robot::to_string_status() {
-    switch (this->status) {
+    switch (this->status_) {
         case (Robot_Status::Free):
             return "Status: Free";
         case (Robot_Status::Busy):
@@ -70,21 +70,21 @@ string Robot::to_string_status() {
     }
 }
 
-void Robot::set_status(string status) {
-    if (status == "Free") {
-        this->status = Robot_Status::Free;
-    } else if (status == "Busy") {
-        this->status = Robot_Status::Busy;
+void Robot::set_status(string status_) {
+    if (status_ == "Free") {
+        this->status_ = Robot_Status::Free;
+    } else if (status_ == "Busy") {
+        this->status_ = Robot_Status::Busy;
     }
 }
 
 // basically reset
 void Robot::go_home() {
-    this->room = "";
-    this->status = Robot_Status::Free;
+    this->room_ = "";
+    this->status_ = Robot_Status::Free;
 }
 
 string Robot::to_string() {
-    std::string data = "Robot:\t" + id + "\n" + to_string_status() + "\n" + to_string_size() + "\n" + to_string_type();
+    std::string data = "Robot:\t" + id_ + "\n" + to_string_status() + "\n" + to_string_size() + "\n" + to_string_type();
     return data;
 }

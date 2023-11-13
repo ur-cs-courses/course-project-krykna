@@ -9,10 +9,10 @@
 
 class Management {
 private:
-    std::vector<Robot> robot_list;
-    std::vector<Room> room_list;
-    std::string csv_path_room;
-    std::string csv_path_robot;
+    std::vector<Robot> robot_list_;
+    std::vector<Room> room_list_;
+    std::string csv_path_room_;
+    std::string csv_path_robot_;
 
     void initialize_robot_list_from_csv_file(const std::string& csv_path);
     void initialize_room_list_from_csv_file(const std::string& csv_path);
