@@ -39,34 +39,34 @@ string Robot::get_room() const {
     return this->room;
 }
 
-string Robot::to_string_size() const {
+string Robot::to_string_size() {
     switch (this->size) {
         case (Robot_Size::Small):
-            return "Small";
+            return "Size: Small";
         case (Robot_Size::Medium):
-            return "Medium";
+            return "Size: Medium";
         case (Robot_Size::Large):
-            return "Large";
+            return "Size: Large";
     }
 }
 
-string Robot::to_string_status() const {
+string Robot::to_string_type() {
     switch (this->type) {
         case (Type::Mop):
-            return "Mop";
+            return "Type: Mop";
         case (Type::Vac):
-            return "Vac";
+            return "Type: Vaccuum";
         case (Type::Scrub):
-            return "Scrub";
+            return "Type: Scrub";
     }
 }
 
-string Robot::to_string_status() const {
+string Robot::to_string_status() {
     switch (this->status) {
         case (Robot_Status::Free):
-            return "Free";
+            return "Status: Free";
         case (Robot_Status::Busy):
-            return "Busy";
+            return "Status: Busy";
     }
 }
 
@@ -85,6 +85,6 @@ void Robot::go_home() {
 }
 
 string Robot::to_string() {
-    std::string data = "Robot:\t" + this->id + "\n" + to_string_status() + "\n" + to_string_size() + "\n" + to_string_type();
+    std::string data = "Robot:\t" + id + "\n" + to_string_status() + "\n" + to_string_size() + "\n" + to_string_type();
     return data;
 }
