@@ -7,13 +7,11 @@ enum Status   {emp, dirty, in_progress, clean};
 enum Size     {emp2, small, medium, large};
 
 class Room {
-    public:
-        std::string room_name;
-
     private:
-        int     estimated_time;
-        Status  room_status;
-        Size    room_size;
+        std::string room_name_;
+        int     estimated_time_;
+        Status  room_status_;
+        Size    room_size_;
 
     public:
         /**
@@ -80,7 +78,7 @@ class Room {
         * RETURN:  String providing the information of the room
         * HELPERS: status_to_string(), size_to_string(), time_to_string()
         */
-        std::string get_room_data();
+        std::string to_string();
 };
 
 #endif

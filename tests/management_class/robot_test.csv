@@ -1,5 +1,3 @@
-#test csv of robots
-"ID","Status","Size","Type"
 0,Free,Small,Mop
 1,Busy,Small,Vac
 2,Free,Medium,Scrub
@@ -7,5 +5,3 @@
 4,Free,Large,Vac
 5,Busy,Large,Scrub
 6,Free,Large,Mop
-
-
