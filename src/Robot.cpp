@@ -47,6 +47,8 @@ string Robot::to_string_size() {
             return "Size: Medium";
         case (Robot_Size::Large):
             return "Size: Large";
+        default:
+            return "Size: Unknown"; // Default case    
     }
 }
 
@@ -58,7 +60,10 @@ string Robot::to_string_type() {
             return "Type: Vaccuum";
         case (Type::Scrub):
             return "Type: Scrub";
-    }
+        default:
+            return "Type: Unknown"; // Default case
+        }
+    
 }
 
 string Robot::to_string_status() {
@@ -67,6 +72,8 @@ string Robot::to_string_status() {
             return "Status: Free";
         case (Robot_Status::Busy):
             return "Status: Busy";
+        default:
+            return "Status: Unknown"; // Default case
     }
 }
 
@@ -88,3 +95,4 @@ string Robot::to_string() {
     std::string data = "Robot:\t" + id_ + "\n" + to_string_status() + "\n" + to_string_size() + "\n" + to_string_type();
     return data;
 }
+

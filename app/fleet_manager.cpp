@@ -3,11 +3,13 @@
 #include <sstream>
 #include "../include/libRobot/Robot.hpp"
 
+
+
 using namespace std; // Use the standard namespace
 
 int main() {
     string input;
-    string size, type;
+    
     //Introduction Message
     cout << "Welcome to your Robot Fleet Management System! "; 
     
@@ -18,16 +20,22 @@ int main() {
 
         // Check the user input and respond accordingly
         if (input == "Add Robot") {
-            cout << "What is the size and type?" << endl;
+            string robotId, robotStatus, robotSize, robotType;
+            cout << "Enter: [Robot ID] [robotStatus] [robotSize] [robotType] (in this order):" << endl;
             getline(cin, input); // Expecting user to input size and type in "size type" format
             stringstream ss(input);
-            ss >> size >> type; // Split the input into size and type
-            cout << "New Robot: " << size << " and " << type << " has been added to Robot CSV file!" << endl;
+            ss >> robotId >> robotStatus>> robotSize >> robotType; // Split the input into robot id, status, size, and 
+            
+            Robot newRobot(robotId, robotStatus, robotSize, robotType);
+            cout << "Robot Details:\n" << newRobot.to_string() << endl;
+
+            cout << "New Robot has been added to Robot CSV file! (NOT INTEGRATED YET)" << endl;
         } else if (input == "Add Room") {
+            string roomSize;
             cout << "Size of Room?" << endl;
-            cin >> size;
+            cin >> roomSize;
             cin.ignore(); // To consume the newline character and avoid it being read in the next getline call
-            cout << "New Room Size " << size << " is initialized to dirty and is now added to the Room CSV File" << endl;
+            cout << "New Room Size " << roomSize << " is initialized to dirty and is now added to the Room CSV File" << endl;
         } else if (input == "Get Overall Room Status") {
             cout << "The backend will grab the to_string() from the Room class and use file line reading functionality to print out the updated contents of the entire Room CSV file " << endl;
         } else if (input == "Get Overall Robot Status") {
