@@ -1,7 +1,5 @@
-#include "../include/manage/Management.hpp"
-#include <iostream>
-#include <fstream>
-#include <sstream>
+//#include "../include/manage/Management.hpp"
+#include "manage/Management.hpp"
 
 // Default constructor
 Management::Management() {

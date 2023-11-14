@@ -1,5 +1,5 @@
-#include "../include/libroom/room.hpp"
-#include <iostream>
+#include "libroom/room.hpp"
+
 Room::Room() {
     room_name_ = "TBD";
     this->room_status_ = Status::emp;

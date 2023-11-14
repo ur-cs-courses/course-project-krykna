@@ -1,6 +1,5 @@
-#include "../include/libRobot/Robot.hpp"
-#include <iostream>
-#include <string>
+//#include "../include/libRobot/Robot.hpp"
+#include "libRobot/Robot.hpp"
 using namespace std;
 
 Robot::Robot(string ID, string status_, string size_, string type_) {
@@ -42,32 +41,38 @@ string Robot::get_room() const {
 string Robot::to_string_size() {
     switch (this->size_) {
         case (Robot_Size::Small):
-            return "Size: Small";
+            return "Size:\tSmall";
         case (Robot_Size::Medium):
-            return "Size: Medium";
+            return "Size:\tMedium";
         case (Robot_Size::Large):
-            return "Size: Large";
+            return "Size:\tLarge";
     }
+
+    return "Size:\tNA";
 }
 
 string Robot::to_string_type() {
     switch (this->type_) {
         case (Type::Mop):
-            return "Type: Mop";
+            return "Type:\tMop";
         case (Type::Vac):
-            return "Type: Vaccuum";
+            return "Type:\tVaccuum";
         case (Type::Scrub):
-            return "Type: Scrub";
+            return "Type:\tScrub";
     }
+
+    return "Type:\tNA";
 }
 
 string Robot::to_string_status() {
     switch (this->status_) {
         case (Robot_Status::Free):
-            return "Status: Free";
+            return "Status:\tFree";
         case (Robot_Status::Busy):
-            return "Status: Busy";
+            return "Status:\tBusy";
     }
+
+    return "Status:\tNA";
 }
 
 void Robot::set_status(string status_) {
@@ -85,6 +90,6 @@ void Robot::go_home() {
 }
 
 string Robot::to_string() {
-    std::string data = "Robot:\t" + id_ + "\n" + to_string_status() + "\n" + to_string_size() + "\n" + to_string_type();
+    std::string data = "Robot ID:\t" + id_ + "\n" + to_string_status() + "\n" + to_string_size() + "\n" + to_string_type();
     return data;
 }
