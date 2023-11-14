@@ -1,7 +1,7 @@
 #include <iostream> // Include the library that contains the standard input/output stream objects
 #include <string> // Including the string library
 #include <sstream>
-
+#include "../include/libRobot/Robot.hpp"
 
 using namespace std; // Use the standard namespace
 
