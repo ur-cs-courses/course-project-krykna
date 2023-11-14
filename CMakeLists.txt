@@ -27,5 +27,3 @@ target_link_libraries(manage
 
 # add_subdirectory(app)
 add_subdirectory(tests)
-
-# target_link_libraries(libhello fmt::fmt)
