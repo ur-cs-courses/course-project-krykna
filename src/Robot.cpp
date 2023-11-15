@@ -12,17 +12,17 @@ Robot::Robot(string ID, string status_, string size_, string type_) {
 
     if (type_ == "Mop") {
         this->type_ = Type::Mop;
-    } else if (type_ == "Vac") {
+    } else if (type_ == "Vac" || type_ == "Vaccuum") {
         this->type_ = Type::Vac;
     } else if (type_== "Scrub") {
         this->type_ = Type::Scrub;
     }
-
-    if (size_ == "Small") {
+    
+    if (size_ == "Small" || size_ == "small") {
         this->size_ = Robot_Size::Small;
-    } else if (size_ == "Medium") {
+    } else if (size_ == "Medium" || size_== "medium") {
         this->size_ = Robot_Size::Medium;
-    } else if (size_== "Large") {
+    } else if (size_== "Large" || size_== "large") {
         this->size_ = Robot_Size::Large;
     }
 }

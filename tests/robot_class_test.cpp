@@ -15,6 +15,7 @@ TEST_CASE("Robot Class") {
         CHECK(testRobot.get_room() == "Cruddy Crawfish");
         testRobot.go_home();
         CHECK(testRobot.get_room() == "");
+        CHECK(testRobot.to_string_status() == "Status:\tFree");
     }
 }
 
