@@ -12,7 +12,7 @@ TEST_CASE("Testing Compatibility of Management with Room and Robot Classes") {
     const std::string require_robots = 
     "********** ROBOTS ************ \n \nRobot ID:\t0\nStatus:\tFree\nSize:\tSmall\nType:\tMop\n\nRobot ID:\t1\nStatus:\tBusy\nSize:\tSmall\nType:\tVaccuum\n\nRobot ID:\t2\nStatus:\tFree\nSize:\tMedium\nType:\tScrub\n\nRobot ID:\t3\nStatus:\tBusy\nSize:\tMedium\nType:\tMop\n\nRobot ID:\t4\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum\n\nRobot ID:\t5\nStatus:\tBusy\nSize:\tLarge\nType:\tScrub\n\nRobot ID:\t6\nStatus:\tFree\nSize:\tLarge\nType:\tMop\n\n";
 
-    Management management(test_csv_rooms, test_csv_robots);
+    Management management(test_csv_robots, test_csv_rooms);
     CHECK(management.to_string_room_list() == require_rooms);
     CHECK(management.to_string_robot_list() == require_robots);
 }

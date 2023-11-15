@@ -10,7 +10,7 @@ Management::Management() {
 }
 
 //Parameterized constructor
-Management::Management(const std::string& csv_path_room_, const std::string& csv_path_robot_){
+Management::Management(const std::string& csv_path_robot_, const std::string& csv_path_room_){
     this->csv_path_room_ = csv_path_room_;
     this->csv_path_robot_ = csv_path_robot_;
     initialize_robot_list_from_csv_file(csv_path_robot_);
