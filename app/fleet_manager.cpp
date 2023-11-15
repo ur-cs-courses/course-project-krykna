@@ -32,7 +32,7 @@ int main() {
 
             cout << "New Robot has been added to Robot CSV file! (NOT INTEGRATED YET)" << endl;
         } else if (input == "Add Room") {
-            string roomSize;
+            string roomName, roomStatus, roomSize, estimatedTime;
             cout << "Size of Room?" << endl;
             cin >> roomSize;
             cin.ignore(); // To consume the newline character and avoid it being read in the next getline call
