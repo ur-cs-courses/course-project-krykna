@@ -1,9 +1,10 @@
+#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include "manage/Management.hpp"
 
 TEST_CASE("Testing Compatibility of Management with Room and Robot Classes") {
-    const std::string test_csv_rooms = "tests/management_class/room_test.csv";
-    const std::string test_csv_robots = "tests/management_class/robot_test.csv";
+    const std::string test_csv_rooms = "tests/room_test.csv";
+    const std::string test_csv_robots = "tests/robot_test.csv";
 
     const std::string require_rooms = 
     "********** ROOMS ************ \n \nRoom Name:\t0\nRoom Status:\tClean\nRoom Size:\tSmall\nEstimated Time to Clean: 0 minutes\n\nRoom Name:\t1\nRoom Status:\tDirty\nRoom Size:\tSmall\nEstimated Time to Clean: 10 minutes\n\nRoom Name:\t2\nRoom Status:\tIP\nRoom Size:\tMedium\nEstimated Time to Clean: 20 minutes\n\nRoom Name:\t3\nRoom Status:\tDirty\nRoom Size:\tMedium\nEstimated Time to Clean: 20 minutes\n\nRoom Name:\t4\nRoom Status:\tClean\nRoom Size:\tLarge\nEstimated Time to Clean: 0 minutes\n\nRoom Name:\t5\nRoom Status:\tIP\nRoom Size:\tLarge\nEstimated Time to Clean: 30 minutes\n\nRoom Name:\t6\nRoom Status:\tClean\nRoom Size:\tLarge\nEstimated Time to Clean: 0 minutes\n\n";
