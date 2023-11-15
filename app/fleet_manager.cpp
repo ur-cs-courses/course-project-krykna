@@ -1,7 +1,8 @@
 #include <iostream> // Include the library that contains the standard input/output stream objects
 #include <string> // Including the string library
 #include <sstream>
-#include "../include/libRobot/Robot.hpp"
+#include "../include/libRobot/Robot.hpp" // Include Robot Header File
+#include "../include/libroom/room.hpp" //Include Room Header File
 
 
 
