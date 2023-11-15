@@ -1,9 +1,17 @@
-add_executable(manage_test test_management.cpp robot_test.csv room_test.csv)
+find_package(Catch2 REQUIRED)
+
+IF (${Catch2_FOUND})
+    MESSAGE(STATUS "Found Catch2")
+ELSE (${Catch2_FOUND})
+    MESSAGE(STATUS "Cound not find Catch2. Check to make sure its installed on your system!")
+ENDIF (${Catch2_FOUND})
+
+add_executable(manage_test test_management.cpp)
 add_executable(room_class_test room_class_test.cpp)
 add_executable(robot_class_test robot_class_test.cpp)
 
-# file(GLOB CSV_FILES "*.csv") 
-# file(COPY ${CSV_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+set(room_input_csv ${CMAKE_CURRENT_SOURCE_DIR}/room_test.csv)
+set(robot_input_csv ${CMAKE_CURRENT_SOURCE_DIR}/robot_test.csv)
 
 target_link_libraries(manage_test
   PRIVATE
@@ -26,5 +34,3 @@ target_link_libraries(robot_class_test
 target_compile_features(manage_test PRIVATE cxx_std_20)
 target_compile_features(room_class_test PRIVATE cxx_std_20)
 target_compile_features(robot_class_test PRIVATE cxx_std_20)
-
-add_subdirectory(management_class)
