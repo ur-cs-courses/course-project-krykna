@@ -10,8 +10,8 @@ add_executable(manage_test test_management.cpp)
 add_executable(room_class_test room_class_test.cpp)
 add_executable(robot_class_test robot_class_test.cpp)
 
-set(room_input_csv ${CMAKE_CURRENT_SOURCE_DIR}/room_test.csv)
-set(robot_input_csv ${CMAKE_CURRENT_SOURCE_DIR}/robot_test.csv)
+# Add .csv files to the build; file path for testing: "input_test_files/[filename].csv"
+file(COPY ${PROJECT_SOURCE_DIR}/tests/room_test.csv ${PROJECT_SOURCE_DIR}/tests/robot_test.csv DESTINATION input_test_files)
 
 target_link_libraries(manage_test
   PRIVATE
