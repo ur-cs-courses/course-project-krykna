@@ -33,10 +33,15 @@ int main() {
             cout << "New Robot has been added to Robot CSV file! (NOT INTEGRATED YET)" << endl;
         } else if (input == "Add Room") {
             string roomName, roomStatus, roomSize, estimatedTime;
-            cout << "Size of Room?" << endl;
-            cin >> roomSize;
-            cin.ignore(); // To consume the newline character and avoid it being read in the next getline call
-            cout << "New Room Size " << roomSize << " is initialized to dirty and is now added to the Room CSV File" << endl;
+            cout << "Enter: [Room Name] [Room Status] [Room Size] [Estimated Time] (in this order):" << endl;
+            getline(cin, input); // Expecting user to input details in "name status size time" format
+            stringstream ss(input);
+            ss >> roomName >> roomStatus >> roomSize >> estimatedTime;
+
+            Room newRoom(roomName, roomStatus, roomSize, estimatedTime);
+            cout << "Room Details:\n" << newRoom.to_string() << endl;
+
+            cout << "New Room has been added to Room CSV file! (NOT INTEGRATED YET)" << endl;
         } else if (input == "Get Overall Room Status") {
             cout << "The backend will grab the to_string() from the Room class and use file line reading functionality to print out the updated contents of the entire Room CSV file " << endl;
         } else if (input == "Get Overall Robot Status") {
