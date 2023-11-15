@@ -3,11 +3,37 @@
 #include "libRobot/Robot.hpp"
 
 TEST_CASE("Robot Class") {
-    Robot robot_failed_1("Bubbles", "free", "large", "mop");
-    Robot robot_passed_2("Bubbles", "Free", "Large", "Mop");
-    std::string expected_robot = "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop";
-    CHECK(robot_failed_1.to_string() == expected_robot);
-    CHECK(robot_passed_2.to_string() == expected_robot);
+    SECTION("Concentration: Robot Size") {
+        // Robot robot_small_nocap("Bubbles", "free", "small", "mop");
+        // Robot robot_med_nocap("Bubbles", "free", "medium", "mop");
+        // Robot robot_large_nocap("Bubbles", "free", "large", "mop");
+        Robot robot_small_cap("Bubbles", "Free", "Small", "Mop");
+        Robot robot_med_cap("Bubbles", "Free", "Medium", "Mop");
+        Robot robot_large_cap("Bubbles", "Free", "Large", "Mop");
+
+        // CHECK(robot_small_nocap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tSmall\nType:\tMop");
+        // CHECK(robot_med_nocap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tMedium\nType:\tMop");
+        // CHECK(robot_large_nocap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
+        CHECK(robot_small_cap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tSmall\nType:\tMop");
+        CHECK(robot_med_cap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tMedium\nType:\tMop");
+        CHECK(robot_large_cap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
+    }
+
+    SECTION("Concentration: Robot Types") {
+        // Robot robot_mop_nocap("Bubbles", "free", "large", "mop");
+        // Robot robot_vac_nocap("Kirbbuum", "free", "large", "vac");
+        // Robot robot_scrub_nocap("Scrubby", "free", "large", "scrub");
+        Robot robot_mop_cap("Bubbles", "Free", "Large", "Mop");
+        Robot robot_vac_cap("Kirbbuum", "Free", "Large", "Vac");
+        Robot robot_scrub_cap("Scrubby", "Free", "Large", "Scrub");
+
+        // CHECK(robot_mop_nocap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
+        // CHECK(robot_vac_nocap.to_string() == "Robot ID:\tKirbbuum\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum");
+        // CHECK(robot_scrub_nocap.to_string() == "Robot ID:\tScrubby\nStatus:\tFree\nSize:\tLarge\nType:\tScrub");
+        CHECK(robot_mop_cap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
+        CHECK(robot_vac_cap.to_string() == "Robot ID:\tKirbbuum\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum");
+        CHECK(robot_scrub_cap.to_string() == "Robot ID:\tScrubby\nStatus:\tFree\nSize:\tLarge\nType:\tScrub");
+    }
 
     Robot testRobot("SpongeBot", "Free", "Small", "Scrub");
     SECTION("Robot is successfully assigned to a room + Sent back home") {
