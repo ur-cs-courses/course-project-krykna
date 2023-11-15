@@ -3,43 +3,42 @@
 #include <string>
 using namespace std;
 
-// TODO 
-// Timer not needed
-// Combine set room into cleanRoom param
-enum class Status {Free, Busy};
-enum class Size {Small, Medium, Large};
-enum class Type {Mop, Vac, Scrub};
+enum Robot_Status {Free, Busy};
+enum Robot_Size {Small, Medium, Large};
+enum Type {Mop, Vac, Scrub};
 
 class Robot {
+    private:
+        string id_;
+        Robot_Size size_;
+        string room_;
+        Robot_Status status_;
+        Type type_;
+    
     public:
         // Constructors
         //Robot();
-        Robot(int ID, string status, string size, string type);
+        Robot(string ID, string status, string size, string type);
 
         // Destructor
         ~Robot();
 
         // Room
-        void setRoom(string room);
-        string getRoom() const;
+        void set_room(string room);
+        string get_room() const;
 
 
         // Status
-        void setStatus(string status);
+        void set_status(string status);
     
 
         // Robot activities
-        void goHome();
+        void go_home();
 
-        string typeToString() const;
-        string statusToString() const;
-        string sizeToString() const;
-    private:
-        string id;
-        Size size;
-        string room;
-        Status status;
-        Type type;
+        string to_string_type();
+        string to_string_status();
+        string to_string_size();
+        string to_string();
 };
 
 #endif
