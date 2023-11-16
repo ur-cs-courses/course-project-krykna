@@ -105,7 +105,7 @@ std::string Management::to_string_robot_list() {
     return output;
 }
 
-void Management::cleaning_assignment(Robot robot, Room room){
+void Management::cleaning_assignment(Robot& robot, Room& room){
     assignment_map[robot] = room;
     int time = 0;
 
@@ -119,12 +119,11 @@ void Management::cleaning_assignment(Robot robot, Room room){
 
     room.set_status(in_progress);
     robot.set_status("Busy");
-    std::thread([this, time]() {
+    std::thread([this, &robot, &room, time]() {
         std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
+        room.set_status(clean);
+        robot.set_status("Free");
     }).detach();
-
-    room.set_status(clean);
-    robot.set_status("Free");
 
     assignment_map.erase(robot);
 }

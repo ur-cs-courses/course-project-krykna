@@ -27,7 +27,19 @@ void test_run_functionality() {
     Robot bot = Robot("0", "Free", "Large", "Mop");
     Room room = Room("0", "Dirty", "Large", "10");
     Management timer = Management();
+
+    cout << bot.to_string_status() << endl;
+    cout << room.status_to_string() << endl;
+
     timer.cleaning_assignment(bot, room);
+
+    std::this_thread::sleep_for(std::chrono::seconds(4));
+    cout << bot.to_string_status() << endl;
+    cout << room.status_to_string() << endl;
+    
+    std::this_thread::sleep_for(std::chrono::seconds(11));
+    cout << bot.to_string_status() << endl;
+    cout << room.status_to_string() << endl;
 }
 
 int main() {
