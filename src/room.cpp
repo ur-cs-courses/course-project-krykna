@@ -19,7 +19,10 @@ Room::Room(std::string name, std::string status, std::string size, std::string t
         this->room_status_ = Status::in_progress;
     } else if (stat_conv == "clean") {
         this->room_status_ = Status::clean;
-    }
+    } else if (stat_conv != "dirty" && stat_conv != "in-progress" && stat_conv != "in progress"
+                && stat_conv != "ip" && stat_conv != "clean") {
+            throw std::invalid_argument("Invalid argument: Received an invalid status");
+        }
 
     if (size_conv == "small" || size_conv == "s") {
         this->room_size_ = Size::small;
@@ -27,7 +30,11 @@ Room::Room(std::string name, std::string status, std::string size, std::string t
         this->room_size_ = Size::medium;
     } else if (size_conv == "large" || size_conv == "lg" || size_conv == "l") {
         this->room_size_ = Size::large;
-    }
+    } else if (size_conv != "small" && size_conv != "s" && size_conv != "medium" &&
+                size_conv != "med" && size_conv != "m" && size_conv != "large" && size_conv != "lg"
+                && size_conv != "l") {
+            throw std::invalid_argument("Invalid argument: Received an invalid size");
+        }
 
     this->estimated_time_ = std::stoi(time);
 

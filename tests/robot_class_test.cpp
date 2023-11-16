@@ -1,5 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
+#include <catch.hpp>
 #include "libRobot/Robot.hpp"
 
 TEST_CASE("Robot Class") {
@@ -34,6 +35,17 @@ TEST_CASE("Robot Class") {
         CHECK(robot_vac_cap.to_string() == "Robot ID:\tKirbbuum\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum");
         CHECK(robot_scrub_cap.to_string() == "Robot ID:\tScrubby\nStatus:\tFree\nSize:\tLarge\nType:\tScrub");
     }
+
+    SECTION("Concentration: Throw Error") {
+        REQUIRE_THROWS_WITH(
+            Robot("Bubbles", "Free", "Large", "asldkfjslkfjselkfj"),
+            Catch::Contains("Invalid argument: Received an invalid type")
+        );
+        REQUIRE_THROWS_WITH(
+            Robot("Bubbles", "Free", "slkfjlsekfjslfkjwf", "mop"),
+            Catch::Contains("Invalid argument: Received an invalid size")
+        );
+    } 
 
     Robot testRobot("SpongeBot", "Free", "Small", "Scrub");
     SECTION("Robot is successfully assigned to a room + Sent back home") {

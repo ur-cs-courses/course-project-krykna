@@ -1,8 +1,11 @@
 //#include "../include/libRobot/Robot.hpp"
 #include "libRobot/Robot.hpp"
 using namespace std;
+#include <stdexcept>
 
 Robot::Robot(string ID, string status_, string size_, string type_) {
+    // check for incorrect arguments
+
     this->id_ = ID;
     if (status_ == "Free") {
         this->status_ = Robot_Status::Free;
@@ -10,12 +13,15 @@ Robot::Robot(string ID, string status_, string size_, string type_) {
         this->status_ = Robot_Status::Busy;
     }
 
-    if (type_ == "Mop") {
+    if (type_ == "Mop" || type_ == "mop") {
         this->type_ = Type::Mop;
-    } else if (type_ == "Vac" || type_ == "Vaccuum") {
+    } else if (type_ == "Vac" || type_ == "Vaccuum" || type_ == "vaccuum") {
         this->type_ = Type::Vac;
-    } else if (type_== "Scrub") {
+    } else if (type_== "Scrub" || type_ == "scrub") {
         this->type_ = Type::Scrub;
+    } else if (type_ != "Mop" && type_ != "mop" && type_ != "Vac" && type_ != "Vaccuum" && 
+            type_ != "vaccuum" && type_ != "Scrub" && type_ != "scrub") {
+                throw std::invalid_argument("Invalid argument: Received an invalid type");
     }
     
     if (size_ == "Small" || size_ == "small") {
@@ -24,6 +30,9 @@ Robot::Robot(string ID, string status_, string size_, string type_) {
         this->size_ = Robot_Size::Medium;
     } else if (size_== "Large" || size_== "large") {
         this->size_ = Robot_Size::Large;
+    } else if (size_ != "Small" && size_ != "small" && size_ != "Medium" && size_ != "medium" && 
+            size_ != "Large" && size_ != "large") {
+                throw std::invalid_argument("Invalid argument: Received an invalid size");
     }
 }
 
