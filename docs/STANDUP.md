@@ -18,11 +18,11 @@
 * **Kate**
     - Room.hpp, room.cpp, and testRoom.cpp
 * **Waleed**
-      - DataStorage_RobotFleet.csv, Data Storage Ideas
+    - DataStorage_RobotFleet.csv, Data Storage Ideas
 
 ### STANDUP 3 Contributions:
 * **Waleed**
-      - Robot Object Creation from Command Line Input, User Add Room (Creates Room and Displays To String), User commands by int vals (for convenience)
+- Robot Object Creation from Command Line Input, User Add Room (Creates Room and Displays To String), User commands by int vals (for convenience)
 * **Liz**
 	-	1	Threaded cleaning timer
 		2	Status updates to robot and room based on timer 
@@ -32,3 +32,8 @@
 		1	Debugged robot
 		2	Polished to_strings in robot class
 		3	Accomplished management functioning with robot
+
+* **Kate**
+- Configured CMakeLists.txt and tests/CMakeLists.txt
+- Implemented Catch2 testing for management, robot, and room classes
+- Updated Documentation for management, room, and robot classes + PUMLs
