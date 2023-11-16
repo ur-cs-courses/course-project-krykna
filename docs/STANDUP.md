@@ -19,3 +19,7 @@
     - Room.hpp, room.cpp, and testRoom.cpp
 * **Waleed**
       - DataStorage_RobotFleet.csv, Data Storage Ideas
+
+### STANDUP 3 Contributions:
+* **Waleed**
+      - Robot Object Creation from Command Line Input, User Add Room (Creates Room and Displays To String), User commands by int vals (for convenience)
