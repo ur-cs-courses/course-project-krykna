@@ -33,6 +33,9 @@
 		2	Polished to_strings in robot class
 		3	Accomplished management functioning with robot
 
+* **Wonyoung**
+    - Finished up testings for robot, room, and management
+    - Added extra checks for edge cases to throw errors in robot and room
 * **Kate**
 	- Configured CMakeLists.txt and tests/CMakeLists.txt
 	- Implemented Catch2 testing for management, robot, and room classes
