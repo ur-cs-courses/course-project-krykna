@@ -19,10 +19,13 @@ Robot::Robot(string ID, string status_, string size_, string type_) {
         this->type_ = Type::Vac;
     } else if (type_== "Scrub" || type_ == "scrub") {
         this->type_ = Type::Scrub;
-    } else if (type_ != "Mop" && type_ != "mop" && type_ != "Vac" && type_ != "Vaccuum" && 
-            type_ != "vaccuum" && type_ != "Scrub" && type_ != "scrub") {
-                throw std::invalid_argument("Invalid argument: Received an invalid type");
+    } else {
+        throw std::invalid_argument("Invalid argument: Received an invalid type");
     }
+    // } else if (type_ != "Mop" && type_ != "mop" && type_ != "Vac" && type_ != "Vaccuum" && 
+    //         type_ != "vaccuum" && type_ != "Scrub" && type_ != "scrub") {
+    //             throw std::invalid_argument("Invalid argument: Received an invalid type");
+    // }
     
     if (size_ == "Small" || size_ == "small") {
         this->size_ = Robot_Size::Small;
@@ -30,10 +33,13 @@ Robot::Robot(string ID, string status_, string size_, string type_) {
         this->size_ = Robot_Size::Medium;
     } else if (size_== "Large" || size_== "large") {
         this->size_ = Robot_Size::Large;
-    } else if (size_ != "Small" && size_ != "small" && size_ != "Medium" && size_ != "medium" && 
-            size_ != "Large" && size_ != "large") {
-                throw std::invalid_argument("Invalid argument: Received an invalid size");
+    } else {
+        throw std::invalid_argument("Invalid argument: Received an invalid size");
     }
+    // } else if (size_ != "Small" && size_ != "small" && size_ != "Medium" && size_ != "medium" && 
+    //         size_ != "Large" && size_ != "large") {
+    //             throw std::invalid_argument("Invalid argument: Received an invalid size");
+    // }
 }
 
 Robot::~Robot() {}
@@ -57,7 +63,7 @@ string Robot::to_string_size() {
             return "Size:\tLarge";
     }
 
-    return "Size:\tNA";
+    return "Size:\tUnknown";
 }
 
 string Robot::to_string_type() {
@@ -70,7 +76,7 @@ string Robot::to_string_type() {
             return "Type:\tScrub";
     }
 
-    return "Type:\tNA";
+    return "Type:\tUnknown";
 }
 
 string Robot::to_string_status() {
@@ -81,7 +87,7 @@ string Robot::to_string_status() {
             return "Status:\tBusy";
     }
 
-    return "Status:\tNA";
+    return "Status:\tUnknown";
 }
 
 void Robot::set_status(string status_) {
