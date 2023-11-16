@@ -9,6 +9,7 @@ Management::Management() {
     this->csv_path_robot_ = "";
     robot_list_.clear();
     room_list_.clear();
+    this->system_timer_log_ = RoTimer();
 }
 
 //Parameterized constructor
@@ -101,4 +102,8 @@ std::string Management::to_string_robot_list() {
          output += robot.to_string() + "\n" + "\n";
     }
     return output;
+}
+
+void Management::cleaning_assignment(Robot bot, Room room){
+    this->system_timer_log_.assign_room_to_robot(bot, room);
 }

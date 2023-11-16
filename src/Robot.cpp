@@ -88,3 +88,7 @@ string Robot::to_string() {
     std::string data = "Robot:\t" + id_ + "\n" + to_string_status() + "\n" + to_string_size() + "\n" + to_string_type();
     return data;
 }
+
+Robot_Size Robot::get_size() {
+    return this->size_;
+}

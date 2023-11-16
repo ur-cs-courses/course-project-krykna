@@ -39,6 +39,8 @@ class Robot {
         string to_string_status();
         string to_string_size();
         string to_string();
+
+        Robot_Size get_size();
 };
 
 #endif

@@ -3,6 +3,7 @@
 
 #include "../libroom/room.hpp"
 #include "../libRobot/Robot.hpp"
+#include "../../src/RoTimer.cpp"
 
 #include <vector>
 #include <string>
@@ -13,6 +14,7 @@ private:
     std::vector<Room> room_list_;
     std::string csv_path_room_;
     std::string csv_path_robot_;
+    RoTimer system_timer_log_;
 
     void initialize_robot_list_from_csv_file(const std::string& csv_path);
     void initialize_room_list_from_csv_file(const std::string& csv_path);
@@ -29,6 +31,8 @@ public:
     void add_new_room(const std::string& ID, const std::string& clean_status, const std::string& size, const std::string& time_till_clean);
     std::string to_string_room_list();
     std::string to_string_robot_list();
+
+    void cleaning_assignment(Robot bot, Room room);
 };
 
 #endif

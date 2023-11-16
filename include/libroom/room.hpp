@@ -79,6 +79,10 @@ class Room {
         * HELPERS: status_to_string(), size_to_string(), time_to_string()
         */
         std::string to_string();
+
+        void set_status(Status);
+
+        int get_time_to_clean();
 };
 
 #endif
