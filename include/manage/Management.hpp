@@ -1,9 +1,14 @@
-#ifndef MANAGEMENT_H
-#define MANAGEMENT_H
+#ifndef MANAGE_MANAGEMENT_HPP
+#define MANAGE_MANAGEMENT_HPP
 
-#include "../libroom/room.hpp"
-#include "../libRobot/Robot.hpp"
+//#include "../libroom/room.hpp"
+//#include "../libRobot/Robot.hpp"
+#include "libroom/room.hpp"
+#include "libRobot/Robot.hpp"
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
 #include <vector>
 #include <string>
 
