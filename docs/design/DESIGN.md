@@ -26,23 +26,34 @@ This document describes the class diagram for a simple management system that in
 ## Classes
 ### Management
 
+**`IMPORTANT FORMAT NOTE`**:  Any attribute or method names that are **BOLD** signify that they have not been implemented yet in the class. Any attribute or method names that are in `COLOR` means that it has been implemented in the class.
+
 Attributes
 
-* room_clean: set: A set containing the rooms that are clean.
-* rooms_dirty: set: A set containing the rooms that are dirty.
-* bots_ready: set: A set containing the robots that are ready for cleaning.
-* bots_out: set: A set containing the robots that are currently out cleaning or out of commission.
+* **room_clean: set:** A set containing the rooms that are clean.
+* **rooms_dirty: set:** A set containing the rooms that are dirty.
+* **bots_ready: set:** A set containing the robots that are ready for cleaning.
+* **bots_out: set**: A set containing the robots that are currently out cleaning or out of commission.
+
+* `room_list_: set`: A Set (vector) with room class objects.
+* `robot_list_: set`: A Set (vector) with robot class objects.
+* `csv_path_room_: String`: A String storing the path to a csv file comprised of a detailed building's room list.
+* `csv_path_robot_: String`: A String storing the path to a csv file comprised of a detailed inventory of the robots within a manager's fleet.
 
 Methods
 
-* assign_bots(): void: Assigns robots to rooms for cleaning.
-* update_rooms(): void: Updates the status of rooms (clean/dirty).
-* update_bots(): void: Updates the status of robots (clean/dirty).
-* availability_string(): string: Returns a string representing the availability of robots (available/not).
-* room_status_string(): string: Returns a string representing the status of rooms (clean/dirty).
-* bot_data_string(): string: Returns a string representing the status of robots (size, type).
-* add_new_bot(): void: Adds a new robot to the system.
-* add_new_room(): void: Adds a new room to the system.
+* **initialize_robot_list_from_csv_file(): void**: A helper function for reading the csv file for the robots within a manager's fleet.
+* **initialize_room_list_from_csv_file(): void**: A helper function for reading the csv file for the rooms within a building.
+* **assign_bots(): void**: Assigns robots to rooms for cleaning.
+* **update_rooms(): void**: Updates the status of rooms (clean/dirty).
+* **update_bots(): void**: Updates the status of robots (clean/dirty).
+* **availability_string(): string**: Returns a string representing the availability of robots (available/not).
+* **room_status_string(): string**: Returns a string representing the status of rooms (clean/dirty).
+* **bot_data_string()**: string: Returns a string representing the status of robots (size, type).
+* `add_new_bot(): void`: Adds a new robot to the system.
+* `add_new_room(): void`: Adds a new room to the system.
+* `to_string_room_list(): String`: Returns the data of the rooms in the room_list_.
+* `to_string_robot_list(): String`: Returns the data of the robots in the robot_list_.
 
 Relationships
 
@@ -59,23 +70,34 @@ This document describes the class diagram for a system of robots that involves r
 ## Classes
 ### Robot
 
+**`IMPORTANT FORMAT NOTE`**:  Any attribute or method names that are **BOLD** signify that they have not been implemented yet in the class. Any attribute or method names that are in `COLOR` means that it has been implemented in the class.
+
 Attributes
 
-* room_assigned: string: A string to represent room assigned for robot to clean.
-* task_assigned: string: A string to represent task of either mop, scrub, or vacuum.
-* robot_status: string: A string to represent the status of robot ready or not.
-* timer: int: An integer to represent time needed to clean the assigned room.
+* `robot_name: String`: A String storing the name/ID of the robot.
+* `robot_status: Robot_Status`: An enum variable storing the status of the robot --> (`Free`, `Busy`).
+* `robot_size: Robot_Size`: An enum variable storing the size of the robot --> (`Small`, `Medium`, `Large`).
+* `robot_type: Robot_Type`: An enum variable storing the type of the robot --> (`Mop`, `Vac`, `Scrub`).
+* `assigned_room: String`: A String storing the room a robot is assigned to clean --> (*`default ""` when robot status is `Free`*).
 
 Methods
 
-* clean_room(): void: Robot set to clean assigned room.
-* go_home(): void: Robot sent back home.
-* get_robot_status(): Returns a string representing whether robot has failed or not.
-* update_robot_status(): Sets robot status to a string representing whether robot is ready for new task or not.
+* **get_robot_size(): Robot_Size**: Returns the enum value of Robot_Size of a robot object.
+* `set_assigned_room(): void`: Stores the name of the room that a robot is assigned to clean.
+* `get_assigned_room(): String`: Returns the room name the robot is assigned to clean (returns "" if not currently assigned).
+* `set_robot_status(): String`: Sets robot status to either "Free" or "Busy"; determined by if they are currently assigned to clean or not.
+* `go_home(): void`: Acts a reset for the robot; sets the robot status to "Free" and the name of the room assigned to "".
+* `to_string_type(): String`: A helper function to convert the robot_type (enum) to a string; used by to_string().
+* `to_string_status(): String`: A helper function to convert the robot_status (enum) to a string; used by to_string().
+* `to_string_size(): String`: A helper function to convert the robot_size (enum) to a string; used by to_string().
+* `to_string(): String`: Returns the data of a Robot object in a nicely structured format.
 
 Relationships
 
-* The Robot class has a 1 to 1 aggregation relationship with the Rooms class. 
+* The Robot class has a 1 to 1 aggregation relationship with the Rooms class.
+* The Robot class has a 1-to-1 composition with enum class Robot_Status.
+* The Robot class has a 1-to-1 composition with enum class Robot_Size.
+* The Robot class has a 1-to-1 composition with enum class Robot_Type.
 
 ## Room Class Diagram Overview
 
@@ -86,22 +108,28 @@ This document describes the class diagram for a system of rooms that involves re
 ## Classes
 ### Room
 
+**`IMPORTANT FORMAT NOTE`**:  Any attribute or method names that are **BOLD** signify that they have not been implemented yet in the class. Any attribute or method names that are in `COLOR` means that it has been implemented in the class.
+
 Attributes
 
-* room_name: string: The name of a room
-* status: enum: The status of the room currently assigned.
-* size: enum: The size of the room
+* `room_name: String`: A String storing the room name.
+* `estimated_clean_time: int`: An int variable storing the estimated time to clean the room.
+* `room_status: Status`: An enum variable storing the cleanliness status of the room --> (`Dirty`, `In-progress`, `Clean`).
+* `room_size: Size`: An enum variable storing the size of the room --> (`Small`, `Medium`, `Large`).
 
 Methods
 
-* update_room_status(): void: Updates whether the current room is cleaned.
-* get_room_status(): Returns an enum representing the current state of the assigned room (dirty, in-progress, clean).
-* get_size(): Returns an enum representing the size of a room (small, medium, large).
+* **get_estimated_clean_time(): int**: Returns the integer value of the estimated time to clean; used to calculate the timer for an assigned robot to clean.
+* **update_room_status(): void**: Updates the room status; used when a robot is assigned to a room (i.e. room_status changes to `In-progress`) and cleaning is finished (i.e. room_status changes to `Clean`).
+* `status_to_string(): String`: A helper function to convert the room_status (enum) to a string; used by to_string().
+* `size_to_string(): String`: A helper function to convert the room_size (enum) to a string; used by to_string().
+* `time_to_string(): String`: A helper function to convert the estimated_clean_time (int) to a string; used by to_string().
+* `to_string(): String`: Returns the data of a Room object in a nicely structured format.
 
 Relationships
 
-* The Room class has a 1-to-1 composition with enum class Status
-* The Room class has a 1-to-1 composition with enum class Size
+* The Room class has a 1-to-1 composition with enum class Status.
+* The Room class has a 1-to-1 composition with enum class Size.
 
 # Sequence Diagram Documentation
 

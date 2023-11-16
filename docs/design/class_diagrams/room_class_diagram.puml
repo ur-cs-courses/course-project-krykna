@@ -1,11 +1,15 @@
 @startuml
 class Room {
-    + String room_name
-    - enum status
-    - enum size
+    - room_name:    String
+    - estimated_clean_time: int
+    - room_status:  Status
+    - room_size:    Size
+    + get_estimated_clean_time(): int
     + update_room_status(): void
-    + get_room_status(): enum status
-    + get_size(): enum size
+    + status_to_string():   String
+    + size_to_string():     String
+    + time_to_string():     String
+    + to_string():          String
 }
 
 enum Status {

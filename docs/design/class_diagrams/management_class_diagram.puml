@@ -4,7 +4,12 @@ class Management {
   - rooms_dirty: set
   - bots_ready: set
   - bots_out: set
-  
+  - room_list_: set
+  - robot_list_: set
+  - csv_path_room_: String
+  - csv_path_robot_: String
+  - initialize_robot_list_from_csv_file(): void
+  - initialize_room_list_from_csv_file(): void
   + assign_bots(): void
   + update_rooms(): void
   + update_bots(): void
@@ -13,6 +18,8 @@ class Management {
   + bot_data_string(): string
   + add_new_bot(): void
   + add_new_room(): void
+  + to_string_room_list(): String
+  + to_string_robot_list(): String
 }
 
 interface CommandLine {}
