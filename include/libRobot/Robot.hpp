@@ -41,6 +41,8 @@ class Robot {
         string to_string();
 
         Robot_Size get_size();
+
+        bool operator<(const Robot& other) const;
 };
 
 #endif

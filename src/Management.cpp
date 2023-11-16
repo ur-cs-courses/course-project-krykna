@@ -9,7 +9,7 @@ Management::Management() {
     this->csv_path_robot_ = "";
     robot_list_.clear();
     room_list_.clear();
-    this->system_timer_log_ = RoTimer();
+    assignment_map.clear();
 }
 
 //Parameterized constructor
@@ -18,6 +18,7 @@ Management::Management(const std::string& csv_path_room_, const std::string& csv
     this->csv_path_robot_ = csv_path_robot_;
     initialize_robot_list_from_csv_file(csv_path_robot_);
     initialize_room_list_from_csv_file(csv_path_room_);
+    assignment_map.clear(); // for now, this will need to change
 }
 
 // Private methods
@@ -104,6 +105,38 @@ std::string Management::to_string_robot_list() {
     return output;
 }
 
-void Management::cleaning_assignment(Robot bot, Room room){
-    this->system_timer_log_.assign_room_to_robot(bot, room);
+void Management::cleaning_assignment(Robot robot, Room room){
+    assignment_map[robot] = room;
+    int time = 0;
+
+    if (robot.get_size() == Large) {
+        time = room.get_time_to_clean();
+    } else if (robot.get_size() == Medium) {
+        time = room.get_time_to_clean() * 2;
+    } else {
+        time = room.get_time_to_clean() * 3;
+    }
+
+    room.set_status(in_progress);
+    robot.set_status("Busy");
+    std::thread([this, time]() {
+        std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
+    }).detach();
+
+    room.set_status(clean);
+    robot.set_status("Free");
+
+    assignment_map.erase(robot);
 }
+
+// std::map<Robot, Room> Management::get_map(){
+//     return this->assignment_map;
+// }
+
+    // RoTimer(std::vector<Robot> robot_list, std::vector<Room> room_list){
+    //     int assigned_room;
+    //     for (int i = 0; i < robot_list.size(); i++){
+    //         assigned_room = robot_list[i].get_room();
+
+    //     }
+    // }

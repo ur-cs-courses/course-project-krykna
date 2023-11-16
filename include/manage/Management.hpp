@@ -3,10 +3,13 @@
 
 #include "../libroom/room.hpp"
 #include "../libRobot/Robot.hpp"
-#include "../../src/RoTimer.cpp"
 
 #include <vector>
 #include <string>
+#include <map>
+#include <memory>
+#include <thread>
+#include <chrono>
 
 class Management {
 private:
@@ -14,7 +17,7 @@ private:
     std::vector<Room> room_list_;
     std::string csv_path_room_;
     std::string csv_path_robot_;
-    RoTimer system_timer_log_;
+    std::map<Robot, Room> assignment_map;
 
     void initialize_robot_list_from_csv_file(const std::string& csv_path);
     void initialize_room_list_from_csv_file(const std::string& csv_path);
@@ -33,6 +36,7 @@ public:
     std::string to_string_robot_list();
 
     void cleaning_assignment(Robot bot, Room room);
+    // std::map<Robot, Room> get_map();
 };
 
 #endif

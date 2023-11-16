@@ -92,3 +92,7 @@ string Robot::to_string() {
 Robot_Size Robot::get_size() {
     return this->size_;
 }
+
+bool Robot::operator<(const Robot& other) const {
+        return std::stoi(id_) < std::stoi(other.id_);
+ }
