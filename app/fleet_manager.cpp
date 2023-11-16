@@ -1,18 +1,22 @@
-#include <iostream> // Include the library that contains the standard input/output stream objects
-#include <string> // Including the string library
+#include <iostream>
+#include <string>
 #include <sstream>
-#include "../include/libRobot/Robot.hpp" // Include Robot Header File
-#include "../include/libroom/room.hpp" //Include Room Header File
+#include "../include/manage/Management.hpp" // Include Management Header File
 
-
-
-using namespace std; // Use the standard namespace
+using namespace std;
 
 int main() {
+    // Paths to the CSV files
+    string csvPathRobot = "/home/ws4wd/course-project-krykna/course-project-krykna-2/tests/management_class/robot_test.csv";
+    string csvPathRoom = "/home/ws4wd/course-project-krykna/course-project-krykna-2/tests/management_class/room_test.csv";
+
+    // Create an instance of Management
+    Management management(csvPathRoom, csvPathRobot);
+
     string input;
     
-    //Introduction Message
-    cout << "Welcome to your Robot Fleet Management System! "; 
+    // Introduction Message
+    cout << "Welcome to your Robot Fleet Management System! " << endl; 
     
     // Main loop for program to run
     while (true) {
@@ -26,44 +30,42 @@ int main() {
             case 1: {
                 string robotId, robotStatus, robotSize, robotType;
                 cout << "Enter: [Robot ID] [robotStatus] [robotSize] [robotType] (in this order):" << endl;
-                getline(cin, input); // Expecting user to input size and type in "size type" format
+                getline(cin, input);
                 stringstream ss(input);
-                ss >> robotId >> robotStatus>> robotSize >> robotType; // Split the input into robot id, status, size, and 
-                
-                Robot newRobot(robotId, robotStatus, robotSize, robotType);
-                cout << "Robot Details:\n" << newRobot.to_string() << endl;
+                ss >> robotId >> robotStatus >> robotSize >> robotType;
 
-                cout << "New Robot has been added to Robot CSV file! (NOT INTEGRATED YET)" << endl;
+                management.add_new_robot(robotId, robotStatus, robotSize, robotType);
+                cout << "New Robot has been added!" << endl;
                 break;
-
-            } case 2: {
+            }
+            case 2: {
                 string roomName, roomStatus, roomSize, estimatedTime;
                 cout << "Enter: [Room Name] [Room Status] [Room Size] [Estimated Time] (in this order):" << endl;
-                getline(cin, input); // Expecting user to input details in "name status size time" format
+                getline(cin, input);
                 stringstream ss(input);
                 ss >> roomName >> roomStatus >> roomSize >> estimatedTime;
 
-                Room newRoom(roomName, roomStatus, roomSize, estimatedTime);
-                cout << "Room Details:\n" << newRoom.to_string() << endl;
-
-                cout << "New Room has been added to Room CSV file! (NOT INTEGRATED YET)" << endl;
+                management.add_new_room(roomName, roomStatus, roomSize, estimatedTime);
+                cout << "New Room has been added!" << endl;
                 break;
-
-            } case 3: {
-                cout << "The backend will grab the to_string() from the Room class and use file line reading functionality to print out the updated contents of the entire Room CSV file " << endl;
+            }
+            case 3: {
+                cout << management.to_string_room_list() << endl;
                 break;
-            } case 4: {
-                cout << "The backend will grab the to_string() from the Robot class and use file line reading functionality to print out the updated contents of the entire Robot CSV file " << endl;
+            }
+            case 4: {
+                cout << management.to_string_robot_list() << endl;
                 break;
-            } case 0: {
+            }
+            case 0: {
                 cout << "Exiting Robot Fleet Management System." << endl;
                 return 0; // Exit the while loop and end the program
-            } default: {
+            }
+            default: {
                 cout << "Invalid command. Please try again." << endl;
                 break;
             }
         }
-        
     }
 
     return 0; // End of the program
