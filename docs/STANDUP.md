@@ -36,4 +36,4 @@
 * **Kate**
 	- Configured CMakeLists.txt and tests/CMakeLists.txt
 	- Implemented Catch2 testing for management, robot, and room classes
-- Updated Documentation for management, room, and robot classes + PUMLs
+	- Updated Documentation for management, room, and robot classes + PUMLs
