@@ -26,7 +26,7 @@ This document describes the class diagram for a simple management system that in
 ## Classes
 ### Management
 
-**`IMPORTANT FORMAT NOTE`**:  Any attribute or method names that are **BOLD** signify that they have not been implemented yet in the class. Any attribute or method names that are in `COLOR` means that it has been implemented in the class.
+**`IMPORTANT FORMAT NOTE`**:  Any attribute or method names that are **BOLD** signify that they have not been implemented yet in the class. Any attribute or method names that are in `HIGHLIGHT` means that it has been implemented in the class.
 
 Attributes
 
@@ -42,8 +42,8 @@ Attributes
 
 Methods
 
-* **initialize_robot_list_from_csv_file(): void**: A helper function for reading the csv file for the robots within a manager's fleet.
-* **initialize_room_list_from_csv_file(): void**: A helper function for reading the csv file for the rooms within a building.
+* `initialize_robot_list_from_csv_file(): void`: A helper function for reading the csv file for the robots within a manager's fleet.
+* `initialize_room_list_from_csv_file(): void`: A helper function for reading the csv file for the rooms within a building.
 * **assign_bots(): void**: Assigns robots to rooms for cleaning.
 * **update_rooms(): void**: Updates the status of rooms (clean/dirty).
 * **update_bots(): void**: Updates the status of robots (clean/dirty).
@@ -70,7 +70,7 @@ This document describes the class diagram for a system of robots that involves r
 ## Classes
 ### Robot
 
-**`IMPORTANT FORMAT NOTE`**:  Any attribute or method names that are **BOLD** signify that they have not been implemented yet in the class. Any attribute or method names that are in `COLOR` means that it has been implemented in the class.
+**`IMPORTANT FORMAT NOTE`**:  Any attribute or method names that are **BOLD** signify that they have not been implemented yet in the class. Any attribute or method names that are in `HIGHLIGHT` means that it has been implemented in the class.
 
 Attributes
 
@@ -78,7 +78,7 @@ Attributes
 * `robot_status: Robot_Status`: An enum variable storing the status of the robot --> (`Free`, `Busy`).
 * `robot_size: Robot_Size`: An enum variable storing the size of the robot --> (`Small`, `Medium`, `Large`).
 * `robot_type: Robot_Type`: An enum variable storing the type of the robot --> (`Mop`, `Vac`, `Scrub`).
-* `assigned_room: String`: A String storing the room a robot is assigned to clean --> (*`default ""` when robot status is `Free`*).
+* `assigned_room: String`: A String storing the room a robot is assigned to clean --> (*default "" when robot status is Free*).
 
 Methods
 
@@ -108,7 +108,7 @@ This document describes the class diagram for a system of rooms that involves re
 ## Classes
 ### Room
 
-**`IMPORTANT FORMAT NOTE`**:  Any attribute or method names that are **BOLD** signify that they have not been implemented yet in the class. Any attribute or method names that are in `COLOR` means that it has been implemented in the class.
+**`IMPORTANT FORMAT NOTE`**:  Any attribute or method names that are **BOLD** signify that they have not been implemented yet in the class. Any attribute or method names that are in `HIGHLIGHT` means that it has been implemented in the class.
 
 Attributes
 
