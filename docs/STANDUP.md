@@ -24,14 +24,14 @@
 * **Waleed**
 	- Robot Object Creation from Command Line Input, User Add Room (Creates Room and Displays To String), User commands by int vals (for convenience)
 * **Liz**
-	-	1	Threaded cleaning timer
-		2	Status updates to robot and room based on timer 
-		3	New functions for robot to facilitate timer 
-		4	test main
+	-	Threaded cleaning timer
+	-	Status updates to robot and room based on timer 
+	-	New functions for robot to facilitate timer 
+	-	test main
 	 
-		1	Debugged robot
-		2	Polished to_strings in robot class
-		3	Accomplished management functioning with robot
+	- 	Debugged robot class
+	- 	Polished to_strings in robot class
+	- 	Accomplished management functioning with robot
 
 * **Wonyoung**
     - Finished up testings for robot, room, and management
