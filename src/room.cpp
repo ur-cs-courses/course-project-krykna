@@ -85,3 +85,15 @@ std::string Room::to_string() {
     std::string data = "Room Name:\t" + room_name_ + "\n" + status_to_string() + "\n" + size_to_string() + "\n" + time_to_string();
     return data;
 }
+
+void Room::set_status(Status status){
+    this->room_status_ = status;
+}
+
+int Room::get_time_to_clean(){
+    return this->estimated_time_;
+}
+
+void Room::set_time_to_clean(int time){
+    this->estimated_time_ = time;
+}
