@@ -21,8 +21,6 @@ private:
 
     void initialize_robot_list_from_csv_file(const std::string& csv_path);
     void initialize_room_list_from_csv_file(const std::string& csv_path);
-    void robot_list_pushback(std::string& ID, Robot& bot);
-    void room_list_pushback(std::string& ID, Room& room);
 public:
     // Default constructor
     Management();
@@ -31,12 +29,12 @@ public:
     Management(const std::string& csv_path_robot, const std::string& csv_path_room);
 
     // Public methods
-    void add_new_robot(std::string& ID,  std::string& online_status, std::string& size, std::string& clean_type);
+    void add_new_robot(std::string& ID,  std::string& online_status, std::string& size, std::string& clean_type, std::string& room_id);
     void add_new_room(std::string& ID, std::string& clean_status, std::string& size, std::string& time_till_clean);
     std::string to_string_room_list();
     std::string to_string_robot_list();
 
-    void cleaning_assignment(Robot& bot, Room& room);
+    void cleaning_assignment(std::string bot, std::string rm);
     // std::map<Robot, Room> get_map();
 };
 

@@ -11,16 +11,16 @@ class Robot {
     private:
         string id_;
         Robot_Size size_;
-        string room_;
         Robot_Status status_;
         Type type_;
+        string room_id_;
     
     public:
         // Constructors
         Robot();
 
-        Robot(string ID, string status, string size, string type);
-        
+        Robot(string ID, string status_, string size_, string type_, string room_id_);
+
         Robot(const Robot& other);
 
         // Destructor

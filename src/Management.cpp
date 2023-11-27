@@ -18,9 +18,9 @@ Management::Management(const std::string& csv_path_room_, const std::string& csv
     this->csv_path_robot_ = csv_path_robot_;
     robot_list_.clear();
     room_list_.clear();
-    initialize_robot_list_from_csv_file(csv_path_robot_);
+    assignment_map.clear();
     initialize_room_list_from_csv_file(csv_path_room_);
-    assignment_map.clear(); // for now, this will need to change
+    initialize_robot_list_from_csv_file(csv_path_robot_);
 }
 
 
@@ -40,12 +40,18 @@ void Management::initialize_robot_list_from_csv_file(const std::string& csv_path
         std::string size;
         std::string clean_type;
         std::string online_status;
+        std::string room_id;
         std::getline(iss, ID, ',');
         std::getline(iss, online_status, ',');
         std::getline(iss, size, ',');
         std::getline(iss, clean_type, ',');
+        std::getline(iss, room_id, ',');
         
-        add_new_robot(ID, online_status, size, clean_type);
+        add_new_robot(ID, online_status, size, clean_type, room_id);
+
+    if (room_id != "NA") {
+        cleaning_assignment(ID, room_id);
+    }
     }
     
     csvFile.close();
@@ -82,8 +88,8 @@ void Management::initialize_room_list_from_csv_file(const std::string& csv_path)
 
 
 // Public methods
-void Management::add_new_robot( std::string& ID, std::string& online_status, std::string& size, std::string& clean_type) {
-    robot_list_[ID] = Robot(ID, online_status, size, clean_type);
+void Management::add_new_robot( std::string& ID, std::string& online_status, std::string& size, std::string& clean_type, std::string& room_id) {
+    robot_list_[ID] = Robot(ID, online_status, size, clean_type, room_id);
 }
 
 void Management::add_new_room(std::string& ID, std::string& clean_status, std::string& size, std::string& time_till_clean) {
@@ -107,7 +113,9 @@ std::string Management::to_string_robot_list() {
         return output;
 }
 
-void Management::cleaning_assignment(Robot& robot, Room& room){
+void Management::cleaning_assignment(std::string bot, std::string rm){
+    Robot& robot = robot_list_[bot];
+    Room& room = room_list_[rm];
     assignment_map[robot] = room;
     int time = 0;
 
@@ -121,10 +129,12 @@ void Management::cleaning_assignment(Robot& robot, Room& room){
 
     room.set_status(in_progress);
     robot.set_status("Busy");
+    robot.set_room(rm);
     std::thread([this, &robot, &room, time]() {
         std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
         room.set_status(clean);
-        robot.set_status("Free");
+        room.set_time_to_clean(0);
+        robot.go_home();
     }).detach();
 
     assignment_map.erase(robot);

@@ -83,6 +83,8 @@ class Room {
         void set_status(Status);
 
         int get_time_to_clean();
+
+        void set_time_to_clean(int);
 };
 
 #endif

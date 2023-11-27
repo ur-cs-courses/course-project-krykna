@@ -93,3 +93,7 @@ void Room::set_status(Status status){
 int Room::get_time_to_clean(){
     return this->estimated_time_;
 }
+
+void Room::set_time_to_clean(int time){
+    this->estimated_time_ = time;
+}
