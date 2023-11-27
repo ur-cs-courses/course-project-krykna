@@ -17,8 +17,11 @@ class Robot {
     
     public:
         // Constructors
-        //Robot();
+        Robot();
+
         Robot(string ID, string status, string size, string type);
+        
+        Robot(const Robot& other);
 
         // Destructor
         ~Robot();

@@ -3,6 +3,17 @@
 #include <string>
 using namespace std;
 
+// Default constructor
+Robot::Robot() {
+    // Initialize member variables with default values
+    this->id_ = "ERROR: NON EXISTENT BOT";  // Default ID
+    this->status_ = Robot_Status::Free; 
+    this->size_ = Robot_Size::Medium;
+    this->type_ = Type::Vac;
+    this->room_ = ""; 
+}
+
+
 Robot::Robot(string ID, string status_, string size_, string type_) {
     this->id_ = ID;
     if (status_ == "Free") {
@@ -26,6 +37,15 @@ Robot::Robot(string ID, string status_, string size_, string type_) {
     } else if (size_== "Large") {
         this->size_ = Robot_Size::Large;
     }
+}
+
+// Copy constructor
+Robot::Robot(const Robot& other) {
+    this->id_ = other.id_;
+    this->status_ = other.status_;
+    this->size_ = other.size_;
+    this->type_ = other.type_;
+    this->room_ = other.room_;
 }
 
 Robot::~Robot() {}
