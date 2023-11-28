@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
-#include "catch.hpp"
-#include "manage/Management.hpp"
+#include "../include/catch.hpp"
+#include "../include/manage/Management.hpp"
 
 TEST_CASE("Testing Compatibility of Management with Room and Robot Classes") {
     const std::string test_csv_rooms = "input_test_files/room_test.csv";
