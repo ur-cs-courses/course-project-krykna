@@ -7,8 +7,8 @@ using namespace std;
 
 int main() {
     // Paths to the CSV files
-    string csvPathRobot = "/home/ws4wd/course-project-krykna/course-project-krykna-2/tests/management_class/robot_test.csv";
-    string csvPathRoom = "/home/ws4wd/course-project-krykna/course-project-krykna-2/tests/management_class/room_test.csv";
+    string csvPathRobot = "tests/management_class/robot_test.csv";
+    string csvPathRoom = "tests/management_class/room_test.csv";
 
     // Create an instance of Management
     Management management(csvPathRoom, csvPathRobot);
