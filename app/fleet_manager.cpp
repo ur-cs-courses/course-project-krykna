@@ -71,6 +71,11 @@ int main() {
                 cout << "Cleaning operation initiated for Robot ID: " << robotId << " in Room ID: " << roomId << endl;
                 break;
             }
+            case 6: {
+                // Hypothetical implementation for sending a robot home
+                cout << "Selected robot should be sent home for charging. [Hypothetical Implementation]" << endl;
+                break;
+            }
             case 0: {
                 cout << "Exiting Robot Fleet Management System." << endl;
                 return 0; // Exit the while loop and end the program
