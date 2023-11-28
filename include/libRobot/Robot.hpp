@@ -1,6 +1,7 @@
 #ifndef LIBROBOT_ROBOT_HPP
 #define LIBROBOT_ROBOT_HPP
 #include <string>
+#include <stdexcept>
 using namespace std;
 
 enum Robot_Status {Free, Busy};

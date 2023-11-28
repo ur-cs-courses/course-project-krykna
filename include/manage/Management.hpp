@@ -3,6 +3,7 @@
 
 #include "../libroom/room.hpp"
 #include "../libRobot/Robot.hpp"
+#include <stdexcept>
 
 #include <iostream>
 #include <fstream>
