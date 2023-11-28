@@ -66,8 +66,10 @@ int main() {
                 stringstream ss(input);
                 ss >> robotId >> roomId;
 
-                
-                cout << "Cleaning is done!" << endl;
+
+                management.cleaning_assignment(robotId, roomId);
+                cout << "Cleaning operation initiated for Robot ID: " << robotId << " in Room ID: " << roomId << endl;
+                break;
             }
             case 0: {
                 cout << "Exiting Robot Fleet Management System." << endl;
