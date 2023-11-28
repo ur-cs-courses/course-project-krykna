@@ -60,7 +60,7 @@ int main() {
             }
             //Cleaning Operation
             case 5: {
-                //Make sure to actually utilize cleaning_assignment()
+                string robotId, roomId;
                 cout << "Cleaning is done!" << endl;
             }
             case 0: {
