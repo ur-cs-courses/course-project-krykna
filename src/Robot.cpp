@@ -69,6 +69,7 @@ string Robot::to_string_size() {
         case (Robot_Size::Large):
             return "Size: Large";
     }
+    return "N/A"; // Return an empty string if no other return statement is executed
 }
 
 string Robot::to_string_type() {
@@ -80,6 +81,7 @@ string Robot::to_string_type() {
         case (Type::Scrub):
             return "Type: Scrub";
     }
+    return "N/A"; // Return an empty string if no other return statement is executed
 }
 
 string Robot::to_string_status() {
@@ -89,6 +91,7 @@ string Robot::to_string_status() {
         case (Robot_Status::Busy):
             return "Status: Busy";
     }
+    return "N/A"; // Return an empty string if no other return statement is executed
 }
 
 void Robot::set_status(string status_) {
