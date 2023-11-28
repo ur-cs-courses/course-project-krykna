@@ -21,7 +21,7 @@ int main() {
     // Main loop for program to run
     while (true) {
         // Just added the Perform Cleaning Operation
-        cout << "Please type a command (1: Add Robot, 2: Add Room, 3: Get Overall Room Status, 4: Get Overall Robot Status, 5: Perform Cleaning Operation) or type 0 to Exit:";
+        cout << "Please type a command (1: Add Robot, 2: Add Room, 3: Get Overall Room Status, 4: Get Overall Robot Status, 5: Perform Cleaning Operation, 6: Send Robot Home) or type 0 to Exit:";
         getline(cin, input); // Get the whole line as a command
 
         int command = stoi(input);
