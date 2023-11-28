@@ -61,6 +61,7 @@ int main() {
             //Cleaning Operation
             case 5: {
                 string robotId, roomId;
+                cout << "Enter Robot ID and Room ID for cleaning operation (separated by space):" << endl;
                 cout << "Cleaning is done!" << endl;
             }
             case 0: {
