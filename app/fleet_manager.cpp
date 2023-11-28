@@ -62,6 +62,11 @@ int main() {
             case 5: {
                 string robotId, roomId;
                 cout << "Enter Robot ID and Room ID for cleaning operation (separated by space):" << endl;
+                getline(cin, input);
+                stringstream ss(input);
+                ss >> robotId >> roomId;
+
+                
                 cout << "Cleaning is done!" << endl;
             }
             case 0: {
