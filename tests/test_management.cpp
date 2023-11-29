@@ -15,8 +15,8 @@ TEST_CASE("Testing Management") {
         require_robots = 
         "********** ROBOTS ************ \n \nRobot ID:\t0\nStatus:\tFree\nSize:\tSmall\nType:\tMop\n\nRobot ID:\t1\nStatus:\tBusy\nSize:\tSmall\nType:\tVaccuum\n\nRobot ID:\t2\nStatus:\tFree\nSize:\tMedium\nType:\tScrub\n\nRobot ID:\t3\nStatus:\tBusy\nSize:\tMedium\nType:\tMop\n\nRobot ID:\t4\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum\n\nRobot ID:\t5\nStatus:\tBusy\nSize:\tLarge\nType:\tScrub\n\nRobot ID:\t6\nStatus:\tFree\nSize:\tLarge\nType:\tMop\n\n";
 
-        CHECK(management.to_string_room_list() == require_rooms);
-        CHECK(management.to_string_robot_list() == require_robots);
+        REQUIRE(management.to_string_room_list() == require_rooms);
+        REQUIRE(management.to_string_robot_list() == require_robots);
     }
 
     SECTION("Test Timer") {
@@ -26,8 +26,8 @@ TEST_CASE("Testing Management") {
         require_robots = 
     "********** ROBOTS ************ \n \nRobot ID:\t0\nStatus:\tFree\nSize:\tSmall\nType:\tMop\n\nRobot ID:\t1\nStatus:\tBusy\nSize:\tSmall\nType:\tVaccuum\n\nRobot ID:\t2\nStatus:\tFree\nSize:\tMedium\nType:\tScrub\n\nRobot ID:\t3\nStatus:\tBusy\nSize:\tMedium\nType:\tMop\n\nRobot ID:\t4\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum\n\nRobot ID:\t5\nStatus:\tBusy\nSize:\tLarge\nType:\tScrub\n\nRobot ID:\t6\nStatus:\tFree\nSize:\tLarge\nType:\tMop\n\n";
 
-        CHECK(management.to_string_room_list() == require_rooms);
-        CHECK(management.to_string_robot_list() == require_robots);
+        REQUIRE(management.to_string_room_list() == require_rooms);
+        REQUIRE(management.to_string_robot_list() == require_robots);
     }
 
     SECTION("Test Cleaning") {
@@ -37,8 +37,8 @@ TEST_CASE("Testing Management") {
 
         require_robots = 
     "********** ROBOTS ************ \n \nRobot ID:\t0\nStatus:\tFree\nSize:\tSmall\nType:\tMop\n\nRobot ID:\t1\nStatus:\tBusy\nSize:\tSmall\nType:\tVaccuum\n\nRobot ID:\t2\nStatus:\tFree\nSize:\tMedium\nType:\tScrub\n\nRobot ID:\t3\nStatus:\tBusy\nSize:\tMedium\nType:\tMop\n\nRobot ID:\t4\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum\n\nRobot ID:\t5\nStatus:\tBusy\nSize:\tLarge\nType:\tScrub\n\nRobot ID:\t6\nStatus:\tFree\nSize:\tLarge\nType:\tMop\n\n";
-        CHECK(management.to_string_room_list() == require_rooms);
-        CHECK(management.to_string_robot_list() == require_robots);
+        REQUIRE(management.to_string_room_list() == require_rooms);
+        REQUIRE(management.to_string_robot_list() == require_robots);
 
         std::this_thread::sleep_for(std::chrono::seconds(6)); // TIMER INCREMENT
         require_rooms = 
@@ -46,7 +46,7 @@ TEST_CASE("Testing Management") {
 
         require_robots = 
     "********** ROBOTS ************ \n \nRobot ID:\t0\nStatus:\tFree\nSize:\tSmall\nType:\tMop\n\nRobot ID:\t1\nStatus:\tBusy\nSize:\tSmall\nType:\tVaccuum\n\nRobot ID:\t2\nStatus:\tFree\nSize:\tMedium\nType:\tScrub\n\nRobot ID:\t3\nStatus:\tBusy\nSize:\tMedium\nType:\tMop\n\nRobot ID:\t4\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum\n\nRobot ID:\t5\nStatus:\tBusy\nSize:\tLarge\nType:\tScrub\n\nRobot ID:\t6\nStatus:\tFree\nSize:\tLarge\nType:\tMop\n\n";
-        CHECK(management.to_string_room_list() == require_rooms);
-        CHECK(management.to_string_robot_list() == require_robots);     
+        REQUIRE(management.to_string_room_list() == require_rooms);
+        REQUIRE(management.to_string_robot_list() == require_robots);     
     }
 }

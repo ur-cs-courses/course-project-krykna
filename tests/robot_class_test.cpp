@@ -12,12 +12,12 @@ TEST_CASE("Robot Class") {
         Robot robot_med_cap("Bubbles", "Free", "Medium", "Mop", "NA");
         Robot robot_large_cap("Bubbles", "Free", "Large", "Mop", "NA");
 
-        // CHECK(robot_small_nocap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tSmall\nType:\tMop");
-        // CHECK(robot_med_nocap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tMedium\nType:\tMop");
-        // CHECK(robot_large_nocap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
-        CHECK(robot_small_cap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tSmall\nType:\tMop");
-        CHECK(robot_med_cap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tMedium\nType:\tMop");
-        CHECK(robot_large_cap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
+        // CHECK(robot_small_nocap.to_string() == "ID:\tBubbles\nStatus:\tFree\nSize:\tSmall\nType:\tMop");
+        // CHECK(robot_med_nocap.to_string() == "ID:\tBubbles\nStatus:\tFree\nSize:\tMedium\nType:\tMop");
+        // CHECK(robot_large_nocap.to_string() == "ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
+        CHECK(robot_small_cap.to_string() == "ID:\tBubbles\nStatus:\tFree\nSize:\tSmall\nType:\tMop");
+        CHECK(robot_med_cap.to_string() == "ID:\tBubbles\nStatus:\tFree\nSize:\tMedium\nType:\tMop");
+        CHECK(robot_large_cap.to_string() == "ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
     }
 
     SECTION("Concentration: Robot Types") {
@@ -28,12 +28,12 @@ TEST_CASE("Robot Class") {
         Robot robot_vac_cap("Kirbbuum", "Free", "Large", "Vac", "NA");
         Robot robot_scrub_cap("Scrubby", "Free", "Large", "Scrub", "NA");
 
-        // CHECK(robot_mop_nocap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
-        // CHECK(robot_vac_nocap.to_string() == "Robot ID:\tKirbbuum\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum");
-        // CHECK(robot_scrub_nocap.to_string() == "Robot ID:\tScrubby\nStatus:\tFree\nSize:\tLarge\nType:\tScrub");
-        CHECK(robot_mop_cap.to_string() == "Robot ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
-        CHECK(robot_vac_cap.to_string() == "Robot ID:\tKirbbuum\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum");
-        CHECK(robot_scrub_cap.to_string() == "Robot ID:\tScrubby\nStatus:\tFree\nSize:\tLarge\nType:\tScrub");
+        // CHECK(robot_mop_nocap.to_string() == "ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
+        // CHECK(robot_vac_nocap.to_string() == "ID:\tKirbbuum\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum");
+        // CHECK(robot_scrub_nocap.to_string() == "ID:\tScrubby\nStatus:\tFree\nSize:\tLarge\nType:\tScrub");
+        CHECK(robot_mop_cap.to_string() == "ID:\tBubbles\nStatus:\tFree\nSize:\tLarge\nType:\tMop");
+        CHECK(robot_vac_cap.to_string() == "ID:\tKirbbuum\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum");
+        CHECK(robot_scrub_cap.to_string() == "ID:\tScrubby\nStatus:\tFree\nSize:\tLarge\nType:\tScrub");
     }
 
     SECTION("Concentration: Throw Error") {
@@ -56,24 +56,3 @@ TEST_CASE("Robot Class") {
         CHECK(testRobot.to_string_status() == "Status:\tFree");
     }
 }
-
-// Comment
-/**
-void test_initialize_Robot() {
-    Robot testRobot(0, "Free", "Small", "Mop");
-    std::cout << testRobot.typeToString() << std::endl;
-    std::cout << testRobot.statusToString() << std::endl;
-    std::cout << testRobot.sizeToString() << std::endl;
-    testRobot.setRoom("BOOOOOOOOOOOOOOOOOOOM");
-    std::cout << testRobot.getRoom() << std::endl;
-    std::cout << testRobot.statusToString() << std::endl;
-    testRobot.goHome();
-    std::cout << testRobot.getRoom() << std::endl;
-    std::cout << testRobot.statusToString() << std::endl;
-}
-
-int main() {
-    test_initialize_Robot();
-    return 0;
-}
-*/
