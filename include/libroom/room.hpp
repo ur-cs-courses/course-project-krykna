@@ -2,6 +2,7 @@
 #define LIBROOM_ROOM_HPP
 
 #include <string>
+#include <stdexcept>
 
 enum Status   {emp, dirty, in_progress, clean};
 enum Size     {emp2, small, medium, large};

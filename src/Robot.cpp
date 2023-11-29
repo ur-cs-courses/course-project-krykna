@@ -1,7 +1,6 @@
 #include "../include/libRobot/Robot.hpp"
-#include <iostream>
-#include <string>
 using namespace std;
+#include <stdexcept>
 
 // Default constructor
 Robot::Robot() {
@@ -23,21 +22,33 @@ Robot::Robot(string ID, string status_, string size_, string type_, string room_
         this->status_ = Robot_Status::Busy;
     }
 
-    if (type_ == "Mop") {
+    if (type_ == "Mop" || type_ == "mop") {
         this->type_ = Type::Mop;
-    } else if (type_ == "Vac") {
+    } else if (type_ == "Vac" || type_ == "Vaccuum" || type_ == "vaccuum") {
         this->type_ = Type::Vac;
-    } else if (type_== "Scrub") {
+    } else if (type_== "Scrub" || type_ == "scrub") {
         this->type_ = Type::Scrub;
+    } else {
+        throw std::invalid_argument("Invalid argument: Received an invalid type");
     }
-
-    if (size_ == "Small") {
+    // } else if (type_ != "Mop" && type_ != "mop" && type_ != "Vac" && type_ != "Vaccuum" && 
+    //         type_ != "vaccuum" && type_ != "Scrub" && type_ != "scrub") {
+    //             throw std::invalid_argument("Invalid argument: Received an invalid type");
+    // }
+    
+    if (size_ == "Small" || size_ == "small") {
         this->size_ = Robot_Size::Small;
-    } else if (size_ == "Medium") {
+    } else if (size_ == "Medium" || size_== "medium") {
         this->size_ = Robot_Size::Medium;
-    } else if (size_== "Large") {
+    } else if (size_== "Large" || size_== "large") {
         this->size_ = Robot_Size::Large;
+    } else {
+        throw std::invalid_argument("Invalid argument: Received an invalid size");
     }
+    // } else if (size_ != "Small" && size_ != "small" && size_ != "Medium" && size_ != "medium" && 
+    //         size_ != "Large" && size_ != "large") {
+    //             throw std::invalid_argument("Invalid argument: Received an invalid size");
+    // }
 }
 
 // Copy constructor
@@ -63,35 +74,38 @@ string Robot::get_room() const {
 string Robot::to_string_size() {
     switch (this->size_) {
         case (Robot_Size::Small):
-            return "Size: Small";
+            return "Size:\tSmall";
         case (Robot_Size::Medium):
-            return "Size: Medium";
+            return "Size:\tMedium";
         case (Robot_Size::Large):
-            return "Size: Large";
+            return "Size:\tLarge";
     }
-    return "N/A"; // Return an empty string if no other return statement is executed
+
+    return "Size:\tUnknown";
 }
 
 string Robot::to_string_type() {
     switch (this->type_) {
         case (Type::Mop):
-            return "Type: Mop";
+            return "Type:\tMop";
         case (Type::Vac):
-            return "Type: Vaccuum";
+            return "Type:\tVaccuum";
         case (Type::Scrub):
-            return "Type: Scrub";
+            return "Type:\tScrub";
     }
-    return "N/A"; // Return an empty string if no other return statement is executed
+
+    return "Type:\tUnknown";
 }
 
 string Robot::to_string_status() {
     switch (this->status_) {
         case (Robot_Status::Free):
-            return "Status: Free";
+            return "Status:\tFree";
         case (Robot_Status::Busy):
-            return "Status: Busy";
+            return "Status:\tBusy";
     }
-    return "N/A"; // Return an empty string if no other return statement is executed
+
+    return "Status:\tUnknown";
 }
 
 void Robot::set_status(string status_) {
