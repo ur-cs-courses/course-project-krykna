@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(FleetManagement)
-
+set(CMAKE_CXX_STANDARD 17) # Replace 17 with the standard you need
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 include(dependencies.cmake)
 
 add_library(manage src/Management.cpp)
