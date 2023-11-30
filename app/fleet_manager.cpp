@@ -13,7 +13,7 @@ int main() {
     string csvPathRoom = "../tests/room_test.csv";
 
     // Create an instance of Management
-    Management management(csvPathRoom, csvPathRobot);
+    Management management(csvPathRobot, csvPathRoom);
 
     string input;
     
