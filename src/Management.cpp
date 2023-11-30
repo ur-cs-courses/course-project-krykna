@@ -1,6 +1,7 @@
 #include "../include/manage/Management.hpp"
 
 // Default constructor
+//      Constructs a management instance with empty rooms and robots
 Management::Management() {
     this->csv_path_room_ = "";
     this->csv_path_robot_ = "";
@@ -10,6 +11,7 @@ Management::Management() {
 }
 
 //Parameterized constructor
+    // Constructs a management instance given a file path for robot and room csv
 Management::Management(const std::string& csv_path_robot_, const std::string& csv_path_room_){
     this->csv_path_room_ = csv_path_room_;
     this->csv_path_robot_ = csv_path_robot_;
@@ -22,6 +24,8 @@ Management::Management(const std::string& csv_path_robot_, const std::string& cs
 
 
 // Private methods
+    // Initializes the robots with the respective attributes in a given csv file path
+        // Throws error if the given pathway is not valid
 void Management::initialize_robot_list_from_csv_file(const std::string& csv_path) {
     std::ifstream csvFile(csv_path);
     
@@ -46,15 +50,16 @@ void Management::initialize_robot_list_from_csv_file(const std::string& csv_path
         
         add_new_robot(ID, online_status, size, clean_type, room_id);
 
-    if (room_id != "NA") {
-        cleaning_assignment(ID, room_id);
-    }
+        if (room_id != "NA") {
+            cleaning_assignment(ID, room_id);
+        }
     }
     
     csvFile.close();
 }
 
-
+// // Initializes the rooms with the respective attributes in a given csv file path
+        // Throws error if the given pathway is not valid
 void Management::initialize_room_list_from_csv_file(const std::string& csv_path) {
     std::ifstream csvFile(csv_path);
     
@@ -85,14 +90,18 @@ void Management::initialize_room_list_from_csv_file(const std::string& csv_path)
 
 
 // Public methods
+
+// Adds a new robot with the given id, status, size, type, and room id
 void Management::add_new_robot( std::string& ID, std::string& online_status, std::string& size, std::string& clean_type, std::string& room_id) {
     robot_list_[ID] = Robot(ID, online_status, size, clean_type, room_id);
 }
 
+// Adds a new room with the given id, status, size, and time
 void Management::add_new_room(std::string& ID, std::string& clean_status, std::string& size, std::string& time_till_clean) {
     room_list_[ID] = Room(ID, clean_status, size, time_till_clean);
 }
 
+// Returns a string of all the rooms and their attributes
 std::string Management::to_string_room_list() {
         std::string output = "********** ROOMS ************ \n \n";
         for (auto& pair : room_list_) {
@@ -101,7 +110,7 @@ std::string Management::to_string_room_list() {
         return output;
 }
 
-
+// Returns a string of all the robots and their attributes
 std::string Management::to_string_robot_list() {
         std::string output = "********** ROBOTS ************ \n \n";
         for (auto& pair : robot_list_) {
@@ -110,12 +119,19 @@ std::string Management::to_string_robot_list() {
         return output;
 }
 
+// Sends the given robot to the given room for the given amount of time.
+//  Simulates the cleaning of the robot and sets the status of the room to clean
+//  and sends the robot back home afterwards. 
 void Management::cleaning(Robot& robot, Room& room, int time){
     std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
     room.set_status(Status::clean);
     room.set_time_to_clean(0);
     robot.go_home();
 }
+
+// Assigns a room to a robot giving it a cleaning time based on the size
+// of the robot.
+// Removes the cleaning assignment when finished.
 void Management::cleaning_assignment(std::string bot, std::string rm){
     Robot& robot = robot_list_[bot];
     Room& room = room_list_[rm];

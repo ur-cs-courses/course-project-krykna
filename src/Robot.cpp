@@ -3,6 +3,7 @@ using namespace std;
 #include <stdexcept>
 
 // Default constructor
+// Inititalizes an instance of the robot with default attributes
 Robot::Robot() {
     // Initialize member variables with default values
     this->id_ = "ERROR: NON EXISTENT BOT";  // Default ID
@@ -12,7 +13,9 @@ Robot::Robot() {
     this->room_id_= ""; 
 }
 
-
+// Robot constructor that takes the parameters ID, status, size, type, and room id.
+// Constructs an instance of a robot with the given parameters
+// Throws error if the given type or size is not valid
 Robot::Robot(string ID, string status_, string size_, string type_, string room_id_) {
     this->id_ = ID;
     this->room_id_ = room_id_;
@@ -52,6 +55,7 @@ Robot::Robot(string ID, string status_, string size_, string type_, string room_
 }
 
 // Copy constructor
+// Initializes an instance of a robot given a reference of another robot
 Robot::Robot(const Robot& other) {
     this->id_ = other.id_;
     this->status_ = other.status_;
@@ -60,17 +64,23 @@ Robot::Robot(const Robot& other) {
     this->room_id_ = other.room_id_;
 }
 
+// Deconstructs 
 Robot::~Robot() {}
 
+// Given a string of room, assigns the robot to the room, setting the
+//  status as busy
 void Robot::set_room(string givenRoom) {
     this->room_id_ = givenRoom;
     this->status_ = Robot_Status::Busy;
 }
 
+// Returns a string of the room that the robot is assigned to
 string Robot::get_room() const {
     return this->room_id_;
 }
 
+// Returns a string of the size of the robot
+// If robot size is not existent, returns "Unknown"
 string Robot::to_string_size() {
     switch (this->size_) {
         case (Robot_Size::Small):
@@ -84,6 +94,8 @@ string Robot::to_string_size() {
     return "Size:\tUnknown";
 }
 
+// Returns a string of the robot type.
+// Returns type "Unknown" if the type is not existent
 string Robot::to_string_type() {
     switch (this->type_) {
         case (Type::Mop):
@@ -97,6 +109,8 @@ string Robot::to_string_type() {
     return "Type:\tUnknown";
 }
 
+// Returns a string of the status of the robot
+// Returns status "Unknown" if the status is not existent
 string Robot::to_string_status() {
     switch (this->status_) {
         case (Robot_Status::Free):
@@ -108,6 +122,8 @@ string Robot::to_string_status() {
     return "Status:\tUnknown";
 }
 
+// Takes in a string status and sets the status of the robot to the corresponding status
+// If given string does not match any status options, defaults to Free
 void Robot::set_status(string status_) {
     if (status_ == "Free") {
         this->status_ = Robot_Status::Free;
@@ -118,21 +134,25 @@ void Robot::set_status(string status_) {
     }
 }
 
-// basically reset
+// Sends the robot home and frees robot assignment from room
 void Robot::go_home() {
     this->room_id_ = "NA";
     this->status_ = Robot_Status::Free;
 }
 
+// Returns a string of Robot ID, status, room ID, size, and type
 string Robot::to_string() {
     std::string data = "ID:\t" + id_ + "\n" + to_string_status() + "\n" + "Room:\t" + this->room_id_+ "\n" + to_string_size() + "\n" + to_string_type();
     return data;
 }
 
+// Returns robot size
 Robot_Size Robot::get_size() {
     return this->size_;
 }
 
+// Given a reference to another robot, returns a boolean comparing 
+// if the robot id is less than the id of the given robot
 bool Robot::operator<(const Robot& other) const {
         return std::stoi(id_) < std::stoi(other.id_);
  }
