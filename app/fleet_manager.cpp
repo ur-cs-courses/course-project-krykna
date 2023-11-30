@@ -9,8 +9,8 @@ using namespace std;
 
 int main() {
     // Paths to the CSV files
-    string csvPathRobot = "../tests/robot_test.csv";
-    string csvPathRoom = "../tests/room_test.csv";
+    string csvPathRobot = "../../tests/robot_test.csv";
+    string csvPathRoom = "../../tests/room_test.csv";
 
     // Create an instance of Management
     Management management(csvPathRobot, csvPathRoom);
