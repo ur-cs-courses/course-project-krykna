@@ -112,10 +112,11 @@ std::string Management::to_string_robot_list() {
 
 void Management::cleaning(Robot& robot, Room& room, int time){
     std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
-    room.set_status(Status::clean);
+    room.set_status(Room_Status::clean);
     room.set_time_to_clean(0);
     robot.go_home();
 }
+
 void Management::cleaning_assignment(std::string bot, std::string rm){
     Robot& robot = robot_list_[bot];
     Room& room = room_list_[rm];
