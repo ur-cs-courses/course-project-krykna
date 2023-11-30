@@ -85,7 +85,7 @@ void Management::initialize_room_list_from_csv_file(const std::string& csv_path)
 
 
 // Public methods
-void Management::add_new_robot( std::string& ID, std::string& online_status, std::string& size, std::string& clean_type, std::string& room_id) {
+void Management::add_new_robot(std::string& ID, std::string& online_status, std::string& size, std::string& clean_type, std::string& room_id) {
     robot_list_[ID] = Robot(ID, online_status, size, clean_type, room_id);
 }
 
