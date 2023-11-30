@@ -99,6 +99,8 @@ class Room {
         */
         std::string to_string();
 
+        Room_Status get_status();
+
 };
 
 #endif

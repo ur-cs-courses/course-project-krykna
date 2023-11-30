@@ -119,6 +119,10 @@ string Robot::to_string() {
     return data;
 }
 
+Robot_Status Robot::get_status() {
+    return this->status_;
+}
+
 bool Robot::operator<(const Robot& other) const {
         return std::stoi(id_) < std::stoi(other.id_);
  }

@@ -67,7 +67,7 @@ TEST_CASE("Testing Management") {
         REQUIRE(management.to_string_robot_list() == require_robots);
     }
 
-    SECTION("Test Timer") {
+    SECTION("Test Timer CSV") {
         std::this_thread::sleep_for(std::chrono::seconds(12));
         require_rooms = 
     "********** ROOMS ************ \n \nRoom Name:\t0\nRoom Status:\tClean\nRoom Size:\tSmall\nEstimated Time to Clean: 0 minutes\n\nRoom Name:\t1\nRoom Status:\tDirty\nRoom Size:\tSmall\nEstimated Time to Clean: 2 minutes\n\nRoom Name:\t2\nRoom Status:\tIn-progress\nRoom Size:\tMedium\nEstimated Time to Clean: 4 minutes\n\nRoom Name:\t3\nRoom Status:\tIn-progress\nRoom Size:\tMedium\nEstimated Time to Clean: 4 minutes\n\nRoom Name:\t4\nRoom Status:\tClean\nRoom Size:\tLarge\nEstimated Time to Clean: 0 minutes\n\nRoom Name:\t5\nRoom Status:\tIn-progress\nRoom Size:\tLarge\nEstimated Time to Clean: 6 minutes\n\nRoom Name:\t6\nRoom Status:\tClean\nRoom Size:\tLarge\nEstimated Time to Clean: 0 minutes\n\n";
@@ -93,5 +93,30 @@ TEST_CASE("Testing Management") {
     "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\nID:\t1\nStatus:\tBusy\nRoom:\t2\nSize:\tSmall\nType:\tVaccuum\n\nID:\t2\nStatus:\tFree\nRoom:\tNA\nSize:\tMedium\nType:\tScrub\n\nID:\t3\nStatus:\tBusy\nRoom:\t5\nSize:\tMedium\nType:\tMop\n\nID:\t4\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tVaccuum\n\nID:\t5\nStatus:\tBusy\nRoom:\t3\nSize:\tLarge\nType:\tScrub\n\nID:\t6\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tMop\n\n";
         REQUIRE(management.to_string_room_list() == require_rooms);
         REQUIRE(management.to_string_robot_list() == require_robots);     
+    }
+
+    SECTION("Test Status") {
+        Management management2 = Management();
+        std::string ID = "20";
+        std::string online_status = "Free"; 
+        std::string size = "Large"; 
+        std::string clean_type = "Vac"; 
+        std::string room_id = "NA";
+        management2.add_new_robot(ID, online_status, size, clean_type, room_id);
+        std::string ID2 = "21";
+        std::string clean_status = "Dirty"; 
+        std::string size2 = "Large"; 
+        std::string time_to_clean = "5";       
+        management2.add_new_room(ID2, clean_status, size2, time_to_clean);
+
+
+        REQUIRE(management2.get_bot("20").get_status() == Robot_Status::Free);
+        REQUIRE(management2.get_room("21").get_status() == Room_Status::dirty);
+        management.cleaning_assignment("20", "21");
+        REQUIRE(management2.get_bot("20").get_status() == Robot_Status::Busy);
+        REQUIRE(management2.get_room("21").get_status() == Room_Status::in_progress);
+        std::this_thread::sleep_for(std::chrono::seconds(5));
+        REQUIRE(management2.get_bot("20").get_status() == Robot_Status::Free);
+        REQUIRE(management2.get_room("21").get_status() == Room_Status::clean);
     }
 }

@@ -95,3 +95,7 @@ std::string Room::to_string() {
     std::string data = "Room Name:\t" + this->room_name_ + "\n" + to_string_status() + "\n" + to_string_size() + "\n" + to_string_time();
     return data;
 }
+
+Room_Status Room::get_status(){
+    return this-> room_status_;
+}

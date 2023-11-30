@@ -48,6 +48,8 @@ class Robot {
 
         inline Robot_Size get_size() const {return this->size_;}
 
+        Robot_Status get_status();
+
         bool operator<(const Robot& other) const;
 };
 
