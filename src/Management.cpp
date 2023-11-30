@@ -46,9 +46,9 @@ void Management::initialize_robot_list_from_csv_file(const std::string& csv_path
         
         add_new_robot(ID, online_status, size, clean_type, room_id);
 
-    if (room_id != "NA") {
-        cleaning_assignment(ID, room_id);
-    }
+        if (room_id != "NA") {
+            cleaning_assignment(ID, room_id);
+        }
     }
     
     csvFile.close();
@@ -94,20 +94,20 @@ void Management::add_new_room(std::string& ID, std::string& clean_status, std::s
 }
 
 std::string Management::to_string_room_list() {
-        std::string output = "********** ROOMS ************ \n \n";
-        for (auto& pair : room_list_) {
-            output += pair.second.to_string() + "\n" + "\n";
-        }
-        return output;
+    std::string output = "********** ROOMS ************ \n \n";
+    for (auto& pair : room_list_) {
+        output += pair.second.to_string() + "\n" + "\n";
+    }
+    return output;
 }
 
 
 std::string Management::to_string_robot_list() {
-        std::string output = "********** ROBOTS ************ \n \n";
-        for (auto& pair : robot_list_) {
-            output += pair.second.to_string() + "\n" + "\n";
-        }
-        return output;
+    std::string output = "********** ROBOTS ************ \n \n";
+    for (auto& pair : robot_list_) {
+        output += pair.second.to_string() + "\n" + "\n";
+    }
+    return output;
 }
 
 void Management::cleaning(Robot& robot, Room& room, int time){
