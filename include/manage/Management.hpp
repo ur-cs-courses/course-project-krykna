@@ -3,8 +3,8 @@
 
 //#include "../libroom/room.hpp"
 //#include "../libRobot/Robot.hpp"
-#include "libroom/room.hpp"
-#include "libRobot/Robot.hpp"
+#include "../libroom/room.hpp"
+#include "../libRobot/Robot.hpp"
 
 #include <iostream>
 #include <fstream>
