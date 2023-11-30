@@ -1,4 +1,6 @@
 find_package(Catch2 REQUIRED)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
 
 IF (${Catch2_FOUND})
     MESSAGE(STATUS "Found Catch2")
@@ -17,6 +19,7 @@ target_link_libraries(manage_test
   PRIVATE
     Catch2::Catch2WithMain
     manage
+    Threads::Threads
 )
 
 target_link_libraries(room_class_test

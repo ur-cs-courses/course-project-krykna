@@ -2,17 +2,77 @@
 #include "../include/catch.hpp"
 #include "../include/manage/Management.hpp"
 
-TEST_CASE("Testing Compatibility of Management with Room and Robot Classes") {
-    const std::string test_csv_rooms = "input_test_files/room_test.csv";
-    const std::string test_csv_robots = "input_test_files/robot_test.csv";
+/**
+ * For Constructing Expected Results for Room and Robot to_string_list()
+ * Room Display String Format:
+    Room Name:\t
+    \nRoom Status:\t
+    \nRoom Size:\t
+    \nEstimated Time to Clean: 0 minutes\n\n
 
-    const std::string require_rooms = 
-    "********** ROOMS ************ \n \nRoom Name:\t0\nRoom Status:\tClean\nRoom Size:\tSmall\nEstimated Time to Clean: 0 minutes\n\nRoom Name:\t1\nRoom Status:\tDirty\nRoom Size:\tSmall\nEstimated Time to Clean: 10 minutes\n\nRoom Name:\t2\nRoom Status:\tIn-progress\nRoom Size:\tMedium\nEstimated Time to Clean: 20 minutes\n\nRoom Name:\t3\nRoom Status:\tDirty\nRoom Size:\tMedium\nEstimated Time to Clean: 20 minutes\n\nRoom Name:\t4\nRoom Status:\tClean\nRoom Size:\tLarge\nEstimated Time to Clean: 0 minutes\n\nRoom Name:\t5\nRoom Status:\tIn-progress\nRoom Size:\tLarge\nEstimated Time to Clean: 30 minutes\n\nRoom Name:\t6\nRoom Status:\tClean\nRoom Size:\tLarge\nEstimated Time to Clean: 0 minutes\n\n";
+    0,Clean,Small,0
+    1,Dirty,Small,2
+    2,IP,Medium,4
+    3,IP,Medium,4
+    4,Clean,Large,0
+    5,IP,Large,6
+    6,Clean,Large,0
 
-    const std::string require_robots = 
-    "********** ROBOTS ************ \n \nRobot ID:\t0\nStatus:\tFree\nSize:\tSmall\nType:\tMop\n\nRobot ID:\t1\nStatus:\tBusy\nSize:\tSmall\nType:\tVaccuum\n\nRobot ID:\t2\nStatus:\tFree\nSize:\tMedium\nType:\tScrub\n\nRobot ID:\t3\nStatus:\tBusy\nSize:\tMedium\nType:\tMop\n\nRobot ID:\t4\nStatus:\tFree\nSize:\tLarge\nType:\tVaccuum\n\nRobot ID:\t5\nStatus:\tBusy\nSize:\tLarge\nType:\tScrub\n\nRobot ID:\t6\nStatus:\tFree\nSize:\tLarge\nType:\tMop\n\n";
+    Room Name:\t0\nRoom Status:\tClean\nRoom Size:\tSmall\nEstimated Time to Clean: 0 minutes\n\n
+    Room Name:\t1\nRoom Status:\tDirty\nRoom Size:\tSmall\nEstimated Time to Clean: 2 minutes\n\n
+    Room Name:\t2\nRoom Status:\tIn-progress\nRoom Size:\tMedium\nEstimated Time to Clean: 4 minutes\n\n
+    Room Name:\t3\nRoom Status:\tIn-progress\nRoom Size:\tMedium\nEstimated Time to Clean: 4 minutes\n\n
+    Room Name:\t4\nRoom Status:\tClean\nRoom Size:\tLarge\nEstimated Time to Clean: 0 minutes\n\n
+    Room Name:\t5\nRoom Status:\tIn-progress\nRoom Size:\tLarge\nEstimated Time to Clean: 6 minutes\n\n
+    Room Name:\t6\nRoom Status:\tClean\nRoom Size:\tLarge\nEstimated Time to Clean: 0 minutes\n\n
+---------------------------------
+ * Robot Display String Format:
+    ID:\t
+    \nStatus:\t
+    \nRoom:\t
+    \nSize\t
+    \nType:\t
+    \n\n
 
-    Management management(test_csv_robots, test_csv_rooms);
-    CHECK(management.to_string_room_list() == require_rooms);
-    CHECK(management.to_string_robot_list() == require_robots);
+    0,Free,Small,Mop,NA
+    1,Busy,Small,Vac,2
+    2,Free,Medium,Scrub,NA
+    3,Busy,Medium,Mop,5
+    4,Free,Large,Vac,NA
+    5,Busy,Large,Scrub,3
+    6,Free,Large,Mop,NA
+
+    ID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\n
+    ID:\t1\nStatus:\tBusy\nRoom:\t2\nSize:\tSmall\nType:\tVaccuum\n\n
+    ID:\t2\nStatus:\tFree\nRoom:\tNA\nSize:\tMedium\nType:\tScrub\n\n
+    ID:\t3\nStatus:\tBusy\nRoom:\t5\nSize:\tMedium\nType:\tMop\n\n
+    ID:\t4\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tVaccuum\n\n
+    ID:\t5\nStatus:\tBusy\nRoom:\t3\nSize:\tLarge\nType:\tScrub\n\n
+    ID:\t6\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tMop\n\n
+*/
+
+TEST_CASE("Test a Pair") {
+    Management single_pair;
+    std::string room_id = "1";
+    std::string room_status = "Dirty";
+    std::string room_size = "Medium";
+    std::string time = "6";
+    single_pair.add_new_room(room_id, room_status, room_size, time);
+
+    std::string bot_id = "0";
+    std::string bot_status = "Free";
+    std::string bot_size = "Small";
+    std::string bot_type = "Mop";
+    std::string bot_room = "NA";
+    single_pair.add_new_robot(bot_id, bot_status, bot_size, bot_type, bot_room);
+    CHECK(single_pair.to_string_room_list() == "********** ROOMS ************ \n \nRoom Name:\t1\nRoom Status:\tDirty\nRoom Size:\tMedium\nEstimated Time to Clean: 6 minutes\n\n");
+    CHECK(single_pair.to_string_robot_list() == "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\n");
+
+    single_pair.cleaning_assignment("0", "1");
+    CHECK(single_pair.to_string_room_list() == "********** ROOMS ************ \n \nRoom Name:\t1\nRoom Status:\tIn-progress\nRoom Size:\tMedium\nEstimated Time to Clean: 6 minutes\n\n");
+    CHECK(single_pair.to_string_robot_list() == "********** ROBOTS ************ \n \nID:\t0\nStatus:\tBusy\nRoom:\t1\nSize:\tSmall\nType:\tMop\n\n");
+
+    std::this_thread::sleep_for(std::chrono::seconds(20));
+    CHECK(single_pair.to_string_room_list() == "********** ROOMS ************ \n \nRoom Name:\t1\nRoom Status:\tClean\nRoom Size:\tMedium\nEstimated Time to Clean: 0 minutes\n\n");
+    CHECK(single_pair.to_string_robot_list() == "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\n");
 }
