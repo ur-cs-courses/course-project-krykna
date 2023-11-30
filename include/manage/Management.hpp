@@ -1,9 +1,13 @@
-#ifndef MANAGEMENT_H
-#define MANAGEMENT_H
+#ifndef MANAGE_MANAGEMENT_HPP
+#define MANAGE_MANAGEMENT_HPP
 
 #include "../libroom/room.hpp"
 #include "../libRobot/Robot.hpp"
+#include <stdexcept>
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
 #include <vector>
 #include <string>
 #include <map>
@@ -33,6 +37,8 @@ public:
     void add_new_room(std::string& ID, std::string& clean_status, std::string& size, std::string& time_till_clean);
     std::string to_string_room_list();
     std::string to_string_robot_list();
+
+    void cleaning(Robot&, Room&, int);
 
     void cleaning_assignment(std::string bot, std::string rm);
     // std::map<Robot, Room> get_map();

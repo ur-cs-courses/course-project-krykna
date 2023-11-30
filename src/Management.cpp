@@ -1,7 +1,4 @@
 #include "../include/manage/Management.hpp"
-#include <iostream>
-#include <fstream>
-#include <sstream>
 
 // Default constructor
 Management::Management() {
@@ -13,7 +10,7 @@ Management::Management() {
 }
 
 //Parameterized constructor
-Management::Management(const std::string& csv_path_room_, const std::string& csv_path_robot_){
+Management::Management(const std::string& csv_path_robot_, const std::string& csv_path_room_){
     this->csv_path_room_ = csv_path_room_;
     this->csv_path_robot_ = csv_path_robot_;
     robot_list_.clear();
@@ -49,9 +46,9 @@ void Management::initialize_robot_list_from_csv_file(const std::string& csv_path
         
         add_new_robot(ID, online_status, size, clean_type, room_id);
 
-    if (room_id != "NA") {
-        cleaning_assignment(ID, room_id);
-    }
+        if (room_id != "NA") {
+            cleaning_assignment(ID, room_id);
+        }
     }
     
     csvFile.close();
@@ -88,7 +85,7 @@ void Management::initialize_room_list_from_csv_file(const std::string& csv_path)
 
 
 // Public methods
-void Management::add_new_robot( std::string& ID, std::string& online_status, std::string& size, std::string& clean_type, std::string& room_id) {
+void Management::add_new_robot(std::string& ID, std::string& online_status, std::string& size, std::string& clean_type, std::string& room_id) {
     robot_list_[ID] = Robot(ID, online_status, size, clean_type, room_id);
 }
 
@@ -97,20 +94,27 @@ void Management::add_new_room(std::string& ID, std::string& clean_status, std::s
 }
 
 std::string Management::to_string_room_list() {
-        std::string output = "********** ROOMS ************ \n \n";
-        for (auto& pair : room_list_) {
-            output += pair.second.to_string() + "\n" + "\n";
-        }
-        return output;
+    std::string output = "********** ROOMS ************ \n \n";
+    for (auto& pair : room_list_) {
+        output += pair.second.to_string() + "\n" + "\n";
+    }
+    return output;
 }
 
 
 std::string Management::to_string_robot_list() {
-        std::string output = "********** ROBOTS ************ \n \n";
-        for (auto& pair : robot_list_) {
-            output += pair.second.to_string() + "\n" + "\n";
-        }
-        return output;
+    std::string output = "********** ROBOTS ************ \n \n";
+    for (auto& pair : robot_list_) {
+        output += pair.second.to_string() + "\n" + "\n";
+    }
+    return output;
+}
+
+void Management::cleaning(Robot& robot, Room& room, int time){
+    std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
+    room.set_status(Room_Status::clean);
+    room.set_time_to_clean(0);
+    robot.go_home();
 }
 
 void Management::cleaning_assignment(std::string bot, std::string rm){
@@ -130,24 +134,24 @@ void Management::cleaning_assignment(std::string bot, std::string rm){
     room.set_status(in_progress);
     robot.set_status("Busy");
     robot.set_room(rm);
-    std::thread([this, &robot, &room, time]() {
-        std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
-        room.set_status(clean);
-        room.set_time_to_clean(0);
-        robot.go_home();
-    }).detach();
+
+    // method 3
+    std::thread t1([this, &robot, &room, time]{ 
+        this->cleaning(robot, room, time); 
+        });
+    t1.detach();
+
+    // method 2
+    // std::thread t1(&Management::cleaning, this, std::ref(robot), std::ref(room), time); 
+    // t1.detach();
+
+    // method 1
+    // std::thread([&robot, &room, time]() {
+    //     std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
+    //     room.set_status(clean);
+    //     room.set_time_to_clean(0);
+    //     robot.go_home();
+    // }).detach();
 
     assignment_map.erase(robot);
 }
-
-// std::map<Robot, Room> Management::get_map(){
-//     return this->assignment_map;
-// }
-
-    // RoTimer(std::vector<Robot> robot_list, std::vector<Room> room_list){
-    //     int assigned_room;
-    //     for (int i = 0; i < robot_list.size(); i++){
-    //         assigned_room = robot_list[i].get_room();
-
-    //     }
-    // }
