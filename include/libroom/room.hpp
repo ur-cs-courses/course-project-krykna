@@ -2,16 +2,17 @@
 #define LIBROOM_ROOM_HPP
 
 #include <string>
+#include <stdexcept>
 
-enum Status   {emp, dirty, in_progress, clean};
-enum Size     {emp2, small, medium, large};
+enum Room_Status   {emp, dirty, in_progress, clean};
+enum Room_Size     {emp2, small, medium, large};
 
 class Room {
     private:
         std::string room_name_;
         int     estimated_time_;
-        Status  room_status_;
-        Size    room_size_;
+        Room_Status  room_status_;
+        Room_Size    room_size_;
 
     public:
         /**
@@ -43,25 +44,43 @@ class Room {
         ~Room();
 
         /**
+        * PURPOSE: Modifier - converts lowercase string to status and sets room status
+        * PARAMS:  String status
+        * RETURN:  None
+        */
+        void convert_to_status(std::string& status_string_);
+
+        /**
+        * PURPOSE: Modifier - converts lowercase string to size and set room size
+        * PARAMS:  String size
+        * RETURN:  None
+        */
+        void convert_to_size(std::string& size_string_);
+
+        /**
         * PURPOSE: Helper - converts string to lowercase
         * PARAMS:  None
         * RETURN:  lowercase string
         */
         std::string to_lower(std::string& string_to_convert);
 
+        inline void set_status(Room_Status status) {this->room_status_ = status;}
+        inline void set_time_to_clean(int time) {this->estimated_time_ = time;}
+        inline int get_time_to_clean() const {return this->estimated_time_;}
+
         /**
         * PURPOSE: Helper - Converts enum class Status value to string
         * PARAMS:  None
         * RETURN:  String conversion of the enum status
         */
-        std::string status_to_string();
+        std::string to_string_status();
 
         /**
         * PURPOSE: Helper - Converts enum class Size value to string
         * PARAMS:  None
         * RETURN:  String conversion of the enum size
         */
-        std::string size_to_string();
+        std::string to_string_size();
 
         /**
         * PURPOSE: Helper - Converts estimated time to string
@@ -70,7 +89,7 @@ class Room {
         *          "Estimated Time to Clean: [estimated_time] minutes"
         * NOTE:    Assumes unit of time is minutes
         */
-        std::string time_to_string();
+        std::string to_string_time();
 
         /**
         * PURPOSE: Acts as a to_string() method to return the room data
@@ -79,6 +98,7 @@ class Room {
         * HELPERS: status_to_string(), size_to_string(), time_to_string()
         */
         std::string to_string();
+
 };
 
 #endif

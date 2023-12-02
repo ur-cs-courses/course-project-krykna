@@ -1,10 +1,11 @@
-add_executable(say_hello
-  say_hello.cpp
+add_executable(fleet_manage_app
+  fleet_management.cpp
 )
 
-target_link_libraries(say_hello
-  PRIVATE
-    libhello
+target_link_libraries(fleet_manage_app
+  PRIVATE manage
+  PRIVATE libRobot
+  PRIVATE libroom
 )
 
-target_compile_features(say_hello PRIVATE cxx_std_20)
+target_compile_features(fleet_manage_app PRIVATE cxx_std_20)
