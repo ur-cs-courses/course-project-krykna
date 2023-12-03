@@ -32,5 +32,5 @@ target_link_libraries(manage
   PUBLIC libroom
 )
 
-# add_subdirectory(app)
+add_subdirectory(app)
 add_subdirectory(tests)
