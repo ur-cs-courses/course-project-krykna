@@ -64,7 +64,7 @@ int main() {
                     // std::cout << management.to_string_robot_individual(input) << std::endl;
                     std::cout << "\033[1;31mImplementation needed to request specific robot status:\n\tmanagement.to_string_robot_individual(std::string& robot_id)\033[0m" << std::endl;
                 }
-                else { std::cout << "Invalid entry." << std::endl;}
+                else { std::cout << "\033[1;31mInvalid entry.\033[0m" << std::endl;}
                 break;
             }
             //Cleaning Operation
@@ -72,8 +72,14 @@ int main() {
                 std::string robotId, roomId;
                 std::cout << "Enter Robot ID and Room ID for cleaning operation (separated by space): ";
                 std::getline(std::cin, input);
-                std::stringstream ss(input);
-                ss >> robotId >> roomId;
+                if (input.size() == 3) {
+                    std::stringstream ss(input);
+                    ss >> robotId >> roomId;
+                }
+                else { 
+                    std::cout << "\033[1;31mInvalid entry. Please make sure that input is formatted as '\033[0mRobot_ID\033[1;31m[HIT-THE-SPACEBAR]\033[0mRoom_ID\033[1;31m'.\033[0m" << std::endl;
+                    break;
+                }
 
 
                 management.cleaning_assignment(robotId, roomId);
@@ -104,7 +110,7 @@ int main() {
                 return 0; // Exit the while loop and end the program
             }
             default: {
-                std::cout << "Invalid command. Please try again." << std::endl;
+                std::cout << "\033[1;31mInvalid command. Please try again.\033[0m" << std::endl;
                 break;
             }
         }
