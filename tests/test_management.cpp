@@ -75,4 +75,5 @@ TEST_CASE("Test a Pair") {
     std::this_thread::sleep_for(std::chrono::seconds(20));
     CHECK(single_pair.to_string_room_list() == "********** ROOMS ************ \n \nRoom Name:\t1\nRoom Status:\tClean\nRoom Size:\tMedium\nEstimated Time to Clean: 0 minutes\n\n");
     CHECK(single_pair.to_string_robot_list() == "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\n");
+
 }
