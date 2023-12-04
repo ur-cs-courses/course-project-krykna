@@ -27,15 +27,17 @@ class Robot {
         // Destructor
         ~Robot();
 
+        void set_type(string& bot_type_);
+        void set_size(string& bot_size_);
+
         // Room
         void set_room(string room);
-        string get_room() const;
-
+        inline string get_room() const {return this->room_id_;}
 
         // Status
+        // NOTE: Would recommend avoiding any change to this as it is used by Robot Constructor
         void set_status(string status);
     
-
         // Robot activities
         void go_home();
 
@@ -44,7 +46,7 @@ class Robot {
         string to_string_size();
         string to_string();
 
-        Robot_Size get_size();
+        inline Robot_Size get_size() const {return this->size_;}
 
         bool operator<(const Robot& other) const;
 };

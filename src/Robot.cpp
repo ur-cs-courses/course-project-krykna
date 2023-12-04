@@ -16,39 +16,9 @@ Robot::Robot() {
 Robot::Robot(string ID, string status_, string size_, string type_, string room_id_) {
     this->id_ = ID;
     this->room_id_ = room_id_;
-    if (status_ == "Free") {
-        this->status_ = Robot_Status::Free;
-    } else if (status_ == "Busy") {
-        this->status_ = Robot_Status::Busy;
-    }
-
-    if (type_ == "Mop" || type_ == "mop") {
-        this->type_ = Type::Mop;
-    } else if (type_ == "Vac" || type_ == "Vaccuum" || type_ == "vaccuum") {
-        this->type_ = Type::Vac;
-    } else if (type_== "Scrub" || type_ == "scrub") {
-        this->type_ = Type::Scrub;
-    } else {
-        throw std::invalid_argument("Invalid argument: Received an invalid type");
-    }
-    // } else if (type_ != "Mop" && type_ != "mop" && type_ != "Vac" && type_ != "Vaccuum" && 
-    //         type_ != "vaccuum" && type_ != "Scrub" && type_ != "scrub") {
-    //             throw std::invalid_argument("Invalid argument: Received an invalid type");
-    // }
-    
-    if (size_ == "Small" || size_ == "small") {
-        this->size_ = Robot_Size::Small;
-    } else if (size_ == "Medium" || size_== "medium") {
-        this->size_ = Robot_Size::Medium;
-    } else if (size_== "Large" || size_== "large") {
-        this->size_ = Robot_Size::Large;
-    } else {
-        throw std::invalid_argument("Invalid argument: Received an invalid size");
-    }
-    // } else if (size_ != "Small" && size_ != "small" && size_ != "Medium" && size_ != "medium" && 
-    //         size_ != "Large" && size_ != "large") {
-    //             throw std::invalid_argument("Invalid argument: Received an invalid size");
-    // }
+    set_status(status_);
+    set_type(type_);
+    set_size(size_);
 }
 
 // Copy constructor
@@ -62,13 +32,49 @@ Robot::Robot(const Robot& other) {
 
 Robot::~Robot() {}
 
+void Robot::set_type(string& bot_type_) {
+    if (bot_type_ == "Mop" || bot_type_ == "mop") {
+        this->type_ = Type::Mop;
+    } else if (bot_type_ == "Vac" || bot_type_ == "Vaccuum" || bot_type_ == "vaccuum") {
+        this->type_ = Type::Vac;
+    } else if (bot_type_== "Scrub" || bot_type_ == "scrub") {
+        this->type_ = Type::Scrub;
+    } else {
+        throw std::invalid_argument("Invalid argument: Received an invalid type");
+    }
+}
+
+void Robot::set_size(string& bot_size_) {
+    if (bot_size_ == "Small" || bot_size_ == "small") {
+        this->size_ = Robot_Size::Small;
+    } else if (bot_size_ == "Medium" || bot_size_== "medium") {
+        this->size_ = Robot_Size::Medium;
+    } else if (bot_size_== "Large" || bot_size_== "large") {
+        this->size_ = Robot_Size::Large;
+    } else {
+        throw std::invalid_argument("Invalid argument: Received an invalid size");
+    }
+}
+
 void Robot::set_room(string givenRoom) {
     this->room_id_ = givenRoom;
     this->status_ = Robot_Status::Busy;
 }
 
-string Robot::get_room() const {
-    return this->room_id_;
+void Robot::set_status(string status_) {
+    if (status_ == "Free") {
+        this->status_ = Robot_Status::Free;
+    } else if (status_ == "Busy") {
+        this->status_ = Robot_Status::Busy;
+    } else {
+        throw std::invalid_argument("Invalid argument: Received an invalid status");
+    }
+}
+
+// basically reset
+void Robot::go_home() {
+    this->room_id_ = "NA";
+    this->status_ = Robot_Status::Free;
 }
 
 string Robot::to_string_size() {
@@ -108,29 +114,9 @@ string Robot::to_string_status() {
     return "Status:\tUnknown";
 }
 
-void Robot::set_status(string status_) {
-    if (status_ == "Free") {
-        this->status_ = Robot_Status::Free;
-    } else if (status_ == "Busy") {
-        this->status_ = Robot_Status::Busy;
-    } else {
-        this->status_ = Robot_Status::Free;
-    }
-}
-
-// basically reset
-void Robot::go_home() {
-    this->room_id_ = "NA";
-    this->status_ = Robot_Status::Free;
-}
-
 string Robot::to_string() {
     std::string data = "ID:\t" + id_ + "\n" + to_string_status() + "\n" + "Room:\t" + this->room_id_+ "\n" + to_string_size() + "\n" + to_string_type();
     return data;
-}
-
-Robot_Size Robot::get_size() {
-    return this->size_;
 }
 
 bool Robot::operator<(const Robot& other) const {
