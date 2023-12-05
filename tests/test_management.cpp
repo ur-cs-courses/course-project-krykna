@@ -53,6 +53,24 @@
 
 TEST_CASE("Testing Add New Robot and Room Functions") {
     // Expansion required
+    SECTION("Add New Room") {
+        Management room_managing;
+        std::string room_id = "1";
+        std::string room_status = "Dirty";
+        std::string room_size = "Medium";
+        std::string time = "6";
+        room_managing.add_new_room(room_id, room_status, room_size, time);
+    }
+
+    SECTION("Add New Robot") {
+        Management robot_managing;
+        std::string bot_id = "0";
+        std::string bot_status = "Free";
+        std::string bot_size = "Small";
+        std::string bot_type = "Mop";
+        std::string bot_room = "NA";
+        robot_managing.add_new_robot(bot_id, bot_status, bot_size, bot_type, bot_room);
+    }
 }
 
 TEST_CASE("Test a Pair") {
