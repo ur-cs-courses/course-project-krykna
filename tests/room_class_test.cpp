@@ -6,7 +6,7 @@
 /**
  * TESTING: Room Class
 */
-TEST_CASE("Independent Class: Room Class") {
+TEST_CASE("Independent Class: Room") {
     Room room_passed_1("Conference", "dirty", "small", "5");
     Room room_passed_2("Conference", "Dirty", "Small", "5");
     std::string expected_room = 
