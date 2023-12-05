@@ -42,6 +42,9 @@ public:
 
     void cleaning_assignment(std::string bot, std::string rm);
     // std::map<Robot, Room> get_map();
+
+    inline Robot get_bot(std::string id) { return this->robot_list_[id]; }
+    inline Room get_room(std::string id) { return this->room_list_[id]; }
 };
 
 #endif

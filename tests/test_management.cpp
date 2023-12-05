@@ -60,6 +60,9 @@ TEST_CASE("Testing Add New Robot and Room Functions") {
         std::string room_size = "Medium";
         std::string time = "6";
         room_managing.add_new_room(room_id, room_status, room_size, time);
+        REQUIRE(room_managing.get_room("1").to_string_status() == "Status:\tDirty");
+        REQUIRE(room_managing.get_room("1").to_string_size() == "Size:\tMedium");
+        REQUIRE(room_managing.get_room("1").get_time_to_clean() == 6);
     }
 
     SECTION("Add New Robot") {
@@ -70,6 +73,10 @@ TEST_CASE("Testing Add New Robot and Room Functions") {
         std::string bot_type = "Mop";
         std::string bot_room = "NA";
         robot_managing.add_new_robot(bot_id, bot_status, bot_size, bot_type, bot_room);
+        REQUIRE(robot_managing.get_bot("0").to_string_status() == "Status:\tBusy");
+        REQUIRE(robot_managing.get_bot("0").to_string_size() == "Size:\tSmall");
+        REQUIRE(robot_managing.get_bot("0").to_string_type() == "Type:\tVaccuum");
+        REQUIRE(robot_managing.get_bot("0").get_room() == "3");
     }
 }
 
