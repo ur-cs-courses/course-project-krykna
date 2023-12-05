@@ -65,7 +65,19 @@ TEST_CASE("Testing Add New Robot and Room Functions") {
         REQUIRE(room_managing.get_room("1").get_time_to_clean() == 6);
     }
 
-    SECTION("Add New Robot") {
+    SECTION("Add New Room: Empty Parameters") {
+        Management room_managing;
+        std::string room_id;
+        std::string room_status;
+        std::string room_size;
+        std::string time;
+        room_managing.add_new_room(room_id, room_status, room_size, time);
+        REQUIRE(room_managing.get_room("1").to_string_status() == "Status:\tUnknown");
+        REQUIRE(room_managing.get_room("1").to_string_size() == "Size:\tUnknown");
+        REQUIRE(room_managing.get_room("1").get_time_to_clean() == 0);
+    }
+
+    SECTION("Add New Robot: Actual Values") {
         Management robot_managing;
         std::string bot_id = "0";
         std::string bot_status = "Free";
@@ -73,10 +85,24 @@ TEST_CASE("Testing Add New Robot and Room Functions") {
         std::string bot_type = "Mop";
         std::string bot_room = "NA";
         robot_managing.add_new_robot(bot_id, bot_status, bot_size, bot_type, bot_room);
-        REQUIRE(robot_managing.get_bot("0").to_string_status() == "Status:\tBusy");
+        REQUIRE(robot_managing.get_bot("0").to_string_status() == "Status:\tFree");
         REQUIRE(robot_managing.get_bot("0").to_string_size() == "Size:\tSmall");
+        REQUIRE(robot_managing.get_bot("0").to_string_type() == "Type:\tMop");
+        REQUIRE(robot_managing.get_bot("0").get_room() == "NA");
+    }
+
+    SECTION("Add New Robot: Empty Parameters") {
+        Management robot_managing;
+        std::string bot_id;
+        std::string bot_status;
+        std::string bot_size;
+        std::string bot_type;
+        std::string bot_room;
+        robot_managing.add_new_robot(bot_id, bot_status, bot_size, bot_type, bot_room);
+        REQUIRE(robot_managing.get_bot("0").to_string_status() == "Status:\tBusy");
+        REQUIRE(robot_managing.get_bot("0").to_string_size() == "Size:\tMedium");
         REQUIRE(robot_managing.get_bot("0").to_string_type() == "Type:\tVaccuum");
-        REQUIRE(robot_managing.get_bot("0").get_room() == "3");
+        REQUIRE(robot_managing.get_bot("0").get_room() == "");
     }
 }
 
