@@ -64,7 +64,7 @@ TEST_CASE("Independent Class: Robot") {
         REQUIRE(edgecase_vac.to_string_type() == "Type:\tVaccuum");
 
         Robot scrub("NA", "NA", "NA", "Scrub", "NA");
-        Robot edgecase_srcub("NA", "NA", "NA", "scrub", "NA");
+        Robot edgecase_scrub("NA", "NA", "NA", "scrub", "NA");
         REQUIRE(scrub.to_string_type() == "Type:\tScrub");
         REQUIRE(edgecase_scrub.to_string_type() == "Type:\tScrub");
     }
@@ -75,6 +75,7 @@ TEST_CASE("Independent Class: Robot") {
         REQUIRE(cleaner.get_room() == "NA");
         cleaner.set_room("3");
         REQUIRE(cleaner.get_room() == "3");
+        REQUIRE(cleaner.to_string_status() == "Status:\tBusy");
     }
         
 }
