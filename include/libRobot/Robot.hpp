@@ -16,37 +16,120 @@ class Robot {
         std::string room_id_;
     
     public:
-        // Constructors
+        /**
+         * Default Constructor
+         * @param  None
+         * @return  None
+        */
         Robot();
 
+        /**
+         * Parameterized Constructor
+         * @param  String name, status, size, time
+         * @return  None
+        */
         Robot(std::string ID, std::string status_, std::string size_, std::string type_, std::string room_id_);
 
+        /**
+         * Copy Constructor
+         * @param  Const reference to another Robot object
+         * @return  None
+        */
         Robot(const Robot& other);
 
-        // Destructor
+        /**
+         * Robot Destructor
+         * @param  None
+         * @return  None
+        */
         ~Robot();
-
-        void set_type(std::string& bot_type_);
+        
+        /**
+         * Modifier - set Robot_Status
+         * @param  String desired status
+         * @return  void
+         * @throws  std::invalid_argument if no match is found
+         * @note    Would recommend avoiding any change to this as it is used by Robot Constructor
+        */
+        void set_status(std::string status);
+        
+        /**
+         * Modifier - set Robot_Size
+         * @param  String reference size
+         * @return  void
+         * @throws  std::invalid_argument if no match is found
+        */
         void set_size(std::string& bot_size_);
 
-        // Room
-        void set_room(std::string room);
-        inline std::string get_room() const {return this->room_id_;}
+        /**
+         * Modifier - set Type of robot
+         * @param  String reference type
+         * @return  void
+         * @throws  std::invalid_argument if no match is found
+        */
+        void set_type(std::string& bot_type_);
 
-        // Status
-        // NOTE: Would recommend avoiding any change to this as it is used by Robot Constructor
-        void set_status(std::string status);
-    
-        // Robot activities
+        /**
+         * Modifier - set assigned room to clean
+         * @param  String assigned room
+         * @return  void
+        */
+        void set_room(std::string givenRoom);
+
+        /**
+         * Modifier - resets room assignment and Robot_Status
+         * @param  None
+         * @return  None
+        */
         void go_home();
 
+        /**
+         * Helper - converts enum Type to string
+         * @param  None
+         * @return  String Type
+        */
         std::string to_string_type();
+
+        /**
+         * Helper - converts enum Robot_Status to string
+         * @param  None
+         * @return  String Robot_Status
+        */
         std::string to_string_status();
+
+        /**
+         * Helper - converts enum Robot_Size to string
+         * @param  None
+         * @return  String Robot_Size
+        */
         std::string to_string_size();
+
+        /**
+         * Format desired to_string() output of Robot object
+         * @param  None
+         * @return  String providing Robot details
+        */
         std::string to_string();
 
+        /**
+         * Accessor - get assigned room
+         * @param  None
+         * @return  String: room_id_
+        */
+        inline std::string get_room() const {return this->room_id_;}
+
+        /**
+         * Accessor - get Robot_Size
+         * @param  None
+         * @return  enum Robot_Size
+        */
         inline Robot_Size get_size() const {return this->size_;}
 
+        /**
+         * Override comparison boolean
+         * @param  Robot reference
+         * @return  boolean
+        */
         bool operator<(const Robot& other) const;
 };
 

@@ -1,10 +1,8 @@
 #include "../include/libRobot/Robot.hpp"
 #include <stdexcept>
 
-// Default constructor
 Robot::Robot() {
-    // Initialize member variables with default values
-    this->id_ = "ERROR: NON EXISTENT BOT";  // Default ID
+    this->id_ = "ERROR: NON EXISTENT BOT";
     this->status_ = Robot_Status::Busy; 
     this->size_ = Robot_Size::Medium;
     this->type_ = Type::Vac;
@@ -19,7 +17,6 @@ Robot::Robot(std::string ID, std::string status_, std::string size_, std::string
     set_size(size_);
 }
 
-// Copy constructor
 Robot::Robot(const Robot& other) {
     this->id_ = other.id_;
     this->status_ = other.status_;
@@ -30,15 +27,13 @@ Robot::Robot(const Robot& other) {
 
 Robot::~Robot() {}
 
-void Robot::set_type(std::string& bot_type_) {
-    if (bot_type_ == "Mop" || bot_type_ == "mop") {
-        this->type_ = Type::Mop;
-    } else if (bot_type_ == "Vac" || bot_type_ == "Vaccuum" || bot_type_ == "vaccuum") {
-        this->type_ = Type::Vac;
-    } else if (bot_type_== "Scrub" || bot_type_ == "scrub") {
-        this->type_ = Type::Scrub;
+void Robot::set_status(std::string status_) {
+    if (status_ == "Free") {
+        this->status_ = Robot_Status::Free;
+    } else if (status_ == "Busy") {
+        this->status_ = Robot_Status::Busy;
     } else {
-        throw std::invalid_argument("Invalid argument: Received an invalid type");
+        throw std::invalid_argument("Invalid argument: Received an invalid status");
     }
 }
 
@@ -54,22 +49,23 @@ void Robot::set_size(std::string& bot_size_) {
     }
 }
 
+void Robot::set_type(std::string& bot_type_) {
+    if (bot_type_ == "Mop" || bot_type_ == "mop") {
+        this->type_ = Type::Mop;
+    } else if (bot_type_ == "Vac" || bot_type_ == "Vaccuum" || bot_type_ == "vaccuum") {
+        this->type_ = Type::Vac;
+    } else if (bot_type_== "Scrub" || bot_type_ == "scrub") {
+        this->type_ = Type::Scrub;
+    } else {
+        throw std::invalid_argument("Invalid argument: Received an invalid type");
+    }
+}
+
 void Robot::set_room(std::string givenRoom) {
     this->room_id_ = givenRoom;
     this->status_ = Robot_Status::Busy;
 }
 
-void Robot::set_status(std::string status_) {
-    if (status_ == "Free") {
-        this->status_ = Robot_Status::Free;
-    } else if (status_ == "Busy") {
-        this->status_ = Robot_Status::Busy;
-    } else {
-        throw std::invalid_argument("Invalid argument: Received an invalid status");
-    }
-}
-
-// basically reset
 void Robot::go_home() {
     this->room_id_ = "NA";
     this->status_ = Robot_Status::Free;

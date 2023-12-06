@@ -1,6 +1,6 @@
 #include "../include/manage/Management.hpp"
 
-// Default constructor
+
 Management::Management() {
     this->csv_path_room_ = "";
     this->csv_path_robot_ = "";
@@ -9,7 +9,6 @@ Management::Management() {
     assignment_map.clear();
 }
 
-//Parameterized constructor
 Management::Management(const std::string& csv_path_robot_, const std::string& csv_path_room_){
     this->csv_path_room_ = csv_path_room_;
     this->csv_path_robot_ = csv_path_robot_;
@@ -83,8 +82,6 @@ void Management::initialize_room_list_from_csv_file(const std::string& csv_path)
 }
 
 
-
-// Public methods
 void Management::add_new_robot(std::string& ID, std::string& online_status, std::string& size, std::string& clean_type, std::string& room_id) {
     robot_list_[ID] = Robot(ID, online_status, size, clean_type, room_id);
 }
