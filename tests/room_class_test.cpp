@@ -57,18 +57,18 @@ TEST_CASE("Independent Class: Room") {
             Room small("NA", "Dirty", "Small", "0");
             Room med("NA", "Dirty", "Medium", "0");
             Room large("NA", "Dirty", "Large", "0");
-            REQUIRE(small.to_string_size() == "Size:\tSmall");
-            REQUIRE(med.to_string_size() == "Size:\tMedium");
-            REQUIRE(large.to_string_size() == "Size:\tLarge");
+            REQUIRE(small.to_string_size() == "Room Size:\tSmall");
+            REQUIRE(med.to_string_size() == "Room Size:\tMedium");
+            REQUIRE(large.to_string_size() == "Room Size:\tLarge");
         }
 
         SECTION("Edge Cases") {
             Room edgecase_small("NA", "Dirty", "small", "0");
             Room edgecase_med("NA", "Dirty", "medium", "0");
             Room edgecase_large("NA", "Dirty", "large", "0");
-            REQUIRE(edgecase_small.to_string_size() == "Size:\tSmall");
-            REQUIRE(edgecase_med.to_string_size() == "Size:\tMedium");
-            REQUIRE(edgecase_large.to_string_size() == "Size:\tLarge");
+            REQUIRE(edgecase_small.to_string_size() == "Room Size:\tSmall");
+            REQUIRE(edgecase_med.to_string_size() == "Room Size:\tMedium");
+            REQUIRE(edgecase_large.to_string_size() == "Room Size:\tLarge");
         }
     }
 
