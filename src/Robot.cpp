@@ -109,7 +109,7 @@ std::string Robot::to_string_status() {
 }
 
 std::string Robot::to_string() {
-    std::string data = "ID:\t" + id_ + "\n" + to_string_status() + "\n" + "Room:\t" + this->room_id_+ "\n" + to_string_size() + "\n" + to_string_type();
+    std::string data = "ID:\t" + id_ + "\n" + to_string_status() + "\n" + "Room:\t" + this->room_id_ + "\n" + to_string_size() + "\n" + to_string_type();
     return data;
 }
 
