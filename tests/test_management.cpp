@@ -143,8 +143,8 @@ TEST_CASE("Testing Management Read CSVs") {
     "********** ROOMS ************ \n \nRoom Name:\t0\nRoom Status:\tClean\nRoom Size:\tSmall\nEstimated Time to Clean: 0 minutes\n\nRoom Name:\t1\nRoom Status:\tDirty\nRoom Size:\tSmall\nEstimated Time to Clean: 2 minutes\n\nRoom Name:\t2\nRoom Status:\tIn-progress\nRoom Size:\tMedium\nEstimated Time to Clean: 4 minutes\n\nRoom Name:\t3\nRoom Status:\tIn-progress\nRoom Size:\tMedium\nEstimated Time to Clean: 4 minutes\n\nRoom Name:\t4\nRoom Status:\tClean\nRoom Size:\tLarge\nEstimated Time to Clean: 0 minutes\n\nRoom Name:\t5\nRoom Status:\tIn-progress\nRoom Size:\tLarge\nEstimated Time to Clean: 6 minutes\n\nRoom Name:\t6\nRoom Status:\tClean\nRoom Size:\tLarge\nEstimated Time to Clean: 0 minutes\n\n";
         require_robots = 
     "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\nID:\t1\nStatus:\tBusy\nRoom:\t2\nSize:\tSmall\nType:\tVaccuum\n\nID:\t2\nStatus:\tFree\nRoom:\tNA\nSize:\tMedium\nType:\tScrub\n\nID:\t3\nStatus:\tBusy\nRoom:\t5\nSize:\tMedium\nType:\tMop\n\nID:\t4\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tVaccuum\n\nID:\t5\nStatus:\tBusy\nRoom:\t3\nSize:\tLarge\nType:\tScrub\n\nID:\t6\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tMop\n\n";
-        CHECK(management.to_string_room_list() == require_rooms);
-        REQUIRE(management.to_string_robot_list() == require_robots);
+        REQUIRE(management.to_string_room_list() == require_rooms);
+        REQUIRE((management.to_string_robot_list()).compare(require_robots));
     }
 
     SECTION("Test Timer") {
@@ -154,7 +154,7 @@ TEST_CASE("Testing Management Read CSVs") {
         require_robots = 
     "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\nID:\t1\nStatus:\tBusy\nRoom:\t2\nSize:\tSmall\nType:\tVaccuum\n\nID:\t2\nStatus:\tFree\nRoom:\tNA\nSize:\tMedium\nType:\tScrub\n\nID:\t3\nStatus:\tBusy\nRoom:\t5\nSize:\tMedium\nType:\tMop\n\nID:\t4\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tVaccuum\n\nID:\t5\nStatus:\tBusy\nRoom:\t3\nSize:\tLarge\nType:\tScrub\n\nID:\t6\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tMop\n\n";
         REQUIRE(management.to_string_room_list() == require_rooms);
-        REQUIRE(management.to_string_robot_list() == require_robots);
+        REQUIRE((management.to_string_robot_list()).compare(require_robots));
     }
 
     SECTION("Test Cleaning") {
@@ -164,7 +164,7 @@ TEST_CASE("Testing Management Read CSVs") {
         require_robots = 
     "********** ROBOTS ************ \n \nID:\t0\nStatus:\tBusy\nRoom:\t1\nSize:\tSmall\nType:\tMop\n\nID:\t1\nStatus:\tBusy\nRoom:\t2\nSize:\tSmall\nType:\tVaccuum\n\nID:\t2\nStatus:\tFree\nRoom:\tNA\nSize:\tMedium\nType:\tScrub\n\nID:\t3\nStatus:\tBusy\nRoom:\t5\nSize:\tMedium\nType:\tMop\n\nID:\t4\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tVaccuum\n\nID:\t5\nStatus:\tBusy\nRoom:\t3\nSize:\tLarge\nType:\tScrub\n\nID:\t6\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tMop\n\n";
         REQUIRE(management.to_string_room_list() == require_rooms);
-        REQUIRE(management.to_string_robot_list() == require_robots);
+        REQUIRE((management.to_string_robot_list()).compare(require_robots));
 
         std::this_thread::sleep_for(std::chrono::seconds(6)); // TIMER INCREMENT
         require_rooms = 
@@ -172,6 +172,6 @@ TEST_CASE("Testing Management Read CSVs") {
         require_robots = 
     "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\nID:\t1\nStatus:\tBusy\nRoom:\t2\nSize:\tSmall\nType:\tVaccuum\n\nID:\t2\nStatus:\tFree\nRoom:\tNA\nSize:\tMedium\nType:\tScrub\n\nID:\t3\nStatus:\tBusy\nRoom:\t5\nSize:\tMedium\nType:\tMop\n\nID:\t4\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tVaccuum\n\nID:\t5\nStatus:\tBusy\nRoom:\t3\nSize:\tLarge\nType:\tScrub\n\nID:\t6\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tMop\n\n";
         REQUIRE(management.to_string_room_list() == require_rooms);
-        REQUIRE(management.to_string_robot_list() == require_robots);     
+        REQUIRE((management.to_string_robot_list()).compare(require_robots));     
     }
 }

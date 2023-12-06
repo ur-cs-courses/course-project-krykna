@@ -45,9 +45,15 @@ void Management::initialize_robot_list_from_csv_file(const std::string& csv_path
         
         add_new_robot(ID, online_status, size, clean_type, room_id);
 
-        if (room_id != "NA") {
+        // USE: For dumb compilers
+        if (room_id == "0" || ((atoi(room_id.c_str()) >= 1) && (room_id.compare("NA") < 0))) {
             cleaning_assignment(ID, room_id);
         }
+
+        // USE: For macBook
+        // if (room_id != "NA") {
+        //     cleaning_assignment(ID, room_id);
+        // }
     }
     
     csvFile.close();
