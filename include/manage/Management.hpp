@@ -39,9 +39,10 @@ public:
     std::string to_string_room_list();
     std::string to_string_robot_list();
 
+    void maintenance(std::string bot);
     void cleaning(Robot&, Room&, int);
-
     void cleaning_assignment(std::string bot, std::string rm);
+    Robot& get_bot(std::string id);
     // std::map<Robot, Room> get_map();
 };
 

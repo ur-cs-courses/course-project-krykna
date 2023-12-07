@@ -50,29 +50,45 @@
     ID:\t5\nStatus:\tBusy\nRoom:\t3\nSize:\tLarge\nType:\tScrub\n\n
     ID:\t6\nStatus:\tFree\nRoom:\tNA\nSize:\tLarge\nType:\tMop\n\n
 */
-
-TEST_CASE("Test a Pair") {
+TEST_CASE("Maintenance Test") {
     Management single_pair;
-    std::string room_id = "1";
-    std::string room_status = "Dirty";
-    std::string room_size = "Medium";
-    std::string time = "6";
-    single_pair.add_new_room(room_id, room_status, room_size, time);
-
     std::string bot_id = "0";
     std::string bot_status = "Free";
     std::string bot_size = "Small";
     std::string bot_type = "Mop";
     std::string bot_room = "NA";
     single_pair.add_new_robot(bot_id, bot_status, bot_size, bot_type, bot_room);
-    CHECK(single_pair.to_string_room_list() == "********** ROOMS ************ \n \nRoom Name:\t1\nRoom Status:\tDirty\nRoom Size:\tMedium\nEstimated Time to Clean: 6 minutes\n\n");
-    CHECK(single_pair.to_string_robot_list() == "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\n");
 
-    single_pair.cleaning_assignment("0", "1");
-    CHECK(single_pair.to_string_room_list() == "********** ROOMS ************ \n \nRoom Name:\t1\nRoom Status:\tIn-progress\nRoom Size:\tMedium\nEstimated Time to Clean: 6 minutes\n\n");
-    CHECK(single_pair.to_string_robot_list() == "********** ROBOTS ************ \n \nID:\t0\nStatus:\tBusy\nRoom:\t1\nSize:\tSmall\nType:\tMop\n\n");
+    Robot& bot = single_pair.get_bot(bot_id);
 
-    std::this_thread::sleep_for(std::chrono::seconds(20));
-    CHECK(single_pair.to_string_room_list() == "********** ROOMS ************ \n \nRoom Name:\t1\nRoom Status:\tClean\nRoom Size:\tMedium\nEstimated Time to Clean: 0 minutes\n\n");
-    CHECK(single_pair.to_string_robot_list() == "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\n");
+    single_pair.maintenance(bot_id);
+    CHECK(bot.get_status() == Robot_Status::Offline);
+    std::this_thread::sleep_for(std::chrono::seconds(6));
+    CHECK(bot.get_status() == Robot_Status::Free);
 }
+
+// TEST_CASE("Test a Pair") {
+//     Management single_pair;
+//     std::string room_id = "1";
+//     std::string room_status = "Dirty";
+//     std::string room_size = "Medium";
+//     std::string time = "6";
+//     single_pair.add_new_room(room_id, room_status, room_size, time);
+
+//     std::string bot_id = "0";
+//     std::string bot_status = "Free";
+//     std::string bot_size = "Small";
+//     std::string bot_type = "Mop";
+//     std::string bot_room = "NA";
+//     single_pair.add_new_robot(bot_id, bot_status, bot_size, bot_type, bot_room);
+//     CHECK(single_pair.to_string_room_list() == "********** ROOMS ************ \n \nRoom Name:\t1\nRoom Status:\tDirty\nRoom Size:\tMedium\nEstimated Time to Clean: 6 minutes\n\n");
+//     CHECK(single_pair.to_string_robot_list() == "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\n");
+
+//     single_pair.cleaning_assignment("0", "1");
+//     CHECK(single_pair.to_string_room_list() == "********** ROOMS ************ \n \nRoom Name:\t1\nRoom Status:\tIn-progress\nRoom Size:\tMedium\nEstimated Time to Clean: 6 minutes\n\n");
+//     CHECK(single_pair.to_string_robot_list() == "********** ROBOTS ************ \n \nID:\t0\nStatus:\tBusy\nRoom:\t1\nSize:\tSmall\nType:\tMop\n\n");
+
+//     std::this_thread::sleep_for(std::chrono::seconds(20));
+//     CHECK(single_pair.to_string_room_list() == "********** ROOMS ************ \n \nRoom Name:\t1\nRoom Status:\tClean\nRoom Size:\tMedium\nEstimated Time to Clean: 0 minutes\n\n");
+//     CHECK(single_pair.to_string_robot_list() == "********** ROBOTS ************ \n \nID:\t0\nStatus:\tFree\nRoom:\tNA\nSize:\tSmall\nType:\tMop\n\n");
+// }

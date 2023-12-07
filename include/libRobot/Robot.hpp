@@ -4,7 +4,7 @@
 #include <stdexcept>
 using namespace std;
 
-enum Robot_Status {Free, Busy, Broken};
+enum Robot_Status {Free, Busy, Broken, Offline};
 enum Robot_Size {Small, Medium, Large};
 enum Type {Mop, Vac, Scrub};
 

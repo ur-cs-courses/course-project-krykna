@@ -68,6 +68,8 @@ void Robot::set_status(string status_) {
         this->status_ = Robot_Status::Busy;
     } else if (status_ == "Broken") {
         this->status_ = Robot_Status::Broken;
+    } else if (status_ == "Offline") {
+        this->status_ = Robot_Status::Offline;
     }
     else {
         throw std::invalid_argument("Invalid argument: Received an invalid status");
@@ -112,6 +114,10 @@ string Robot::to_string_status() {
             return "Status:\tFree";
         case (Robot_Status::Busy):
             return "Status:\tBusy";
+        case (Robot_Status::Broken):
+            return "Status:\tBroken";
+        case (Robot_Status::Offline):
+            return "Status:\tOffline";
     }
 
     return "Status:\tUnknown";

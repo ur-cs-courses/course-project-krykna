@@ -110,6 +110,16 @@ std::string Management::to_string_robot_list() {
     return output;
 }
 
+void Management::maintenance(std::string bot){
+    Robot& robot = robot_list_[bot];
+    robot.set_status("Offline");
+    std::thread t1([this, &robot]{ 
+        std::this_thread::sleep_for(std::chrono::seconds(5));
+        robot.set_status("Free");
+        });
+    t1.detach();
+}
+
 void Management::cleaning(Robot& robot, Room& room, int time){
     bool fail;
     for (int i = 0; i < time; i++) {
@@ -120,6 +130,7 @@ void Management::cleaning(Robot& robot, Room& room, int time){
         if (fail == true){
             room.set_time_to_clean(i);
             room.set_status(Room_Status::dirty);
+            robot.go_home();
             robot.set_status("Broken");
             std::cout << "Robot " + robot.get_id() + " in room " + room.get_id() + " is broken." << std::endl;
             return;
@@ -163,3 +174,5 @@ void Management::cleaning_assignment(std::string bot, std::string rm){
 
     assignment_map.erase(robot);
 }
+
+Robot& Management::get_bot(std::string id){ return this->robot_list_[id];}
