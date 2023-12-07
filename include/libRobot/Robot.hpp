@@ -4,7 +4,7 @@
 #include <stdexcept>
 using namespace std;
 
-enum Robot_Status {Free, Busy};
+enum Robot_Status {Free, Busy, Broken};
 enum Robot_Size {Small, Medium, Large};
 enum Type {Mop, Vac, Scrub};
 
@@ -47,6 +47,8 @@ class Robot {
         string to_string();
 
         inline Robot_Size get_size() const {return this->size_;}
+        inline std::string get_id() const {return this->id_;}
+        inline Robot_Status get_status() const {return this->status_;}
 
         bool operator<(const Robot& other) const;
 };

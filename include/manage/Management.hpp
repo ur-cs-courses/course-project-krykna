@@ -14,6 +14,7 @@
 #include <memory>
 #include <thread>
 #include <chrono>
+#include <random>
 
 class Management {
 private:

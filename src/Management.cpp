@@ -111,7 +111,21 @@ std::string Management::to_string_robot_list() {
 }
 
 void Management::cleaning(Robot& robot, Room& room, int time){
-    std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
+    bool fail;
+    for (int i = 0; i < time; i++) {
+        std::random_device rd;  // Obtain a random number from hardware
+        std::mt19937 gen(rd()); // Seed the generator
+        std::uniform_int_distribution<> distr(0, 99); 
+        fail = distr(gen) < 50;
+        if (fail == true){
+            room.set_time_to_clean(i);
+            room.set_status(Room_Status::dirty);
+            robot.set_status("Broken");
+            std::cout << "Robot " + robot.get_id() + " in room " + room.get_id() + " is broken." << std::endl;
+            return;
+        }
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
     room.set_status(Room_Status::clean);
     room.set_time_to_clean(0);
     robot.go_home();
@@ -120,6 +134,13 @@ void Management::cleaning(Robot& robot, Room& room, int time){
 void Management::cleaning_assignment(std::string bot, std::string rm){
     Robot& robot = robot_list_[bot];
     Room& room = room_list_[rm];
+    if (robot.get_status() != Robot_Status::Free){
+        throw std::invalid_argument("Invalid assignment: Robot is unavailable");
+    }
+    if (room.get_status() != Room_Status::dirty){
+        throw std::invalid_argument("Invalid assignment: Room is already clean or assigned");
+    }
+
     assignment_map[robot] = room;
     int time = 0;
 
@@ -135,23 +156,10 @@ void Management::cleaning_assignment(std::string bot, std::string rm){
     robot.set_status("Busy");
     robot.set_room(rm);
 
-    // method 3
     std::thread t1([this, &robot, &room, time]{ 
         this->cleaning(robot, room, time); 
         });
     t1.detach();
-
-    // method 2
-    // std::thread t1(&Management::cleaning, this, std::ref(robot), std::ref(room), time); 
-    // t1.detach();
-
-    // method 1
-    // std::thread([&robot, &room, time]() {
-    //     std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
-    //     room.set_status(clean);
-    //     room.set_time_to_clean(0);
-    //     robot.go_home();
-    // }).detach();
 
     assignment_map.erase(robot);
 }

@@ -67,6 +67,8 @@ class Room {
         inline void set_status(Room_Status status) {this->room_status_ = status;}
         inline void set_time_to_clean(int time) {this->estimated_time_ = time;}
         inline int get_time_to_clean() const {return this->estimated_time_;}
+        inline std::string get_id() const {return this->room_name_;}
+        inline Room_Status get_status() const {return this->room_status_;}
 
         /**
         * PURPOSE: Helper - Converts enum class Status value to string

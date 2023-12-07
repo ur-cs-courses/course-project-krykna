@@ -66,7 +66,10 @@ void Robot::set_status(string status_) {
         this->status_ = Robot_Status::Free;
     } else if (status_ == "Busy") {
         this->status_ = Robot_Status::Busy;
-    } else {
+    } else if (status_ == "Broken") {
+        this->status_ = Robot_Status::Broken;
+    }
+    else {
         throw std::invalid_argument("Invalid argument: Received an invalid status");
     }
 }
