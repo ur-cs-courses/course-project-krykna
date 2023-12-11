@@ -130,8 +130,8 @@ void Management::cleaning(Robot& robot, Room& room, int time){
         std::mt19937 gen(rd()); // Seed the generator
         std::uniform_int_distribution<> distr(0, 99); 
         fail = distr(gen) < 10;
+        room.set_time_to_clean(i);
         if (fail == true){
-            room.set_time_to_clean(i);
             room.set_status(Room_Status::dirty);
             robot.go_home();
             robot.set_status("Broken");
