@@ -1,11 +1,16 @@
-add_executable(fleet_manage_app
-  fleet_management.cpp
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
+add_executable(fleet_manager
+  fleet_manager.cpp
 )
 
-target_link_libraries(fleet_manage_app
-  PRIVATE manage
-  PRIVATE libRobot
-  PRIVATE libroom
+target_link_libraries(fleet_manager
+  PRIVATE
+    manage
+    libRobot
+    libroom
+    Threads::Threads
 )
 
-target_compile_features(fleet_manage_app PRIVATE cxx_std_20)
+target_compile_features(fleet_manager PRIVATE cxx_std_20)

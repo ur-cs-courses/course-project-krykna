@@ -1,12 +1,12 @@
-find_package(Catch2 REQUIRED)
+# find_package(Catch2 REQUIRED)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-IF (${Catch2_FOUND})
-    MESSAGE(STATUS "Found Catch2")
-ELSE (${Catch2_FOUND})
-    MESSAGE(STATUS "Cound not find Catch2. Check to make sure its installed on your system!")
-ENDIF (${Catch2_FOUND})
+# IF (${Catch2_FOUND})
+#     MESSAGE(STATUS "Found Catch2")
+# ELSE (${Catch2_FOUND})
+#     MESSAGE(STATUS "Cound not find Catch2. Check to make sure its installed on your system!")
+# ENDIF (${Catch2_FOUND})
 
 add_executable(manage_test test_management.cpp)
 add_executable(room_class_test room_class_test.cpp)
@@ -17,20 +17,20 @@ file(COPY ${PROJECT_SOURCE_DIR}/tests/room_test.csv ${PROJECT_SOURCE_DIR}/tests/
 
 target_link_libraries(manage_test
   PRIVATE
-    Catch2::Catch2WithMain
+    catch2
     manage
     Threads::Threads
 )
 
 target_link_libraries(room_class_test
   PRIVATE
-    Catch2::Catch2WithMain
+    catch2
     libroom
 )
 
 target_link_libraries(robot_class_test
   PRIVATE
-    Catch2::Catch2WithMain
+    catch2
     libRobot
 )
 

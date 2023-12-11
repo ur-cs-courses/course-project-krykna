@@ -1,6 +1,6 @@
 #include "../include/manage/Management.hpp"
 
-// Default constructor
+
 Management::Management() {
     this->csv_path_room_ = "";
     this->csv_path_robot_ = "";
@@ -9,7 +9,6 @@ Management::Management() {
     assignment_map.clear();
 }
 
-//Parameterized constructor
 Management::Management(const std::string& csv_path_robot_, const std::string& csv_path_room_){
     this->csv_path_room_ = csv_path_room_;
     this->csv_path_robot_ = csv_path_robot_;
@@ -46,9 +45,15 @@ void Management::initialize_robot_list_from_csv_file(const std::string& csv_path
         
         add_new_robot(ID, online_status, size, clean_type, room_id);
 
-        if (room_id != "NA") {
+        // USE: For dumb compilers
+        if (room_id == "0" || ((atoi(room_id.c_str()) >= 1) && (room_id.compare("NA") < 0))) {
             cleaning_assignment(ID, room_id);
         }
+
+        // USE: For macBook
+        // if (room_id != "NA") {
+        //     cleaning_assignment(ID, room_id);
+        // }
     }
     
     csvFile.close();
@@ -83,8 +88,6 @@ void Management::initialize_room_list_from_csv_file(const std::string& csv_path)
 }
 
 
-
-// Public methods
 void Management::add_new_robot(std::string& ID, std::string& online_status, std::string& size, std::string& clean_type, std::string& room_id) {
     robot_list_[ID] = Robot(ID, online_status, size, clean_type, room_id);
 }
@@ -126,7 +129,7 @@ void Management::cleaning(Robot& robot, Room& room, int time){
         std::random_device rd;  // Obtain a random number from hardware
         std::mt19937 gen(rd()); // Seed the generator
         std::uniform_int_distribution<> distr(0, 99); 
-        fail = distr(gen) < 50;
+        fail = distr(gen) < 10;
         if (fail == true){
             room.set_time_to_clean(i);
             room.set_status(Room_Status::dirty);
@@ -145,11 +148,11 @@ void Management::cleaning(Robot& robot, Room& room, int time){
 void Management::cleaning_assignment(std::string bot, std::string rm){
     Robot& robot = robot_list_[bot];
     Room& room = room_list_[rm];
-    if (robot.get_status() != Robot_Status::Free){
+    if (robot.get_status() != Robot_Status::Free && robot.get_room() != room.get_id()){
         throw std::invalid_argument("Invalid assignment: Robot is unavailable");
     }
-    if (room.get_status() != Room_Status::dirty){
-        throw std::invalid_argument("Invalid assignment: Room is already clean or assigned");
+    if (room.get_status() == Room_Status::clean){
+        throw std::invalid_argument("Invalid assignment: Room is already clean");
     }
 
     assignment_map[robot] = room;
@@ -175,4 +178,4 @@ void Management::cleaning_assignment(std::string bot, std::string rm){
     assignment_map.erase(robot);
 }
 
-Robot& Management::get_bot(std::string id){ return this->robot_list_[id];}
+//Robot& Management::get_bot(std::string id){ return this->robot_list_[id];}
