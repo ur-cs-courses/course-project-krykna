@@ -81,27 +81,37 @@ Relationships
 
 ![Diagram Description](images/room_class_diagram.png)
 
-This document describes the class diagram for a system of rooms that involves receiving input commands and cleaning rooms. The system focuses on the attributes of the Room class and mentions its relationships with other classes and interfaces (Management, Robots, and enum classes Status and Size).
+This document describes the class diagram for a system of rooms that involves maintaining the cleanliness. The system focuses on the attributes of the Room class and mentions its relationships with other classes and interfaces (Management, Robots, and enum classes Status and Size).
 
 ## Classes
 ### Room
 
 Attributes
 
-* room_name: string: The name of a room
-* status: enum: The status of the room currently assigned.
-* size: enum: The size of the room
+* `room_name_`: *string* - A string representing the name/id of a room
+* `room_status_`: *enum* - An enum representing the status of a room.
+* `room_size_`: *enum* - An enum representing the size of a room
+* `estimated_time_`: *int* - An int representing the approximate time to clean a room
 
 Methods
 
-* update_room_status(): void: Updates whether the current room is cleaned.
-* get_room_status(): Returns an enum representing the current state of the assigned room (dirty, in-progress, clean).
-* get_size(): Returns an enum representing the size of a room (small, medium, large).
+* `convert_to_status(string)`: *void* - Converts string input to an enum representing the appropriate room status. Used only during room instance creation.
+* `convert_to_size(string)`: *void* - Converts string input to an enum representing the appropriate room size. Used only during room instance creation.
+* `to_lower(string)`: *void* - Converts passed string input to lowercase to cover most variations of strings. Used only during room instance creation.
+* `set_status(enum)`: *void* - Updates the status of a room.
+* `get_status()`: *enum* - Returns an enum indicating the current state of the room (dirty, in-progress, clean).
+* `set_time_to_clean(int)`: *void* - Updates the time to clean the room according to the current cleaning progress made.
+* `get_time_to_clean()`: *int* - Returns an int representing the current time duration it may take for the room to be cleaned.
+* `get_id()`: *string* - Returns a string representing the room identifier/name.
+* `to_string_status()`: *string* - Returns a string representing the room status. Used only as a helper function for the `to_string()` function.
+* `to_string_size()`: *string* - Returns a string representing the room size. Used only as a helper function for the `to_string()` function.
+* `to_string_time()`: *string* - Returns a string representing the approximate time to clean a room. Used only as a helper function for the `to_string()` function.
+* `to_string()`: *string* - Returns a string containing the details of a room object instance.
 
 Relationships
 
-* The Room class has a 1-to-1 composition with enum class Status
-* The Room class has a 1-to-1 composition with enum class Size
+* The Room class has a 1-to-1 composition with enum class Room_Status
+* The Room class has a 1-to-1 composition with enum class Room_Size
 
 # Sequence Diagram Documentation
 
