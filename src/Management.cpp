@@ -117,8 +117,18 @@ void Management::maintenance(std::string bot){
     Robot& robot = robot_list_[bot];
     robot.set_status("Offline");
     std::thread t1([this, &robot]{ 
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        std::this_thread::sleep_for(std::chrono::seconds(10));
         robot.set_status("Free");
+        });
+    t1.detach();
+}
+
+void Management::charge(std::string bot){
+    Robot& robot = robot_list_[bot];
+    robot.set_status("Offline");
+    std::thread t1([this, &robot]{ 
+        std::this_thread::sleep_for(std::chrono::seconds(10));
+        robot.charge_battery();
         });
     t1.detach();
 }
@@ -129,16 +139,24 @@ void Management::cleaning(Robot& robot, Room& room, int time){
         std::random_device rd;  // Obtain a random number from hardware
         std::mt19937 gen(rd()); // Seed the generator
         std::uniform_int_distribution<> distr(0, 99); 
-        fail = distr(gen) < 10;
-        room.set_time_to_clean(i);
+        fail = distr(gen) < 5;
         if (fail == true){
             room.set_status(Room_Status::dirty);
             robot.go_home();
             robot.set_status("Broken");
-            std::cout << "Robot " + robot.get_id() + " in room " + room.get_id() + " is broken." << std::endl;
+            std::cout << "\n [SYSTEM_ALERT] (Robot " + robot.get_id() + " in room " + room.get_id() + " is broken.)" << std::endl;
+            return;
+        }
+        if (robot.get_battery() <= 0){
+            room.set_status(Room_Status::dirty);
+            robot.go_home();
+            robot.set_status("Dead");
+            std::cout << "\n [SYSTEM_ALERT] (Robot " + robot.get_id() + " in room " + room.get_id() + " is dead.)" << std::endl;
             return;
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
+        room.set_time_to_clean(time-i);
+        robot.kill_battery();
     }
     room.set_status(Room_Status::clean);
     room.set_time_to_clean(0);

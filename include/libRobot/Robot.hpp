@@ -3,7 +3,7 @@
 #include <string>
 #include <stdexcept>
 
-enum Robot_Status {Free, Busy, Broken, Offline};
+enum Robot_Status {Free, Busy, Broken, Dead, Offline};
 enum Robot_Size {Small, Medium, Large};
 enum Type {Mop, Vac, Scrub};
 
@@ -14,6 +14,7 @@ class Robot {
         Robot_Status status_;
         Type type_;
         std::string room_id_;
+        int battery_;
     
     public:
         /**
@@ -133,6 +134,25 @@ class Robot {
          * @return  boolean
         */
         bool operator<(const Robot& other) const;
+
+        inline int get_battery() const {return this->battery_;}
+        inline void kill_battery() {
+            if (this->size_ == Robot_Size::Small){
+                this->battery_ = this->battery_ - 3;
+            } else if (this->size_ == Robot_Size::Medium){
+                this->battery_ = this->battery_ - 2;
+            } else if (this->size_ == Robot_Size::Large){
+                this->battery_ = this->battery_ - 1;
+            }
+            if (this->battery_ < 0){
+                this->battery_ = 0;
+            }
+            
+        }
+        inline void charge_battery() {
+            this->battery_ = 20;
+            this->status_ = Robot_Status::Free;
+        }
 };
 
 #endif

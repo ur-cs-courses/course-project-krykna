@@ -100,6 +100,8 @@ public:
      * @return  Room
     */
     inline Room get_room(std::string id) { return this->room_list_[id]; }
+
+    void charge(std::string bot);
 };
 
 #endif

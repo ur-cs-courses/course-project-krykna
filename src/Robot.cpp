@@ -6,12 +6,14 @@ Robot::Robot() {
     this->status_ = Robot_Status::Busy; 
     this->size_ = Robot_Size::Medium;
     this->type_ = Type::Vac;
-    this->room_id_= ""; 
+    this->room_id_= "";
+    this->battery_=0;
 }
 
 Robot::Robot(std::string ID, std::string status_, std::string size_, std::string type_, std::string room_id_) {
     this->id_ = ID;
     this->room_id_ = room_id_;
+    this->battery_=20;
     set_status(status_);
     set_type(type_);
     set_size(size_);
@@ -66,8 +68,9 @@ void Robot::set_status(std::string status_) {
         this->status_ = Robot_Status::Broken;
     } else if (status_ == "Offline") {
         this->status_ = Robot_Status::Offline;
-    }
-    else {
+    } else if (status_ == "Dead"){
+        this->status_ = Robot_Status::Dead;
+    } else {
         throw std::invalid_argument("Invalid argument: Received an invalid status");
     }
 }
@@ -112,6 +115,8 @@ std::string Robot::to_string_status() {
             return "Status:\tBusy";
         case (Robot_Status::Broken):
             return "Status:\tBroken";
+        case (Robot_Status::Dead):
+            return "Status:\tDead";
         case (Robot_Status::Offline):
             return "Status:\tOffline";
     }
@@ -120,7 +125,7 @@ std::string Robot::to_string_status() {
 }
 
 std::string Robot::to_string() {
-    std::string data = "ID:\t" + id_ + "\n" + to_string_status() + "\n" + "Room:\t" + this->room_id_ + "\n" + to_string_size() + "\n" + to_string_type();
+    std::string data = "ID:\t" + id_ + "\n" + to_string_status() + "\n" + "Room:\t" + this->room_id_ + "\n" + to_string_size() + "\n" + to_string_type() + "\nBattery: " + std::to_string(this->battery_);
     return data;
 }
 

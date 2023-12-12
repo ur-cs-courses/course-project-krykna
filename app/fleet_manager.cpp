@@ -89,7 +89,7 @@ int main() {
             case 4: { // Hypothetical implementation for sending a robot home
                 std::cout << "Enter the ID of the robot you'd like to charge: ";
                 std::getline(std::cin, input);
-                management.maintenance(input);
+                management.charge(input);
                 break;
             }
             case 5: {
