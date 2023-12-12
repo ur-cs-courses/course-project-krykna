@@ -86,6 +86,8 @@ class Room {
          * @return  int: estimated_time_
         */
         inline int get_time_to_clean() const {return this->estimated_time_;}
+        inline std::string get_id() const {return this->room_name_;}
+        inline Room_Status get_status() const {return this->room_status_;}
 
         /**
          * Helper - Converts enum class Status value to string

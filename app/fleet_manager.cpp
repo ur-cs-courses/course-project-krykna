@@ -62,7 +62,7 @@ int main() {
                     std::cout << "Enter Robot's ID to View: ";
                     std::getline(std::cin, input);
                     // std::cout << management.to_string_robot_individual(input) << std::endl;
-                    std::cout << "\033[1;31mImplementation needed to request specific robot status:\n\tmanagement.to_string_robot_individual(std::string& robot_id)\033[0m" << std::endl;
+                    std::cout << management.get_bot(input).to_string() << std::endl;
                 }
                 else { std::cout << "\033[1;31mInvalid entry.\033[0m" << std::endl;}
                 break;
@@ -89,20 +89,14 @@ int main() {
             case 4: { // Hypothetical implementation for sending a robot home
                 std::cout << "Enter the ID of the robot you'd like to charge: ";
                 std::getline(std::cin, input);
-                /**
-                 * TODO: management.robot_charge(input);
-                */
-                std::cout << "\033[1;31mImplementation needed to send robot to charge:\n\tmanagement.robot_charge(std::string& robot_id)\033[0m" << std::endl;
+                management.charge(input);
                 break;
             }
             case 5: {
                 std::cout << "\033[1;32mNOTICE: Robot in maintenance will be taken offline.\033[0m" << std::endl;
                 std::cout << "Enter the ID of the robot you'd like to send for maintenance: ";
                 std::getline(std::cin, input);
-                /**
-                 * TODO: management.robot_maintenance(input);
-                */
-                std::cout << "\033[1;31mImplementation needed to send robot to charge:\n\tmanagement.robot_maintenance(std::string& robot_id)\033[0m" << std::endl;
+                management.maintenance(input);
                 break;
             }
             case 0: {

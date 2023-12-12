@@ -113,8 +113,51 @@ std::string Management::to_string_robot_list() {
     return output;
 }
 
+void Management::maintenance(std::string bot){
+    Robot& robot = robot_list_[bot];
+    robot.set_status("Offline");
+    std::thread t1([this, &robot]{ 
+        std::this_thread::sleep_for(std::chrono::seconds(10));
+        robot.set_status("Free");
+        });
+    t1.detach();
+}
+
+void Management::charge(std::string bot){
+    Robot& robot = robot_list_[bot];
+    robot.set_status("Offline");
+    std::thread t1([this, &robot]{ 
+        std::this_thread::sleep_for(std::chrono::seconds(10));
+        robot.charge_battery();
+        });
+    t1.detach();
+}
+
 void Management::cleaning(Robot& robot, Room& room, int time){
-    std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
+    bool fail;
+    for (int i = 0; i < time; i++) {
+        std::random_device rd;  // Obtain a random number from hardware
+        std::mt19937 gen(rd()); // Seed the generator
+        std::uniform_int_distribution<> distr(0, 99); 
+        fail = distr(gen) < 5;
+        if (fail == true){
+            room.set_status(Room_Status::dirty);
+            robot.go_home();
+            robot.set_status("Broken");
+            std::cout << "\n [SYSTEM_ALERT] (Robot " + robot.get_id() + " in room " + room.get_id() + " is broken.)" << std::endl;
+            return;
+        }
+        if (robot.get_battery() <= 0){
+            room.set_status(Room_Status::dirty);
+            robot.go_home();
+            robot.set_status("Dead");
+            std::cout << "\n [SYSTEM_ALERT] (Robot " + robot.get_id() + " in room " + room.get_id() + " is dead.)" << std::endl;
+            return;
+        }
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        room.set_time_to_clean(time-i);
+        robot.kill_battery();
+    }
     room.set_status(Room_Status::clean);
     room.set_time_to_clean(0);
     robot.go_home();
@@ -123,6 +166,13 @@ void Management::cleaning(Robot& robot, Room& room, int time){
 void Management::cleaning_assignment(std::string bot, std::string rm){
     Robot& robot = robot_list_[bot];
     Room& room = room_list_[rm];
+    if (robot.get_status() != Robot_Status::Free && robot.get_room() != room.get_id()){
+        throw std::invalid_argument("Invalid assignment: Robot is unavailable");
+    }
+    if (room.get_status() == Room_Status::clean){
+        throw std::invalid_argument("Invalid assignment: Room is already clean");
+    }
+
     assignment_map[robot] = room;
     int time = 0;
 
@@ -138,23 +188,12 @@ void Management::cleaning_assignment(std::string bot, std::string rm){
     robot.set_status("Busy");
     robot.set_room(rm);
 
-    // method 3
     std::thread t1([this, &robot, &room, time]{ 
         this->cleaning(robot, room, time); 
         });
     t1.detach();
 
-    // method 2
-    // std::thread t1(&Management::cleaning, this, std::ref(robot), std::ref(room), time); 
-    // t1.detach();
-
-    // method 1
-    // std::thread([&robot, &room, time]() {
-    //     std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
-    //     room.set_status(clean);
-    //     room.set_time_to_clean(0);
-    //     robot.go_home();
-    // }).detach();
-
     assignment_map.erase(robot);
 }
+
+//Robot& Management::get_bot(std::string id){ return this->robot_list_[id];}

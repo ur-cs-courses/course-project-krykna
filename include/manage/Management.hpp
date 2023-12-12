@@ -14,6 +14,7 @@
 #include <memory>
 #include <thread>
 #include <chrono>
+#include <random>
 
 class Management {
 private:
@@ -68,6 +69,8 @@ public:
     */
     std::string to_string_robot_list();
 
+    void maintenance(std::string bot);
+
     /**
      * Helper - perform cleaning and sends robot home, changes room status and time to clean
      * @param   Robot reference
@@ -83,14 +86,13 @@ public:
      * @return  void
     */
     void cleaning_assignment(std::string bot, std::string rm);
-    // std::map<Robot, Room> get_map();
 
     /**
      * Accessor - retrieves requested robot from robot_list_
      * @param   String id of robot
      * @return  Robot
     */
-    inline Robot get_bot(std::string id) { return this->robot_list_[id]; }
+    inline Robot& get_bot(std::string id) { return this->robot_list_[id]; }
 
     /**
      * Accessor - retrieves requested room from room_list_
@@ -98,6 +100,8 @@ public:
      * @return  Room
     */
     inline Room get_room(std::string id) { return this->room_list_[id]; }
+
+    void charge(std::string bot);
 };
 
 #endif
