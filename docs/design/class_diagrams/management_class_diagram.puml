@@ -1,18 +1,18 @@
 @startuml
 class Management {
-  - room_clean: set
-  - rooms_dirty: set
-  - bots_ready: set
-  - bots_out: set
-  
-  + assign_bots(): void
-  + update_rooms(): void
-  + update_bots(): void
-  + availability_string(): string
-  + room_status_string(): string
-  + bot_data_string(): string
-  + add_new_bot(): void
-  + add_new_room(): void
+  - set room_list_
+  - set robot_list_
+  - set assignment_map
+  - String csv_path_room_
+  - String csv_path_robot_
+  - initialize_room_list_from_csv_file(string): void
+  - initialize_robot_list_from_csv_file(string): void
+  + add_new_robot(string): void
+  + add_new_room(string): void
+  + maintenance(string): void
+  + cleaning(Robot, Room, int): void
+  + cleaning_assignment(string): void
+  + charge(string): void
 }
 
 interface CommandLine {}
@@ -22,7 +22,7 @@ class Robots{}
 class Rooms{}
 
 Management "1" o--> "0...n" Rooms
-Management "1" *--> "0...n" Robots
+Management "1" o--> "0...n" Robots
 Management ..|> CommandLine
 @enduml
 
