@@ -5,14 +5,10 @@ class Room {
     - enum room_size_
     - int estimated_time_
     + set_status(enum): void
-    + get_status(): enum
     + set_time_to_clean(int): void 
     + get_time_to_clean(): int
     + get_id(): string
-    + to_string_status(): string
-    + to_string_size(): string
-    + to_string_time(): string
-    + to_string(): string
+    + get_status(): enum
 }
 
 enum Status {
