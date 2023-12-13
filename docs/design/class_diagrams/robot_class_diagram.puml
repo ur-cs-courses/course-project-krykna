@@ -1,20 +1,43 @@
 @startuml
 class Robot {
-  - room_assigned: string
-  - task_assigned: string
-  - robot_status: string
-  - timer: int
-  
-  + clean_room(): void
+  - String id_
+  - String room_id_
+  - enum size_
+  - enum status_
+  - enum type_
+  - int battery_
   + go_home(): void
-  + get_robot_status(): string
-  + update_robot_status(): string
+  + kill_battery(): void
+  + charge_battery(): void
+}
+
+enum Type {
+    Mop
+    Scrub
+    Vaccuum
+}
+
+enum Status {
+    Free
+    Busy
+    Broken
+    Dead
+    Offline
+}
+
+enum Size {
+    Small
+    Medium
+    Large
 }
 
 interface CommandLine {}
 
-Management "1" o--> "0...n" Rooms
-Management "1" *--> "0...n" Robot
-Robot "1" o--> "1" Rooms
+Management "1" o--> "0...n" Room
+Management "1" o--> "0...n" Robot
+Robot "1" *--> "1" Type
+Robot "1" *--> "1" Status
+Room "1" *--> "1" Size
+Robot "1" *--> "1" Size
 Management ..|> CommandLine
 @enduml
