@@ -17,6 +17,9 @@ Robot::Robot(std::string ID, std::string status_, std::string size_, std::string
     set_status(status_);
     set_type(type_);
     set_size(size_);
+    if (this->status_ == Robot_Status::Dead) {
+        this->battery_=0;
+    }
 }
 
 Robot::Robot(const Robot& other) {
@@ -105,6 +108,59 @@ std::string Robot::to_string_type() {
     }
 
     return "Type:\tUnknown";
+}
+
+std::string Robot::to_string_csv() {
+    std::string output = "";
+    output+= id_ + ",";
+
+    switch (this->status_) {
+        case (Robot_Status::Free):
+            output+= "Free";
+            break;
+        case (Robot_Status::Busy):
+            output+= "Busy";
+            break;
+        case (Robot_Status::Broken):
+            output+= "Broken";
+            break;
+        case (Robot_Status::Dead):
+            output+= "Dead";
+            break;
+        case (Robot_Status::Offline):
+            output+= "Offline";
+            break;
+    }
+    output+= ",";
+
+    switch (this->size_) {
+        case (Robot_Size::Small):
+            output+= "Small";
+            break;
+        case (Robot_Size::Medium):
+            output+= "Medium";
+            break;
+        case (Robot_Size::Large):
+            output+= "Large";
+            break;
+    }
+    output+= ",";
+
+    switch (this->type_) {
+        case (Type::Mop):
+            output+= "Mop";
+            break;
+        case (Type::Vac):
+            output+= "Vaccuum";
+            break;
+        case (Type::Scrub):
+            output+= "Scrub";
+            break;
+    }
+    output+= ",";
+
+    output+= room_id_;
+    return output;
 }
 
 std::string Robot::to_string_status() {

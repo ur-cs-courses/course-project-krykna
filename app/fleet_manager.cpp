@@ -101,6 +101,25 @@ int main() {
             }
             case 0: {
                 std::cout << "Exiting Robot Fleet Management System." << std::endl;
+
+                std::ofstream robotFile(csvPathRobot);
+                if (robotFile.is_open()) {
+                    robotFile << management.to_string_robot_list_csv();
+                    robotFile.close();
+                    std::cout << "Robot information saved to " << csvPathRobot << std::endl;
+                } else {
+                    std::cerr << "Unable to open robot CSV file: " << std::strerror(errno) << std::endl;
+                }
+
+                std::ofstream roomFile(csvPathRoom);
+                if (roomFile.is_open()) {
+                    roomFile << management.to_string_room_list_csv();
+                    roomFile.close();
+                    std::cout << "Room information saved to " << csvPathRoom << std::endl;
+                } else {
+                    std::cerr << "Unable to open room CSV file: " << std::strerror(errno) << std::endl;
+                }
+
                 return 0; // Exit the while loop and end the program
             }
             default: {
@@ -109,6 +128,5 @@ int main() {
             }
         }
     }
-
     return 0; // End of the program
 }

@@ -68,9 +68,50 @@ std::string Room::to_string_status() {
             return "Room Status:\tIn-progress";
         case (Room_Status::clean):
             return "Room Status:\tClean";
+        default:
+            return "Room Status:\tUnknown";
     }
 
     return "Room Status:\tUnknown";
+}
+
+std::string Room::to_string_csv() {
+    std::string output = "";
+    output+= this->room_name_ + ",";
+
+    switch (this->room_status_) {
+        case (Room_Status::dirty):
+            output+= "Dirty";
+            break;
+        case (Room_Status::in_progress):
+            output+= "In-progress";
+            break;
+        case (Room_Status::clean):
+            output+= "Clean";
+            break;
+        default:
+            output+= "NA";
+            break;
+    }
+    output+= ",";
+
+    switch (this->room_size_) {
+        case (Room_Size::small):
+            output+= "Small";
+            break;
+        case (Room_Size::medium):
+            output+= "Medium";
+            break;
+        case (Room_Size::large):
+            output+= "Large";
+            break;
+        default:
+            output+= "NA";
+            break;
+    }
+
+    output+= "," + std::to_string(this->estimated_time_);
+    return output;
 }
 
 std::string Room::to_string_size() {

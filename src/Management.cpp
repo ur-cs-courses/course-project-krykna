@@ -104,6 +104,32 @@ std::string Management::to_string_room_list() {
     return output;
 }
 
+std::string Management::to_string_room_list_csv() {
+    std::string output = "";
+    size_t totalRooms = room_list_.size();
+    size_t currentRoom = 0;
+
+    for (auto& pair : room_list_) {
+        output += pair.second.to_string_csv();
+        if (++currentRoom < totalRooms) {
+            output += "\n";
+        }
+    }
+    return output;
+}
+
+std::string Management::to_string_robot_list_csv() {
+    std::string output = "";
+    size_t totalRobots = robot_list_.size();
+    size_t currentRobot = 0;
+    for (auto& pair : robot_list_) {
+        output += pair.second.to_string_csv();
+        if (++currentRobot < totalRobots) {
+            output+= "\n";
+        }
+    }
+    return output;
+}
 
 std::string Management::to_string_robot_list() {
     std::string output = "********** ROBOTS ************ \n \n";
