@@ -1,8 +1,9 @@
 # Applications
 
 The robot fleet management system will be a high level application.
-It will need to communicate with a simulator and a back end storage system.
-Any other apps you require may be included in here.
 
-By convention, these applications use the libaries you create.
-So maybe you have a library of robots, then the application should include the header for it like `say_hello` does with `libhello`.
+Our fleet management app is a command line interface (CLI) that uses/communicates with only the `manage` library, which itself communicates with Room and Robot libraries.
+
+When running our app, the user should see this (after successfully building the project):
+
+![CLI view](../docs/user-guide/program_run.png)

@@ -1,7 +1,8 @@
 # Libraries
-For this project, the library convention will be that each supporting library will live within its own subfolder.
-Right now, there is one `libhello` library.
-If you need to make a support library for the simulator, it might be `libsim`.
 
-Header only libraries are fine.
-To see the advantages and disadvantages, take a look at [this SO discussion](https://stackoverflow.com/questions/12671383/benefits-of-header-only-libraries).
+Our supporting libraries live within their own subfolders:
+- `manage` - contains the header file/library for Management implementation file
+- `libroom` - contains the header file/library for room implementation file
+- `libRobot` - contains the header file/library for Robot implementation file
+
+We also added a header only file for [Catch2](https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md#top) testing
