@@ -1,5 +1,5 @@
 #include "../include/manage/Management.hpp"
-
+#include <cmath>
 
 Management::Management() {
     this->csv_path_room_ = "";
@@ -135,6 +135,13 @@ void Management::charge(std::string bot){
 
 void Management::cleaning(Robot& robot, Room& room, int time){
     bool fail;
+    int size;
+    int roundedUp;
+    if (robot.get_size() == Robot_Size::Medium){
+        size = 2;
+    } else if (robot.get_size() == Robot_Size::Small){
+        size = 3;
+    } else{ size = 1; }
     for (int i = 0; i < time; i++) {
         std::random_device rd;  // Obtain a random number from hardware
         std::mt19937 gen(rd()); // Seed the generator
@@ -155,9 +162,11 @@ void Management::cleaning(Robot& robot, Room& room, int time){
             return;
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        room.set_time_to_clean(time-i);
+        roundedUp = static_cast<int>(ceil((time-i)/size));
+        room.set_time_to_clean(roundedUp);
         robot.kill_battery();
     }
+    std::cout << "\n [SYSTEM_ALERT] (Room " + room.get_id() + " is clean.)" << std::endl;
     room.set_status(Room_Status::clean);
     room.set_time_to_clean(0);
     robot.go_home();
