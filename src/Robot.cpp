@@ -17,6 +17,9 @@ Robot::Robot(std::string ID, std::string status_, std::string size_, std::string
     set_status(status_);
     set_type(type_);
     set_size(size_);
+    if (this->status_ == Robot_Status::Dead) {
+        this->battery_=0;
+    }
 }
 
 Robot::Robot(const Robot& other) {
