@@ -58,9 +58,13 @@ public:
     /**
      * Accessor - prints the Room objects in room_list_
      * @param   None
-     * @return  String
+     * @return  String`
     */
     std::string to_string_room_list();
+
+    std::string to_string_room_list_csv();
+    std::string to_string_robot_list_csv();
+
 
     /**
      * Accessor - prints the Robot objects in robot_list_

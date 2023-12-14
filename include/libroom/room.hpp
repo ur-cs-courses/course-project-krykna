@@ -96,6 +96,8 @@ class Room {
         */
         std::string to_string_status();
 
+        std::string to_string_csv();
+
         /**
          * Helper - Converts enum class Size value to string
          * @param  None

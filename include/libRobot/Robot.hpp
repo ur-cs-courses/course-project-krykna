@@ -91,6 +91,8 @@ class Robot {
         */
         std::string to_string_type();
 
+        std::string to_string_csv();
+
         /**
          * Helper - converts enum Robot_Status to string
          * @param  None
