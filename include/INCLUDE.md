@@ -5,4 +5,6 @@ Our supporting libraries live within their own subfolders:
 - `libroom` - contains the header file/library for room implementation file
 - `libRobot` - contains the header file/library for Robot implementation file
 
+The corresponding implementation files can be found in the [src](src\SRC.md) directory.
+
 We also added a header only file for [Catch2](https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md#top) testing
