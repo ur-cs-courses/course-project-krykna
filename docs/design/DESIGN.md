@@ -17,7 +17,7 @@ Potential Design Ideas:
 
 ## Management Class Diagram Overview
 
-![Diagram Description](images/management_class_diagram.png)
+![Diagram Description](class_diagrams/management_class_diagram.png)
 
 This document describes the class diagram for a simple management system that involves room cleaning by robots. The system focuses on the attributes of the main class, Management, and mentions its relationships with other classes and interfaces (CommandLine, Robots, Rooms). 
 
@@ -56,7 +56,7 @@ Relationships
 
 ## Robot Class Diagram Overview
 
-![Diagram Description](images/robot_class_diagram.png)
+![Diagram Description](class_diagrams/robot_class_diagram.png)
 
 This document describes the class diagram for a system of robots that involves receiving input commands and cleaning rooms. The system focuses on the attributes of the Robot class and mentions its relationships with other classes and interfaces (Management, Rooms).
 
@@ -99,7 +99,7 @@ Relationships
 
 ## Room Class Diagram Overview
 
-![Diagram Description](images/room_class_diagram.png)
+![Diagram Description](class_diagrams/room_class_diagram.png)
 
 This document describes the class diagram for a system of rooms that involves maintaining the cleanliness. The system focuses on the attributes of the Room class and mentions its relationships with other classes and interfaces (Management, Robots, and enum classes Status and Size).
 
@@ -145,7 +145,7 @@ This documentation explains a sequence diagram that outlines the interactions be
 4. `Rooms (R)`: Represents the rooms available for cleaning.
 
 ## Cleaning Sequence Diagram
-![Diagram Description](images/cleaning_sequence_diagram.png)
+![Diagram Description](sequence_diagrams/cleaning_sequence_diagram.png)
 
 ## Components
 
@@ -191,7 +191,7 @@ This documentation explains a sequence diagram that outlines the interactions be
 
 
 ## Requesting Room and Bot Status Sequence Diagram
-![Diagram Description](images/requesting_status_sequence_diagram.png)
+![Diagram Description](sequence_diagrams/requesting_status_sequence_diagram.png)
 
 - `CommandLine requests room or bot status from management`
 - `Management` 
@@ -201,7 +201,7 @@ This documentation explains a sequence diagram that outlines the interactions be
 
 
 ## Adding New Rooms and Bots Sequence Diagram
-![Diagram Description](images/adding_sequence_diagram.png)
+![Diagram Description](sequence_diagrams/adding_sequence_diagram.png)
 
 - `CommandLine requests add new bot/room from management`
 - `Management` 
@@ -234,4 +234,4 @@ This documentation explains an activity diagram that outlines the overall activi
             - Check Robot Status
             - Check Room Status
 
-![Diagram Description](images/activity_diagram.png)
+![Diagram Description](activity_diagram/activity_diagram.png)

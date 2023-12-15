@@ -108,7 +108,7 @@ int main() {
                     robotFile.close();
                     std::cout << "Robot information saved to " << csvPathRobot << std::endl;
                 } else {
-                    std::cerr << "Unable to open robot CSV file: " << std::strerror(errno) << std::endl;
+                    std::cerr << "Unable to open robot CSV file: " << csvPathRobot << std::endl;
                 }
 
                 std::ofstream roomFile(csvPathRoom);
@@ -117,7 +117,7 @@ int main() {
                     roomFile.close();
                     std::cout << "Room information saved to " << csvPathRoom << std::endl;
                 } else {
-                    std::cerr << "Unable to open room CSV file: " << std::strerror(errno) << std::endl;
+                    std::cerr << "Unable to open room CSV file: " << csvPathRoom << std::endl;
                 }
 
                 return 0; // Exit the while loop and end the program
