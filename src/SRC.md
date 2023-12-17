@@ -1,3 +1,5 @@
 # Libraries - Source
-You may optionally implement your libraries as cpp files in here.
-See the `include` readme for more discussion.
+This src directory contains the implementations of our supporting libraries:
+- `manage` - Management.cpp
+- `libroom` - Robot.cpp
+- `libRobot` - room.cpp

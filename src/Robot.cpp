@@ -1,27 +1,27 @@
 #include "../include/libRobot/Robot.hpp"
-using namespace std;
 #include <stdexcept>
 
-// Default constructor
 Robot::Robot() {
-    // Initialize member variables with default values
-    this->id_ = "ERROR: NON EXISTENT BOT";  // Default ID
+    this->id_ = "ERROR: NON EXISTENT BOT";
     this->status_ = Robot_Status::Busy; 
     this->size_ = Robot_Size::Medium;
     this->type_ = Type::Vac;
-    this->room_id_= ""; 
+    this->room_id_= "";
+    this->battery_=0;
 }
 
-
-Robot::Robot(string ID, string status_, string size_, string type_, string room_id_) {
+Robot::Robot(std::string ID, std::string status_, std::string size_, std::string type_, std::string room_id_) {
     this->id_ = ID;
     this->room_id_ = room_id_;
+    this->battery_=20;
     set_status(status_);
     set_type(type_);
     set_size(size_);
+    if (this->status_ == Robot_Status::Dead) {
+        this->battery_=0;
+    }
 }
 
-// Copy constructor
 Robot::Robot(const Robot& other) {
     this->id_ = other.id_;
     this->status_ = other.status_;
@@ -32,19 +32,8 @@ Robot::Robot(const Robot& other) {
 
 Robot::~Robot() {}
 
-void Robot::set_type(string& bot_type_) {
-    if (bot_type_ == "Mop" || bot_type_ == "mop") {
-        this->type_ = Type::Mop;
-    } else if (bot_type_ == "Vac" || bot_type_ == "Vaccuum" || bot_type_ == "vaccuum") {
-        this->type_ = Type::Vac;
-    } else if (bot_type_== "Scrub" || bot_type_ == "scrub") {
-        this->type_ = Type::Scrub;
-    } else {
-        throw std::invalid_argument("Invalid argument: Received an invalid type");
-    }
-}
 
-void Robot::set_size(string& bot_size_) {
+void Robot::set_size(std::string& bot_size_) {
     if (bot_size_ == "Small" || bot_size_ == "small") {
         this->size_ = Robot_Size::Small;
     } else if (bot_size_ == "Medium" || bot_size_== "medium") {
@@ -56,16 +45,34 @@ void Robot::set_size(string& bot_size_) {
     }
 }
 
-void Robot::set_room(string givenRoom) {
+void Robot::set_type(std::string& bot_type_) {
+    if (bot_type_ == "Mop" || bot_type_ == "mop") {
+        this->type_ = Type::Mop;
+    } else if (bot_type_ == "Vac" || bot_type_ == "Vaccuum" || bot_type_ == "vaccuum") {
+        this->type_ = Type::Vac;
+    } else if (bot_type_== "Scrub" || bot_type_ == "scrub") {
+        this->type_ = Type::Scrub;
+    } else {
+        throw std::invalid_argument("Invalid argument: Received an invalid type");
+    }
+}
+
+void Robot::set_room(std::string givenRoom) {
     this->room_id_ = givenRoom;
     this->status_ = Robot_Status::Busy;
 }
 
-void Robot::set_status(string status_) {
+void Robot::set_status(std::string status_) {
     if (status_ == "Free") {
         this->status_ = Robot_Status::Free;
     } else if (status_ == "Busy") {
         this->status_ = Robot_Status::Busy;
+    } else if (status_ == "Broken") {
+        this->status_ = Robot_Status::Broken;
+    } else if (status_ == "Offline") {
+        this->status_ = Robot_Status::Offline;
+    } else if (status_ == "Dead"){
+        this->status_ = Robot_Status::Dead;
     } else {
         throw std::invalid_argument("Invalid argument: Received an invalid status");
     }
@@ -77,7 +84,7 @@ void Robot::go_home() {
     this->status_ = Robot_Status::Free;
 }
 
-string Robot::to_string_size() {
+std::string Robot::to_string_size() {
     switch (this->size_) {
         case (Robot_Size::Small):
             return "Size:\tSmall";
@@ -90,7 +97,7 @@ string Robot::to_string_size() {
     return "Size:\tUnknown";
 }
 
-string Robot::to_string_type() {
+std::string Robot::to_string_type() {
     switch (this->type_) {
         case (Type::Mop):
             return "Type:\tMop";
@@ -103,19 +110,78 @@ string Robot::to_string_type() {
     return "Type:\tUnknown";
 }
 
-string Robot::to_string_status() {
+std::string Robot::to_string_csv() {
+    std::string output = "";
+    output+= id_ + ",";
+
+    switch (this->status_) {
+        case (Robot_Status::Free):
+            output+= "Free";
+            break;
+        case (Robot_Status::Busy):
+            output+= "Busy";
+            break;
+        case (Robot_Status::Broken):
+            output+= "Broken";
+            break;
+        case (Robot_Status::Dead):
+            output+= "Dead";
+            break;
+        case (Robot_Status::Offline):
+            output+= "Offline";
+            break;
+    }
+    output+= ",";
+
+    switch (this->size_) {
+        case (Robot_Size::Small):
+            output+= "Small";
+            break;
+        case (Robot_Size::Medium):
+            output+= "Medium";
+            break;
+        case (Robot_Size::Large):
+            output+= "Large";
+            break;
+    }
+    output+= ",";
+
+    switch (this->type_) {
+        case (Type::Mop):
+            output+= "Mop";
+            break;
+        case (Type::Vac):
+            output+= "Vaccuum";
+            break;
+        case (Type::Scrub):
+            output+= "Scrub";
+            break;
+    }
+    output+= ",";
+
+    output+= room_id_;
+    return output;
+}
+
+std::string Robot::to_string_status() {
     switch (this->status_) {
         case (Robot_Status::Free):
             return "Status:\tFree";
         case (Robot_Status::Busy):
             return "Status:\tBusy";
+        case (Robot_Status::Broken):
+            return "Status:\tBroken";
+        case (Robot_Status::Dead):
+            return "Status:\tDead";
+        case (Robot_Status::Offline):
+            return "Status:\tOffline";
     }
 
     return "Status:\tUnknown";
 }
 
-string Robot::to_string() {
-    std::string data = "ID:\t" + id_ + "\n" + to_string_status() + "\n" + "Room:\t" + this->room_id_+ "\n" + to_string_size() + "\n" + to_string_type();
+std::string Robot::to_string() {
+    std::string data = "ID:\t" + id_ + "\n" + to_string_status() + "\n" + "Room:\t" + this->room_id_ + "\n" + to_string_size() + "\n" + to_string_type() + "\nBattery: " + std::to_string(this->battery_);
     return data;
 }
 

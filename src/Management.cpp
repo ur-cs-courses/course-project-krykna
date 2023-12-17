@@ -1,6 +1,6 @@
 #include "../include/manage/Management.hpp"
+#include <cmath>
 
-// Default constructor
 Management::Management() {
     this->csv_path_room_ = "";
     this->csv_path_robot_ = "";
@@ -9,7 +9,6 @@ Management::Management() {
     assignment_map.clear();
 }
 
-//Parameterized constructor
 Management::Management(const std::string& csv_path_robot_, const std::string& csv_path_room_){
     this->csv_path_room_ = csv_path_room_;
     this->csv_path_robot_ = csv_path_robot_;
@@ -46,9 +45,15 @@ void Management::initialize_robot_list_from_csv_file(const std::string& csv_path
         
         add_new_robot(ID, online_status, size, clean_type, room_id);
 
-        if (room_id != "NA") {
+        // USE: For dumb compilers
+        if (room_id == "0" || ((atoi(room_id.c_str()) >= 1) && (room_id.compare("NA") < 0))) {
             cleaning_assignment(ID, room_id);
         }
+
+        // USE: For macBook
+        // if (room_id != "NA") {
+        //     cleaning_assignment(ID, room_id);
+        // }
     }
     
     csvFile.close();
@@ -83,8 +88,6 @@ void Management::initialize_room_list_from_csv_file(const std::string& csv_path)
 }
 
 
-
-// Public methods
 void Management::add_new_robot(std::string& ID, std::string& online_status, std::string& size, std::string& clean_type, std::string& room_id) {
     robot_list_[ID] = Robot(ID, online_status, size, clean_type, room_id);
 }
@@ -101,6 +104,32 @@ std::string Management::to_string_room_list() {
     return output;
 }
 
+std::string Management::to_string_room_list_csv() {
+    std::string output = "";
+    size_t totalRooms = room_list_.size();
+    size_t currentRoom = 0;
+
+    for (auto& pair : room_list_) {
+        output += pair.second.to_string_csv();
+        if (++currentRoom < totalRooms) {
+            output += "\n";
+        }
+    }
+    return output;
+}
+
+std::string Management::to_string_robot_list_csv() {
+    std::string output = "";
+    size_t totalRobots = robot_list_.size();
+    size_t currentRobot = 0;
+    for (auto& pair : robot_list_) {
+        output += pair.second.to_string_csv();
+        if (++currentRobot < totalRobots) {
+            output+= "\n";
+        }
+    }
+    return output;
+}
 
 std::string Management::to_string_robot_list() {
     std::string output = "********** ROBOTS ************ \n \n";
@@ -110,8 +139,60 @@ std::string Management::to_string_robot_list() {
     return output;
 }
 
+void Management::maintenance(std::string bot){
+    Robot& robot = robot_list_[bot];
+    robot.set_status("Offline");
+    std::thread t1([this, &robot]{ 
+        std::this_thread::sleep_for(std::chrono::seconds(10));
+        robot.set_status("Free");
+        });
+    t1.detach();
+}
+
+void Management::charge(std::string bot){
+    Robot& robot = robot_list_[bot];
+    robot.set_status("Offline");
+    std::thread t1([this, &robot]{ 
+        std::this_thread::sleep_for(std::chrono::seconds(10));
+        robot.charge_battery();
+        });
+    t1.detach();
+}
+
 void Management::cleaning(Robot& robot, Room& room, int time){
-    std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
+    bool fail;
+    int size;
+    int roundedUp;
+    if (robot.get_size() == Robot_Size::Medium){
+        size = 2;
+    } else if (robot.get_size() == Robot_Size::Small){
+        size = 3;
+    } else{ size = 1; }
+    for (int i = 0; i < time; i++) {
+        std::random_device rd;  // Obtain a random number from hardware
+        std::mt19937 gen(rd()); // Seed the generator
+        std::uniform_int_distribution<> distr(0, 99); 
+        fail = distr(gen) < 5;
+        if (fail == true){
+            room.set_status(Room_Status::dirty);
+            robot.go_home();
+            robot.set_status("Broken");
+            std::cout << "\n [SYSTEM_ALERT] (Robot " + robot.get_id() + " in room " + room.get_id() + " is broken.)" << std::endl;
+            return;
+        }
+        if (robot.get_battery() <= 0){
+            room.set_status(Room_Status::dirty);
+            robot.go_home();
+            robot.set_status("Dead");
+            std::cout << "\n [SYSTEM_ALERT] (Robot " + robot.get_id() + " in room " + room.get_id() + " is dead.)" << std::endl;
+            return;
+        }
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        roundedUp = static_cast<int>(ceil((time-i)/size));
+        room.set_time_to_clean(roundedUp);
+        robot.kill_battery();
+    }
+    std::cout << "\n [SYSTEM_ALERT] (Room " + room.get_id() + " is clean.)" << std::endl;
     room.set_status(Room_Status::clean);
     room.set_time_to_clean(0);
     robot.go_home();
@@ -120,6 +201,13 @@ void Management::cleaning(Robot& robot, Room& room, int time){
 void Management::cleaning_assignment(std::string bot, std::string rm){
     Robot& robot = robot_list_[bot];
     Room& room = room_list_[rm];
+    if (robot.get_status() != Robot_Status::Free && robot.get_room() != room.get_id()){
+        throw std::invalid_argument("Invalid assignment: Robot is unavailable");
+    }
+    if (room.get_status() == Room_Status::clean){
+        throw std::invalid_argument("Invalid assignment: Room is already clean");
+    }
+
     assignment_map[robot] = room;
     int time = 0;
 
@@ -135,23 +223,12 @@ void Management::cleaning_assignment(std::string bot, std::string rm){
     robot.set_status("Busy");
     robot.set_room(rm);
 
-    // method 3
     std::thread t1([this, &robot, &room, time]{ 
         this->cleaning(robot, room, time); 
         });
     t1.detach();
 
-    // method 2
-    // std::thread t1(&Management::cleaning, this, std::ref(robot), std::ref(room), time); 
-    // t1.detach();
-
-    // method 1
-    // std::thread([&robot, &room, time]() {
-    //     std::this_thread::sleep_for(std::chrono::seconds(time)); // Simulate cleaning time
-    //     room.set_status(clean);
-    //     room.set_time_to_clean(0);
-    //     robot.go_home();
-    // }).detach();
-
     assignment_map.erase(robot);
 }
+
+//Robot& Management::get_bot(std::string id){ return this->robot_list_[id];}

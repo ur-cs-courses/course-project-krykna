@@ -2,53 +2,159 @@
 #define LIBROBOT_ROBOT_HPP
 #include <string>
 #include <stdexcept>
-using namespace std;
 
-enum Robot_Status {Free, Busy};
+enum Robot_Status {Free, Busy, Broken, Dead, Offline};
 enum Robot_Size {Small, Medium, Large};
 enum Type {Mop, Vac, Scrub};
 
 class Robot {
     private:
-        string id_;
+        std::string id_;
         Robot_Size size_;
         Robot_Status status_;
         Type type_;
-        string room_id_;
+        std::string room_id_;
+        int battery_;
     
     public:
-        // Constructors
+        /**
+         * Default Constructor
+         * @param  None
+         * @return  None
+        */
         Robot();
 
-        Robot(string ID, string status_, string size_, string type_, string room_id_);
+        /**
+         * Parameterized Constructor
+         * @param  String name, status, size, time
+         * @return  None
+        */
+        Robot(std::string ID, std::string status_, std::string size_, std::string type_, std::string room_id_);
 
+        /**
+         * Copy Constructor
+         * @param  Const reference to another Robot object
+         * @return  None
+        */
         Robot(const Robot& other);
 
-        // Destructor
+        /**
+         * Robot Destructor
+         * @param  None
+         * @return  None
+        */
         ~Robot();
+        
+        /**
+         * Modifier - set Robot_Status
+         * @param  String desired status
+         * @return  void
+         * @throws  std::invalid_argument if no match is found
+         * @note    Would recommend avoiding any change to this as it is used by Robot Constructor
+        */
+        void set_status(std::string status);
+        
+        /**
+         * Modifier - set Robot_Size
+         * @param  String reference size
+         * @return  void
+         * @throws  std::invalid_argument if no match is found
+        */
+        void set_size(std::string& bot_size_);
 
-        void set_type(string& bot_type_);
-        void set_size(string& bot_size_);
+        /**
+         * Modifier - set Type of robot
+         * @param  String reference type
+         * @return  void
+         * @throws  std::invalid_argument if no match is found
+        */
+        void set_type(std::string& bot_type_);
 
-        // Room
-        void set_room(string room);
-        inline string get_room() const {return this->room_id_;}
+        /**
+         * Modifier - set assigned room to clean
+         * @param  String assigned room
+         * @return  void
+        */
+        void set_room(std::string givenRoom);
 
-        // Status
-        // NOTE: Would recommend avoiding any change to this as it is used by Robot Constructor
-        void set_status(string status);
-    
-        // Robot activities
+        /**
+         * Modifier - resets room assignment and Robot_Status
+         * @param  None
+         * @return  None
+        */
         void go_home();
 
-        string to_string_type();
-        string to_string_status();
-        string to_string_size();
-        string to_string();
+        /**
+         * Helper - converts enum Type to string
+         * @param  None
+         * @return  String Type
+        */
+        std::string to_string_type();
 
+        std::string to_string_csv();
+
+        /**
+         * Helper - converts enum Robot_Status to string
+         * @param  None
+         * @return  String Robot_Status
+        */
+        std::string to_string_status();
+
+        /**
+         * Helper - converts enum Robot_Size to string
+         * @param  None
+         * @return  String Robot_Size
+        */
+        std::string to_string_size();
+
+        /**
+         * Format desired to_string() output of Robot object
+         * @param  None
+         * @return  String providing Robot details
+        */
+        std::string to_string();
+
+        /**
+         * Accessor - get assigned room
+         * @param  None
+         * @return  String: room_id_
+        */
+        inline std::string get_room() const {return this->room_id_;}
+
+        /**
+         * Accessor - get Robot_Size
+         * @param  None
+         * @return  enum Robot_Size
+        */
         inline Robot_Size get_size() const {return this->size_;}
+        inline std::string get_id() const {return this->id_;}
+        inline Robot_Status get_status() const {return this->status_;}
 
+        /**
+         * Override comparison boolean
+         * @param  Robot reference
+         * @return  boolean
+        */
         bool operator<(const Robot& other) const;
+
+        inline int get_battery() const {return this->battery_;}
+        inline void kill_battery() {
+            if (this->size_ == Robot_Size::Small){
+                this->battery_ = this->battery_ - 3;
+            } else if (this->size_ == Robot_Size::Medium){
+                this->battery_ = this->battery_ - 2;
+            } else if (this->size_ == Robot_Size::Large){
+                this->battery_ = this->battery_ - 1;
+            }
+            if (this->battery_ < 0){
+                this->battery_ = 0;
+            }
+            
+        }
+        inline void charge_battery() {
+            this->battery_ = 20;
+            this->status_ = Robot_Status::Free;
+        }
 };
 
 #endif

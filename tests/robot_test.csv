@@ -1,7 +1,7 @@
-0,Free,Small,Mop,NA
-1,Busy,Small,Vac,2
+0,Broken,Small,Mop,NA
+1,Dead,Small,Vaccuum,NA
 2,Free,Medium,Scrub,NA
-3,Busy,Medium,Mop,5
-4,Free,Large,Vac,NA
-5,Busy,Large,Scrub,3
+3,Free,Medium,Mop,NA
+4,Free,Large,Vaccuum,NA
+5,Free,Large,Scrub,NA
 6,Free,Large,Mop,NA
